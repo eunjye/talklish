@@ -46,8 +46,8 @@ body { font-family:'Roboto', 'NotoSans', 'Dotum', 'sans-serif'; font-weight:500;
 /* table */
 .tbl-base { border-top:1px solid #cdcdcd; border-bottom:1px solid #898989; }
 .tbl-base > table { width:100%; }
-.tbl-base th { padding:17px; background:#f9f9f9; font-size:16px; font-weight:400; text-align:center; vertical-align:middle; }
-.tbl-base td { padding:17px; border-top:1px solid #e7e7e7; font-size:16px; font-weight:400; text-align:center; vertical-align:middle; }
+.tbl-base th { padding:5px; background:#f9f9f9; font-size:14px; font-weight:400; text-align:center; vertical-align:middle; }
+.tbl-base td { padding:5px; border-top:1px solid #e7e7e7; font-size:14px; font-weight:400; text-align:center; vertical-align:middle; }
 .tbl-base thead th { color:#232323; border-bottom:1px solid #f9f9f9; }
 .tbl-base tbody th { color:#454545; border-top:1px solid #e7e7e7; }
 .tbl-base th.th-cross { background:#F3F3F3 !important; }
