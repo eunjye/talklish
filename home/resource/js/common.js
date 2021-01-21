@@ -201,6 +201,27 @@
 				}
 			}
 		},
+		answer: null,
+		checkAnswer: {
+			timer: null,
+			run: function(){
+				var flag = !!win[namespace].answer;
+				if (flag) {
+					clearTimeout(win[namespace].checkAnswer.timer);
+					console.log('has data!');
+				} else {
+					win[namespace].checkAnswer.timer = setTimeout(function(){
+						win[namespace].checkAnswer.run();
+						console.log('checking data...');
+					}, 1000)
+				}
+			}
+		},
+		callSpeechApp: function(){
+			console.log('run!!');
+			location.href = '/home/resource/apk/SpeechRecognition-0.0.6-release.apk '; // 안드로이드 앱 실행
+
+		},
 		init: function(){
 
 			$(win).off('.'+namespace);

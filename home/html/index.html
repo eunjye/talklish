@@ -24,46 +24,21 @@
 		<!-- <header class="header-area"></header> -->
 		<!-- [Start] main-area -->
 		<section class="main-area" id="main">
-			<div class="tbl-base">
-				<table>
-					<caption></caption>
-					<colgroup>
-						<col width="20%">
-						<col width="20%">
-						<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<th scope="row" colspan="2">document type & version</th>
-							<td>HTML5, CSS3</td>
-						</tr>
-						<tr>
-							<th scope="row" colspan="2">incoding</th>
-							<td>UTF-8</td>
-						</tr>
-						<tr>
-							<th scope="row" rowspan="2">compatibility</th>
-							<th scope="row">PC</th>
-							<td>IE11, webkit, firefox, edge</td>
-						</tr>
-						<tr>
-							<th scope="row">mobile</th>
-							<td>android 4.4+</td>
-						</tr>
-						<tr>
-							<th scope="row" colspan="2">resolution (optimal)</th>
-							<td>table: 768 ~ 1023 (960)</td>
-						</tr>
-						<tr>
-						</tr>
-					</tbody>
-				</table>
+			<div class="intro-area">
+				<h2>게임 시작</h2>
+				<button type="button" class="btn-base"><span>게임 방법</span></button>
+				<button type="button" class="btn-base"><span>게임 시작</span></button>
 			</div>
+
+			<input type="text" id="inpAnswer">
+			<button type="button" class="btn-base" onclick="
+				window.milkT.answer = document.querySelector('#inpAnswer').value;
+			"><span>답 전송</span></button>
 
 			<script type="text/javascript">
 				;(function ($, win, doc, undefined) {
 					$(doc).on('ready.milkT', function(){
-
+						window.milkT.callSpeechApp();
 					});
 				})(jQuery, window, document);
 			</script>
