@@ -219,7 +219,7 @@
 		},
 		callSpeechApp: function(){
 			console.log('run!!');
-			location.href = '/home/resource/apk/SpeechRecognition-0.0.6-release.apk '; // 안드로이드 앱 실행
+			location.href = '../resource/apk/SpeechRecognition-0.0.6-release.apk '; // 안드로이드 앱 실행
 
 		},
 		init: function(){
