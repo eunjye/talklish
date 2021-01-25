@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+	<link type="text/css" rel="stylesheet" href="./css/sanitize.css"></link>
+	<link type="text/css" rel="stylesheet" href="./css/common.css"></link>
+	<link type="text/css" rel="stylesheet" href="./css/content.css"></link>
+
+</head>
+
+<body>
+
+	<div id="root">
+
+		<div id="content-container">
+
+			<div class="intro">
+				<div class="btn-start"></div>
+			</div>
+
+			<div class="profile hide">
+				<div class="capture-camera-box"></div>
+				<div class="capture-character-box">
+					<div class="img img-01"></div>
+					<div class="img img-02"></div>
+					<div class="img img-03"></div>
+					<div class="img img-04"></div>
+				</div>
+				<div class="capture-effect-box">
+					<div class="img img-01"></div>
+					<div class="img img-02"></div>
+					<div class="img img-03"></div>
+					<div class="img img-04"></div>
+					<div class="img img-05"></div>
+					<div class="img img-06"></div>
+					<div class="img img-07"></div>
+					<div class="img img-08"></div>
+				</div>
+				<div class="bg-profile"></div>
+				<!-- <div class="cam-area"></div> -->
+				<div class="btn-camera"></div>
+
+				<div class="effect-box">
+					<div class="direction">
+						효과를 넣어 사진을 찍어 보자!
+					</div>
+					<div class="slide">
+						<div class="page page-01">
+							<div class="effect effect-01"></div>
+							<div class="effect effect-02"></div>
+							<div class="effect effect-03"></div>
+							<div class="effect effect-04"></div>
+						</div>
+						<div class="page page-02 hide">
+							<div class="effect effect-01"></div>
+							<div class="effect effect-02"></div>
+							<div class="effect effect-03"></div>
+							<div class="effect effect-04"></div>
+						</div>
+						<div class="control">
+							<div class="btn-prev"></div>
+							<div class="btn-next"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="character-box">
+					<div class="direction">
+						사진을 찍기 싫으면 여기를 눌러 보자!
+					</div>
+					<div class="slide">
+						<div class="page page-01">
+							<div class="char char-01"></div>
+							<div class="char char-02"></div>
+							<div class="char char-03"></div>
+							<div class="char char-04"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-complete"></div>
+
+				<!-- <div class="debug-capture"></div> -->
+			</div>
+
+			<div class="profile-name hide">
+				<div class="pic"></div>
+				<div class="cover"></div>
+				<div class="direction">나의 대화명을 지어 보자.</div>
+				<div class="input-box">
+					<input type="text" placeholder="터치하세요">
+				</div>
+				<div class="btn-complete"></div>
+			</div>
+
+			<div class="chat hide">
+				<div class="user-profile">
+					<div class="bg"></div>
+					<div class="pic"></div>
+					<div class="cover"></div>
+				</div>
+
+				<div class="ai-speech-balloon hide">
+					<div class="arrow"></div>
+					<!-- <div class="name">버리</div>
+					<div class="speech">안녕~ 씩씩한 냥이. <br> 나는 버리라고 해.</div> -->
+					<div class="name"></div>
+					<div class="speech"></div>
+					<!-- <div class="blind"></div> -->
+				</div>
+
+				<div class="user-speech-balloon hide">
+					<div class="arrow"></div>
+					<div class="name"></div>
+					<div class="speech"></div>
+				</div>
+
+				<div class="btn-silvy"></div>
+
+				<div class="img-hashtag"></div>
+
+				<!-- 스타트 페이지 -->
+				<div class="bg-start"></div>
+
+				<div class="btn-start"></div>
+			</div>
+
+			<!-- animation-container -->
+			<div id="animation_container" style="position: absolute; z-index: 1; pointer-events: none; background-color:rgba(255, 255, 255, 0); width:1280px; height:800px;">
+				<canvas id="canvas" width="1280" height="800" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 0);"></canvas>
+				<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1280px; height:800px; position: absolute; left: 0px; top: 0px; display: block;">
+				</div>
+			</div>
+			<!-- //animation-container -->
+
+			<div class="btn-corner-container hide">
+				<!-- 인트로를 제외한 첫 번째 코너에서만 prev button hide -->
+				<div class="prev hide">
+					<div class="bg"></div>
+					<div class="icon"></div>
+				</div>
+				<div class="next">
+					<div class="bg"></div>
+					<div class="icon"></div>
+					<div class="effect"></div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="./js/createjs.min.js"></script>
+	<script src="./animation.js"></script>
+	<script src="./js/cc.init.js"></script>
+	<script src="./js/externalManager.js"></script>
+	<script src="./js/content.js"></script>
+</body>
+
+</html>

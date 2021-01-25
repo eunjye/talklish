@@ -1,0 +1,18 @@
+﻿<contents>
+	
+	<study>
+		<ui_type>26</ui_type>
+		<chapter>1</chapter>
+		<title>바르고 떳떳하게</title>
+		
+		<menu id="1">
+			<!-- <type>6</type> -->
+			<!-- <title>인트로</title> -->
+			<type>5</type>
+			<title>AI 오픈톡톡</title>
+			<file_path>content01/content01.html</file_path>
+		</menu> 
+
+	</study>
+
+</contents>

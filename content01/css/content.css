@@ -1,0 +1,676 @@
+#content-container {
+    /* background: url("../image/bg.png") no-repeat;
+    background-size: contain;
+    width: 1280px;
+    height: 800px; */
+}
+
+.intro {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/bg_intro.png") no-repeat;
+    background-size: contain;
+    width: 1280px;
+    height: 800px;
+}
+.btn-start {
+    position: absolute;
+    left: 480px;
+    top: 680px;
+    width: 320px;
+    height: 80px;
+    z-index: 10;
+}
+
+.profile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* background: url("../image/bg_profile.png") no-repeat;
+    background-size: contain; */
+    width: 1280px;
+    height: 800px;
+}
+.bg-profile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/bg_profile.png") no-repeat;
+    background-size: contain;
+    width: 1280px;
+    height: 800px;
+}
+.btn-camera {
+    position: absolute;
+    left: 209px;
+    top: 570px;
+    background: url("../image/btn_camera.png") no-repeat;
+    background-position: 0 0;
+    width: 133px;
+    height: 78px;
+}
+.btn-camera.on {
+    background: url("../image/btn_camera.png") no-repeat;
+    background-position: 0 -78px;
+}
+.capture-camera-box {
+    position: absolute;
+    left: -100px;
+    top: 172px;
+    /* width: 360px;
+    height: 360px; */
+}
+.cam-area {
+    position: absolute;
+    left: 90px;
+    top: 172px;
+    width: 360px;
+    height: 360px;
+    border: 1px solid red;
+}
+
+.capture-effect-box {
+    position: absolute;
+    left: 94px;
+    top: 177px;
+}
+.capture-effect-box .img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 359px;
+    height: 359px;
+}
+.capture-effect-box .img-01 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: 0 0;
+}
+.capture-effect-box .img-02 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -359px 0;
+}
+.capture-effect-box .img-03 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -718px 0;
+}
+.capture-effect-box .img-04 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -1077px 0;
+}
+.capture-effect-box .img-05 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -1436px 0;
+}
+.capture-effect-box .img-06 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: 0 -359px;
+}
+.capture-effect-box .img-07 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -359px -359px;
+}
+.capture-effect-box .img-08 {
+    background: url("../image/capture_effect.png") no-repeat;
+    background-position: -718px -359px;
+}
+
+.capture-character-box {
+    position: absolute;
+    left: 94px;
+    top: 177px;
+}
+.capture-character-box .img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 360px;
+    height: 359px;
+}
+.capture-character-box .img-01 {
+    background: url("../image/capture_character.png") no-repeat;
+    background-position: 0 0;
+}
+.capture-character-box .img-02 {
+    background: url("../image/capture_character.png") no-repeat;
+    background-position: -360px 0;
+}
+.capture-character-box .img-03 {
+    background: url("../image/capture_character.png") no-repeat;
+    background-position: 0 -359px;
+}
+.capture-character-box .img-04 {
+    background: url("../image/capture_character.png") no-repeat;
+    background-position: -360px -359px;
+}
+
+.effect-box {
+    position: absolute;
+    left: 525px;
+    top: 119px;
+    width: 691px;
+    height: 262px;
+    background-color: #fcfeff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.effect-box .direction {
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7fc0fc;
+    font-family: "HU고딕360";
+    font-size: 27px;
+}
+.effect-box .slide {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 66px);
+}
+.effect-box .slide .page {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.effect-box .page .effect {
+    margin: 0 5px;
+    width: 144px;
+    height: 144px;
+}
+.effect-box .page .effect.disable {
+    pointer-events: none;
+    filter: brightness(60%);
+}
+.effect-box .page-01 .effect-01 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: 0 0;
+}
+.effect-box .page-01 .effect-02 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -144px 0;
+}
+.effect-box .page-01 .effect-03 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -288px 0;
+}
+.effect-box .page-01 .effect-04 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -432px 0;
+}
+.effect-box .page-02 .effect-01 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -144px -144px;
+}
+.effect-box .page-02 .effect-02 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -288px -144px;
+}
+.effect-box .page-02 .effect-03 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -432px -144px;
+}
+.effect-box .page-02 .effect-04 {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -576px -144px;
+}
+.effect-box .page-01 .effect-01.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -576px 0;
+}
+.effect-box .page-01 .effect-02.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -720px 0;
+}
+.effect-box .page-01 .effect-03.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -864px 0;
+}
+.effect-box .page-01 .effect-04.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -0 -144px;
+}
+.effect-box .page-02 .effect-01.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -720px -144px;
+}
+.effect-box .page-02 .effect-02.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -864px -144px;
+}
+.effect-box .page-02 .effect-03.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: 0 -288px;
+}
+.effect-box .page-02 .effect-04.on {
+    background: url("../image/effect.png") no-repeat;
+    background-position: -144px -288px;
+}
+.effect-box .slide .control {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+}
+.effect-box .control .btn-prev {
+    margin: 0 0 0 15px;
+    background: url("../image/btn_slide.png") no-repeat;
+    background-position: 0 0;
+    width: 21px;
+    height: 51px;
+    pointer-events: auto;
+}
+.effect-box .control .btn-next {
+    margin: 0 15px 0 0;
+    background: url("../image/btn_slide.png") no-repeat;
+    background-position: 0 0;
+    width: 21px;
+    height: 51px;
+    transform: scaleX(-1);
+    pointer-events: auto;
+}
+.effect-box .control .btn-prev.disable {
+    background: url("../image/btn_slide.png") no-repeat;
+    background-position: -21px 0;
+    pointer-events: none;
+}
+.effect-box .control .btn-next.disable {
+    background: url("../image/btn_slide.png") no-repeat;
+    background-position: -21px 0;
+    transform: scaleX(-1);
+    pointer-events: none;
+}
+
+.character-box {
+    position: absolute;
+    left: 525px;
+    top: 396px;
+    width: 691px;
+    height: 262px;
+    background-color: #fcfeff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.character-box .direction {
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcb68b;
+    font-family: "HU고딕360";
+    font-size: 27px;
+}
+.character-box .slide {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 66px);
+}
+.character-box .slide .page {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.character-box .page .char {
+    margin: 0 5px;
+    width: 143px;
+    height: 144px;
+}
+.character-box .page-01 .char-01 {
+    background: url("../image/character.png") no-repeat;
+    background-position: 0 0;
+}
+.character-box .page-01 .char-02 {
+    background: url("../image/character.png") no-repeat;
+    background-position: -143px 0;
+}
+.character-box .page-01 .char-03 {
+    background: url("../image/character.png") no-repeat;
+    background-position: -286px 0;
+}
+.character-box .page-01 .char-04 {
+    background: url("../image/character.png") no-repeat;
+    background-position: 0 -144px;
+}
+.character-box .page-01 .char-01.on {
+    background: url("../image/character.png") no-repeat;
+    background-position: -143px -144px;
+}
+.character-box .page-01 .char-02.on {
+    background: url("../image/character.png") no-repeat;
+    background-position: -286px -144px;
+}
+.character-box .page-01 .char-03.on {
+    background: url("../image/character.png") no-repeat;
+    background-position: 0 -288px;
+}
+.character-box .page-01 .char-04.on {
+    background: url("../image/character.png") no-repeat;
+    background-position: -143px -288px;
+}
+
+.profile .btn-complete {
+    position: absolute;
+    left: 804px;
+    top: 680px;
+    background: url("../image/btn_complete.png") no-repeat 0 0;
+    width: 133px;
+    height: 79px;
+    pointer-events: none;
+}
+.profile .btn-complete.active {
+    background: url("../image/btn_complete.png") no-repeat 0 -79px;
+    pointer-events: auto;
+}
+.profile .debug-capture {
+    position: absolute;
+    /* left: 10px;
+    top: 10px; */
+    left: 500px;
+    top: 172px;
+    /* left: 500px;
+    top: 172px;
+    width: 360px;
+    height: 360px; */
+    border: 1px solid red;
+}
+
+.profile-name {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/bg_profile_name.png") no-repeat;
+    background-size: contain;
+    width: 1280px;
+    height: 800px;
+}
+.profile-name .pic {
+    position: absolute;
+    left: 240px;
+    top: 240px;
+    /* background: url("../image/bg_profile_name_pic.png") no-repeat;
+    background-size: contain; */
+    width: 368px;
+    /* height: 383px; */
+    height: 368px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+.profile-name .cover {
+    position: absolute;
+    left: 240px;
+    top: 240px;
+    background: url("../image/cover_profile_name_pic.png") no-repeat;
+    background-size: contain;
+    width: 368px;
+    height: 368px;
+}
+.profile-name .direction {
+    position: absolute;
+    left: 645px;
+    top: 270px;
+    font-family: "HU고딕360";
+    font-size: 27px;
+}
+.profile-name .input-box {
+    position: absolute;
+    left: 640px;
+    top: 317px;
+    width: 394px;
+    height: 83px;
+    background-color: #eef9ff;
+    border-radius: 20px;
+}
+.profile-name .input-box input {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    margin: 0;
+    opacity: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-family: "HU네모의꿈180";
+    font-size: 35px;
+    text-align: left;
+    color: #000;
+    line-height: 1;
+}
+input[type="text"]::placeholder {
+    color: #9cbecd;
+}
+input[type="text"]::-webkit-input-placeholder {
+    color: #9cbecd;
+}
+.profile-name .btn-complete {
+    position: absolute;
+    left: 787px;
+    top: 467px;
+    background: url("../image/btn_complete_name.png") no-repeat 0 0;
+    width: 138px;
+    height: 72px;
+    pointer-events: none;
+}
+.profile-name .btn-complete.active {
+    background: url("../image/btn_complete_name.png") no-repeat 0 -72px;
+    pointer-events: auto;
+}
+
+.chat {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/bg_chat.png") no-repeat;
+    background-size: contain;
+    width: 1280px;
+    height: 800px;
+}
+.btn-silvy {
+    position: absolute;
+    left: 500px;
+    top: 684px;
+    padding: 15px 80px 0 0;
+    background: url("../image/btn_silvy.png") no-repeat 0 -110px;
+    width: 681px;
+    height: 110px;
+    font-family: "HU네모의꿈180";
+    font-size: 30px;
+    color: #93a8c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-silvy.on {
+    background: url("../image/btn_silvy.png") no-repeat;
+    background-position: 0 0;
+    color: #fff;
+}
+
+/* .user-profile {
+    position: absolute;
+    left: 908px;
+    top: 360px;
+    background: url("../image/user_disable.png") no-repeat;
+    background-size: contain;
+    width: 295px;
+    height: 307px;
+}
+.user-profile.on {
+    position: absolute;
+    left: 872px;
+    top: 313px;
+    background: url("../image/user.png") no-repeat;
+    background-size: contain;
+    width: 368px;
+    height: 383px;
+} */
+.user-profile {
+    position: absolute;
+    left: 908px;
+    top: 360px;
+    width: 368px;
+    height: 383px;
+    transform-origin: 0 0;
+    transform: scale(0.8);
+    filter: brightness(60%);
+}
+.user-profile .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/bg_profile_name_pic.png") no-repeat;
+    background-size: contain;
+    width: 368px;
+    height: 383px;
+}
+.user-profile .pic {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 368px;
+    height: 368px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.user-profile .cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../image/cover_profile_name_pic.png") no-repeat;
+    background-size: contain;
+    width: 368px;
+    height: 368px;
+}
+.user-profile.on {
+    position: absolute;
+    left: 872px;
+    top: 313px;
+    width: 368px;
+    height: 383px;
+    transform-origin: 0 0;
+    transform: scale(1);
+    filter: none;
+}
+
+/* 하단 #붙은 텍스트이미지 */
+.img-hashtag {
+    position: absolute;
+    left: 98px;
+    top: 715px;
+    background: url("../image/img_hashtag.png") no-repeat;
+    background-size: contain;
+    width: 393px;
+    height: 70px;
+}
+
+.ai-speech-balloon {
+    position: absolute;
+    left: 308px;
+    bottom: 460px;
+    /* width: 612px; */
+    /* width: 390px; */
+    max-width: 612px;
+    height: 235px;
+    background-color: #fff;
+    border-radius: 30px;
+    /* word-break: keep-all; */
+    filter: none;
+}
+.ai-speech-balloon .name {
+    position: absolute;
+    left: 45px;
+    top: 25px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background-color: #fff39a;
+    font-family: "HU고딕360";
+    font-size: 38px;
+    color: #e96600;
+}
+.ai-speech-balloon .speech {
+    position: relative;
+    /* left: 0;
+  top: 0; */
+    margin: 105px 0 0 0;
+    padding: 0 50px;
+    font-family: "HU고딕360";
+    /* font-family: "Nanum Gothic", "나눔고딕"; */
+    font-size: 35px;
+    text-align: justify;
+}
+.ai-speech-balloon .arrow {
+    position: absolute;
+    left: 40px;
+    bottom: -40px;
+    background: url("../image/arrow.png") no-repeat;
+    background-size: contain;
+    width: 134px;
+    height: 131px;
+}
+.ai-speech-balloon.disable {
+    left: 140px;
+    bottom: 340px;
+    transform: scale(0.5);
+    filter: brightness(60%);
+}
+
+.user-speech-balloon {
+    position: absolute;
+    left: 617px;
+    bottom: 505px;
+    min-width: 565px;
+    max-width: 565px;
+    height: 275px;
+    background-color: #fff;
+    border-radius: 30px;
+}
+.user-speech-balloon .name {
+    position: absolute;
+    left: 45px;
+    top: 25px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background-color: #fce3ed;
+    font-family: "HU고딕360";
+    font-size: 38px;
+    color: #e5306b;
+}
+.user-speech-balloon .speech {
+    position: relative;
+    /* left: 0;
+  top: 0; */
+    margin: 105px 0 0 0;
+    padding: 0 50px;
+    font-family: "HU고딕360";
+    font-size: 35px;
+}
+.user-speech-balloon .arrow {
+    position: absolute;
+    left: 40px;
+    bottom: -40px;
+    background: url("../image/arrow.png") no-repeat;
+    background-size: contain;
+    width: 134px;
+    height: 131px;
+    transform: scaleX(-1);
+}
