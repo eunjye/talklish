@@ -1,0 +1,101 @@
+@charset 'UTF-8';
+
+
+body { font-family:'탈네모굴림', 'Dotum', 'sans-serif'; font-weight:500; font-size:16px; color:#555; letter-spacing:-0.025em; }
+
+/* common
+====================== */
+.blind { position:absolute !important; width:1px !important; height:1px !important; color:transparent !important; overflow:hidden !important; clip:rect(1px 1px 1px 1px); /* IE6, IE7 */ clip:rect(1px, 1px,1px, 1px); clip-path:inset(50%); }
+
+.tal { text-align:left !important; }
+.tac { text-align:center !important; }
+.tar { text-align:right !important; }
+
+.fc-primary { color:#0072bc !important; }
+
+/* title */
+.tit-d1 { display:block; font-weight:300; font-size:80px; text-align:center; }
+.tit-d2 { display:block; font-size:44px; font-weight:500; text-align:center; color:#000; }
+.tit-d3 { display:block; font-size:36px; font-weight:700; color:#000; }
+.tit-d4 { display:block; font-size:27px; font-weight:700; color:#000; }
+.tit-sub { display:block; font-size:36px; font-weight:700; text-align:center; color:#f79433; }
+.desc-d1 { display:block; font-size:24px; font-weight:300; text-align:center; }
+.desc-d1:before { display:block; width:40px; height:2px; background:#fff; margin:25px auto 35px; content:""; }
+.desc-d2 { display:block; margin-top:5px; font-size:20px; font-weight:500; color:#555; text-align:center; }
+
+/* button */
+[class*="btn-"]:hover { text-decoration:none; }
+.btn-area { }
+.btn-area img { width:100%; height:auto; }
+
+/* table */
+.tbl-base { }
+.tbl-base > table { width:100%; border-top:1px solid #cdcdcd; border-bottom:1px solid #898989; }
+.tbl-base th { padding:17px; background:#f9f9f9; font-size:18px; font-weight:400; text-align:center; vertical-align:middle; }
+.tbl-base td { padding:17px; border-top:1px solid #e7e7e7; font-size:18px; font-weight:400; text-align:center; vertical-align:middle; }
+.tbl-base thead th { color:#232323; border-bottom:1px solid #f9f9f9; }
+.tbl-base tbody th { color:#454545; border-top:1px solid #e7e7e7; }
+.tbl-base th.th-cross { background:#F3F3F3 !important; }
+.tbl-base a:hover { text-decoration:underline; }
+
+/* bullet */
+p.bul-dot:before,
+ul.bul-dot > li:before { display:inline-block; width:5px; height:5px; margin:-4px 8px 0 -15px; vertical-align:middle; border-radius:50%; background:#454545; content:""; }
+p.bul-dot { color:#454545; padding-left:14px; font-size:18px; }
+ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18px; }
+
+/* icon */
+[class*="ico-"] { display:inline-block; vertical-align:middle; }
+.ico-arr { width:40px; height:10px; background:url('../img/ico_arrow_r.png') right 0/40px auto no-repeat; }
+.ico-download { width:18px; height:18px; background:url('../img/ico_download.png') right 0/18px auto no-repeat; }
+.ico-arr.light { background-position-y:-10px; }
+
+/* modal
+=================== */
+.modal-area { z-index:10; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.6); }
+.modal-area .modal-inner { text-align:center; }
+
+/* constent start
+=================== */
+.container-area,
+.container-inner { width:100%; height:100%; }
+.page-area { position:relative; display:none; width:100%; height:100%; background-position:center center; background-size:cover; background-repeat:no-repeat; }
+
+.btn-area.type-intro { position:absolute; bottom:6.61%; left:50%; transform:translateX(-50%); width:19.06%; }
+.btn-area.type-intro button { height:50%; }
+.btn-area.type-intro button:last-child { top:50%; }
+.btn-area button { position:absolute; top:0; left:0; display:block; width:100%; height:100%; }
+
+/* [modal] how to play */
+.howto-area { position:relative; width:82.19%; margin:2.5% auto 0; }
+.modal-inner .img-bg { width:100%; height:auto; }
+.txt-howto { position:absolute; top:48%; left:50%; transform:translate(-50%, -50%); width:85.65%; }
+.btn-area.type-howto { position:absolute; bottom:5.6%; left:50%; transform:translateX(-50%); width:16.16%; }
+
+/* button */
+.btn-audio { position:absolute; right:1.25%; top:1.5%; background:url('../img/btn_audio_on.png') 0 0/100% auto no-repeat; width:5.93%; height:8.38%; }
+.btn-audio.off { background-image:url('../img/btn_audio_off.png'); }
+
+.btn-voice { position:absolute; left:50vw; bottom:1.72vw; width:15.63vw; height:9.38vw; background:url('../img/btn_voice.png') 0 0/cover no-repeat; transform:translateX(-50%); }
+.btn-voice.on { background-position-y:50%; }
+.btn-voice.off { background-position-y:100%; }
+
+/* progress */
+.progress-area { position:absolute; top:1.88%; left:2.34%; width:17.6%; height:4.5%; background:url('../img/progress_bg.png') 0 0/contain no-repeat; font-size:0; }
+.progress-area li { display:inline-block; width:16.66%; height:100%; background-size:contain; background-position:center center; background-repeat:no-repeat; background-image:url('../img/progress_will.png'); }
+.progress-area li.ing { background-image:url('../img/progress_ing.png'); }
+.progress-area li.right { background-image:url('../img/progress_right.png'); }
+.progress-area li.wrong { background-image:url('../img/progress_wrong.png'); }
+
+.txt-script { position:absolute; top:6.37%; left:0; right:0; margin:0 auto; width:61.88vw; height:11.95vw; background:url('../img/bg_balloon.png') center center/contain no-repeat; }
+.txt-script span { position:absolute; top:50%; left:50%; width:100%; display:block; transform:translate(-50%, -50%); padding:1vw 4vw; color:#fff; font-size:2.5vw; text-align:center; letter-spacing:-0.08vw; }
+
+.img-character { position:absolute; left:50%; bottom:0; width:46.1%; transform:translateX(-50%); text-align:center; }
+.img-character img { width:100%; height:auto; }
+
+.question-area { position:absolute; bottom:10.16vw; left:50%; width:32.06vw; height:10.23vw; background:url('../img/balloon_bg.png') 0 0/auto 100% repeat-x; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.2em; text-align:center; padding-top:1.8vw; }
+.question-area:before,
+.question-area:after { position:absolute; top:0; right:99%; width:4.69vw; height:100%; display:block; background:url('../img/balloon_left.png') 0 0/auto 100% no-repeat; content:""; }
+.question-area:after { left:99%; right:auto; background-image:url('../img/balloon_right.png'); }
+.question-area .single { position:relative; z-index:1; margin:0 -1vw; }
+.question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; background:#F3E2B6; border-radius:15px; text-align:4.2vw; line-height:4.2vw; padding-right:15px; }

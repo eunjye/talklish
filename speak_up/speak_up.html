@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+	<link type="text/css" rel="stylesheet" href="./css/app.css"></link>
+
+</head>
+
+<body>
+	<iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+
+	<div class="container-area">
+		<div class="container-inner">
+
+			<!-- [Page 0 : intro - 시작하기 화면] -->
+			<div class="intro page-area" data-index="0" data-bgm="bgm_intro" style="background-image:url('img/bg_intro.jpg');">
+				<a href="_font.html" style="width:30%; height:15%; background:black; color:white; position:absolute; top:0; left:0; z-index:10; font-size:3vw;">폰트보기</a>
+				
+				<div class="btn-area type-intro">
+					<img src="img/btn_intro.png" alt="">
+					<button type="button" class="" id="btnStart" onclick="
+						window.speakUp.goPage(1, this, function(){
+							setTimeout(function(){
+								window.speakUp.askQuestion(window.speakUp.speak[1][0])
+							}, 2000)
+						});
+					"><span class="blind">시작하기</span></button>
+					<button type="button" class="" id="btnHowTo" onclick="
+						document.querySelector('#modalHowTo').style.display='block';
+					"><span class="blind">학습안내</span></button>
+				</div>
+				<!-- [modal] how to Start -->
+				<div class="modal-area" id="modalHowTo" style="display:none;">
+					<div class="modal-inner">
+						<div class="howto-area">
+							<img src="img/bg_howto.png" alt="" class="img-bg">
+							<img src="img/txt_howto.png" class="txt-howto" alt="학습안내 내용입니다. 학습안내 내용입니다. 임시 이미지.">
+							<div class="btn-area type-howto">
+								<img src="img/btn_howto_confirm.png" alt="">
+								<button type="button" class="btn-confirm modal-close" onclick="
+									document.querySelector('#modalHowTo').style.display='none';
+								"><span class="blind">확인</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // [modal] how to End -->
+			</div>
+			<!-- // [Page 0 : intro - 시작하기 화면] -->
+
+			<!-- [Page 1 : question area ] -->
+			<div class="question page-area" data-index="1" data-bgm="bgm_01_03" style="background-image:url('img/bg_main1.jpg');">
+				<ul class="progress-area">
+					<!-- li class : ing, wrong, right -->
+					<li class="ing"><span class="blind">1단계</span></li>
+					<li><span class="blind">2단계</span></li>
+					<li><span class="blind">3단계</span></li>
+					<li><span class="blind">4단계</span></li>
+					<li><span class="blind">5단계</span></li>
+					<li><span class="blind">6단계</span></li>
+				</ul>
+				<button type="button" class="btn-audio" id="btnAudio" onclick="
+					if (!this.classList.contains('off')) {
+						this.classList.add('off');
+						window.speakUp.soundStatus('stop', 'bgm');
+					} else {
+						this.classList.remove('off');
+						window.speakUp.soundStatus('play', 'bgm', 'bgm_01_03');
+					}
+				">
+					<span class="blind">BGM 음소거</span>
+				</button>
+
+				<div class="txt-script">
+					<span>안녕? 나는 천재초등학교 3학년 1반 하늘이라고 해!</span>
+				</div>
+				<div class="img-character">
+					<img src="img/character.png" alt="">
+				</div>
+
+				<div class="question-area" style="display:none;">
+					<div class="single">
+						<span>디</span>
+						<span>지</span>
+						<span>털</span>&nbsp;
+						<span>영</span>
+						<span>상</span>&nbsp;
+						<span>지</span>
+						<span>도</span>
+					</div>
+				</div>
+
+				<button type="button" class="btn-voice"><span class="blind">녹음하기</span></button>
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="./js/createjs.min.js"></script>
+	<script src="./animation.js"></script>
+	<!-- <script src="./js/cc.init.js"></script> -->
+	<script src="./js/externalManager.js"></script>
+	<!-- <script src="./js/content.js"></script> -->
+	<script src="./js/common.js"></script>
+</body>
+
+</html>
