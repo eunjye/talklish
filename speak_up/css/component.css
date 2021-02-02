@@ -88,14 +88,18 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .progress-area li.wrong { background-image:url('../img/progress_wrong.png'); }
 
 .txt-script { position:absolute; top:6.37%; left:0; right:0; margin:0 auto; width:61.88vw; height:11.95vw; background:url('../img/bg_balloon.png') center center/contain no-repeat; }
-.txt-script span { position:absolute; top:50%; left:50%; width:100%; display:block; transform:translate(-50%, -50%); padding:1vw 4vw; color:#fff; font-size:2.5vw; text-align:center; letter-spacing:-0.08vw; }
+.txt-script span { position:absolute; top:50%; left:50%; width:100%; display:block; transform:translate(-50%, -50%); padding:1vw 4vw; color:#fff; font-size:2.5vw; text-align:center; letter-spacing:-0.08vw; word-break:keep-all; }
 
 .img-character { position:absolute; left:50%; bottom:0; width:46.1%; transform:translateX(-50%); text-align:center; }
 .img-character img { width:100%; height:auto; }
 
-.question-area { position:absolute; bottom:10.16vw; left:50%; width:32.06vw; height:10.23vw; background:url('../img/balloon_bg.png') 0 0/auto 100% repeat-x; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.2em; text-align:center; padding-top:1.8vw; }
+.question-area { position:absolute; bottom:10.16vw; left:50%; width:32.06vw; height:10.23vw; background:url('../img/balloon_bg.png') 0 0/auto 100% repeat-x; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.15em; text-align:center; padding-top:1.2vw; }
 .question-area:before,
 .question-area:after { position:absolute; top:0; right:99%; width:4.69vw; height:100%; display:block; background:url('../img/balloon_left.png') 0 0/auto 100% no-repeat; content:""; }
 .question-area:after { left:99%; right:auto; background-image:url('../img/balloon_right.png'); }
+.question-area.wide { width:80vw; }
 .question-area .single { position:relative; z-index:1; margin:0 -1vw; }
-.question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; background:#F3E2B6; border-radius:15px; text-align:4.2vw; line-height:4.2vw; padding-right:15px; }
+.question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; background:#F3E2B6; border-radius:15px; text-align:4.2vw; line-height:4.2vw; padding-right:1.5vw; vertical-align:middle; }
+.question-area .multiple { display:flex; text-align:center; justify-content:space-between; align-items:center; }
+.question-area .multiple span { flex:1; margin:0 1.5vw; display:inline-block; padding:0.5vw 1.5vw; border-radius:15px; background:#F3E2B6; letter-spacing:0; vertical-align:middle; }
+.question-area .multiple span.selected { background:#442f0a; color:#F3E2B6; }

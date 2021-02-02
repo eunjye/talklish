@@ -174,11 +174,11 @@
 			var $questionArea = document.querySelector('.question-area');
 			var $btnVoide = document.querySelector('.btn-voice');
 
+			$questionArea.style.display='block';
 
 			// [QuizType1] 단답형일 시
 			if (question.type === 'word') {
 				// answer check !! (question.answer[0])
-				$questionArea.style.display='block';
 				$questionArea.innerHTML = '<div class="single"></div>';
 				var $questionInner = $questionArea.querySelector('.single');
 				var answerText = question.answer[2][0];
@@ -186,6 +186,7 @@
 
 				// 초성값 .single에 넣기
 				function setInitialAnswer(initial, isTransparent) {
+					$questionArea.classList.remove('wide');
 					var resultHTML = '';
 					for(var i = 0; i < initial.length; i++) {
 						if (initial[i] === ' ') {
@@ -199,6 +200,20 @@
 						}
 					}
 					$questionInner.innerHTML = resultHTML;
+				}
+
+				// 단어 세개 중 선택하기
+				function setWordsAnswer() {
+					$questionArea.classList.add('wide');
+					$questionArea.innerHTML = '<div class="multiple"></div>';
+					var $questionInner = $questionArea.querySelector('.multiple');
+					var answerWords = question.answer[1];
+					var multipleHTML = '';
+
+					answerWords.forEach(function(item){
+						multipleHTML += '<span>' + item.replace(/ /g,'') + '</span>';
+					})
+					$questionInner.innerHTML = multipleHTML;
 				}
 
 				// 첫번째 (글자수만 나오는거)
@@ -228,7 +243,7 @@
 							win[namespace].wrongAnswer(
 								win[namespace].wrongScript[0][1], 
 								function(){
-									setInitialAnswer(question.answer[1][0]); // not single 
+									setWordsAnswer(); // multiple
 									win[namespace].soundStatus('play', 'script', script.voice);
 									win[namespace].setText(script.text);
 								}
@@ -237,6 +252,7 @@
 							win[namespace].wrongAnswer(// [To-be] wrongAnswer()가 아니라, 으음~아쉬워 알려줄게! 랜덤으로
 								win[namespace].wrongScript[1][2], 
 								function(){ 
+									// 여기서 멀티플 중에 .. 발음한 답이 있으면 그거 선택, 그리고 없으면 그냥 땡 하고 정답 선택. 만약 정답 맞으면 정답에 동그라미
 									!!endBack && endBack();
 								}
 							);
