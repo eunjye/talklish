@@ -99,7 +99,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .question-area:after { left:99%; right:auto; background-image:url('../img/balloon_right.png'); }
 .question-area.wide { width:80vw; }
 .question-area .single { position:relative; z-index:1; margin:0 -1vw; }
-.question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; background:#F3E2B6; border-radius:15px; text-align:4.2vw; line-height:4.2vw; padding-right:1.5vw; vertical-align:middle; }
+.question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; margin:0.2vw; background:#F3E2B6; border-radius:15px; text-align:center; line-height:4.2vw; vertical-align:middle; }
 .question-area .multiple { display:flex; text-align:center; justify-content:space-between; align-items:center; }
 .question-area .multiple span { flex:1; margin:0 1.5vw; display:inline-block; padding:0.5vw 1.5vw; border-radius:15px; background:#F3E2B6; letter-spacing:0; vertical-align:middle; }
 .question-area .multiple span.selected { background:#442f0a; color:#F3E2B6; }

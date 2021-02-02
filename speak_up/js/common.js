@@ -116,16 +116,18 @@
 			var voice = script.voice;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
-			};
+			}
 
 			win[namespace].setText(text);
 
 			// 질문이 있을때는 checkAnswer로 넘어감
 			clearTimeout(win[namespace].willTimer);
 			if (question === undefined){
+				console.log(win[namespace].willTimer);
 				win[namespace].soundStatus('play', 'script', voice, fnEndBack);
 			} else {
 				win[namespace].soundStatus('play', 'script', voice);
+				// win[namespace].checkAnswer(script, question, script.endBack);
 				win[namespace].checkAnswer(script, question, script.endBack);
 				// fnEndBack();
 			}
@@ -142,12 +144,14 @@
 
 			win[namespace].setText(text);
 			document.querySelector('.question-area').style.display = 'none';
+			document.querySelector('.btn-voice').style.display = 'none';
 			win[namespace].soundStatus('play', 'wrong', voice);
 			win[namespace].checkAnswerTry++;
 
 			clearTimeout(win[namespace].willTimer);
 			win[namespace].willTimer = setTimeout(function(){
 				document.querySelector('.question-area').style.display = 'block';
+				document.querySelector('.btn-voice').style.display = 'block';
 				endBack();
 			}, duration)
 		},
@@ -175,6 +179,7 @@
 			var $btnVoide = document.querySelector('.btn-voice');
 
 			$questionArea.style.display='block';
+			$btnVoide.style.display='block';
 
 			// [QuizType1] 단답형일 시
 			if (question.type === 'word') {
@@ -253,7 +258,7 @@
 								win[namespace].wrongScript[1][2], 
 								function(){ 
 									// 여기서 멀티플 중에 .. 발음한 답이 있으면 그거 선택, 그리고 없으면 그냥 땡 하고 정답 선택. 만약 정답 맞으면 정답에 동그라미
-									!!endBack && endBack();
+									fnEndBack();
 								}
 							);
 							win[namespace].setText(win[namespace].wrongScript[1][2].text);
@@ -265,7 +270,7 @@
 						// 성공일 시, 정답 모션
 						setInitialAnswer(answerText);
 						win[namespace].checkAnswerTry = 1;
-						!!endBack && endBack();
+						fnEndBack();
 						$btnVoide.removeEventListener('click', startVoiceCheck);
 					}
 				}
@@ -278,12 +283,20 @@
 			
 			// 음성인식 실행해서 값 가져오기
 			function getVoice(){
-				var str = '음 고장 같아'; // 테스트용
+				var str = '고장 같아'; // 테스트용
 
 				// window.HybridApp.startSilvySTTMode(0); // 여기 풀기
 				// window.HybridApp.onResultSTTMode = function(str) { // 여기 풀기
 					return {text: str, reduceText: str.replace(/(\s*)/g,'')};
 				// } // 여기 풀기
+			}
+
+			function fnEndBack() {
+				!!endBack && endBack();
+				setTimeout(function(){
+					$questionArea.style.display='none';
+					$btnVoide.style.display='none';
+				}, script.duration)
 			}
 		},
 		wrongScript: [
@@ -415,9 +428,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄱㅈ'],
-									['고지', '고증', '고장'],
-									['고장']
+									['ㅎㄱ'],
+									['학교', '학과', '행거'],
+									['학교']
 								]
 							}
 						);
