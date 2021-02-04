@@ -25,7 +25,7 @@
 					<button type="button" class="" id="btnStart" onclick="
 						window.speakUp.goPage(1, this, function(){
 							setTimeout(function(){
-								window.speakUp.askQuestion(window.speakUp.speak[1][0])
+								window.speakUp.askQuestion(window.speakUp.speak[0][0])
 							}, 2000)
 						});
 					"><span class="blind">시작하기</span></button>
@@ -38,7 +38,7 @@
 					<div class="modal-inner">
 						<div class="howto-area">
 							<img src="img/bg_howto.png" alt="" class="img-bg">
-							<img src="img/txt_howto.png" class="txt-howto" alt="학습안내 내용입니다. 학습안내 내용입니다. 임시 이미지.">
+							<p>학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다.</p>
 							<div class="btn-area type-howto">
 								<img src="img/btn_howto_confirm.png" alt="">
 								<button type="button" class="btn-confirm modal-close" onclick="
@@ -56,7 +56,7 @@
 			<div class="question page-area" data-index="1" data-bgm="bgm_01_03" style="background-image:url('img/bg_main1.jpg');">
 				<ul class="progress-area">
 					<!-- li class : ing, wrong, right -->
-					<li class="ing"><span class="blind">1단계</span></li>
+					<li><span class="blind">1단계</span></li>
 					<li><span class="blind">2단계</span></li>
 					<li><span class="blind">3단계</span></li>
 					<li><span class="blind">4단계</span></li>
@@ -101,6 +101,36 @@
 				</div>
 
 				<button type="button" class="btn-voice" style="display:none;"><span class="blind">녹음하기</span></button>
+
+				<!-- [modal] ending popup Start -->
+				<div class="modal-area" id="modalEnding" style="display:none;">
+					<div class="modal-inner">
+						<div class="result-area">
+							<img src="img/bg_result.png" alt="" class="img-bg">
+							<ul class="progress-end-area">
+								<li><span class="blind">1단계</span></li>
+								<li><span class="blind">2단계</span></li>
+								<li><span class="blind">3단계</span></li>
+								<li><span class="blind">4단계</span></li>
+								<li><span class="blind">5단계</span></li>
+								<li><span class="blind">6단계</span></li>
+							</ul>
+							<p>
+								총 6문제 중 <strong id="resultNumber">0</strong>문제 성공! <br>
+								<span id="resultText">우리 친구 최고! 정말 잘했어요~</span>
+							</p>
+							<div class="btn-area2 type-end">
+								<button type="button" class="btn-reset modal-close" onclick="
+									window.speakUp.restart();
+								"><span class="blind">다시 하기</span></button>
+								<button type="button" class="btn-end modal-close" onclick="
+									document.querySelector('#modalEnding').style.display='none';
+								"><span class="blind">학습 종료</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- // [modal] ending popup End -->
 			</div>
 
 		</div>

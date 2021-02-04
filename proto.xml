@@ -1,9 +1,9 @@
 ﻿<contents>
 	
 	<study>
-		<ui_type>1</ui_type> <!-- 과목 UI 탬플릿 단원 번호 -->
+		<ui_type>104</ui_type> <!-- 과목 UI 탬플릿 단원 번호 -->
 		<chapter>1</chapter> <!-- 단원명 -->
-		<title>단원명</title>
+		<title></title>
 		
 		<menu id="1">
 			<type>5</type> <!-- 컨텐츠 타입 ( 1: 영상 컨텐츠, 5: HTML5 컨텐츠, 6: 인트로 ) -->
