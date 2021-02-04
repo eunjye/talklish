@@ -529,22 +529,22 @@
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
 				voice: 'SSJ3b_ending_01',
-				duration: 3000
+				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
 				voice: 'SSJ3b_ending_02',
-				duration: 3000
+				duration: 4000
 			},
 			{
 				text: '다음 번엔 더 잘할 수 있을 거야.',
 				voice: 'SSJ3b_ending_03',
-				duration: 3000
+				duration: 4000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
 				voice: 'SSJ3b_ending_04',
-				duration: 3000
+				duration: 5000
 			},
 		],
 		wrongScript: [
@@ -557,7 +557,7 @@
 				{
 					text: '조금 더 생각해보자!',
 					voice: 'SSJ3b_A_02',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '한 번 더 생각해볼까?',
@@ -572,7 +572,7 @@
 				{
 					text: '아쉬워~ 한 번 더 생각해볼까?',
 					voice: 'SSJ3b_A_05',
-					duration: 3000
+					duration: 4000
 				},
 			],
 			[
@@ -589,7 +589,7 @@
 				{
 					text: '어려웠구나! 내가 알려줄게.',
 					voice: 'SSJ3b_B_03',
-					duration: 6000
+					duration: 4000
 				},
 			]
 		],
@@ -598,7 +598,7 @@
 				{
 					text: '안녕? 나는 천재초등학교 3학년 1반 하늘이라고 해!',
 					voice: 'SSJ310107_01',
-					duration:1000,
+					duration:5000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
 					}
@@ -606,7 +606,7 @@
 				{
 					text: '만나서 반가워~ 헤헷!',
 					voice: 'SSJ310107_02',
-					duration:1000,
+					duration:3000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][2]);
 					}
@@ -614,7 +614,7 @@
 				{
 					text: '그런데, 여기가 어디냐고?',
 					voice: 'SSJ310107_03',
-					duration:1000,
+					duration:3000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
 					}
@@ -624,7 +624,7 @@
 				{
 					text: '여긴 우리 동네야. 많은 사람들이 살고 있지.',
 					voice: 'SSJ310107_04',
-					duration:1000,
+					duration:4000,
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
 						// 여기서 박스 나타남
@@ -648,7 +648,7 @@
 				{
 					text: '사람들이 모여 사는 곳을 무엇이라고 하더라?',
 					voice: 'SSJ310107_05',
-					duration:1000,
+					duration:4000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][2]);
 					}
@@ -656,7 +656,7 @@
 				{
 					text: '사람들이 모여 사는 곳을 고장이라고 해.',
 					voice: 'SSJ310107_06',
-					duration:1000,
+					duration:4000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
@@ -664,7 +664,7 @@
 				{
 					text: '우리 고장의 여러 장소가 머릿속에 떠오르네!',
 					voice: 'SSJ310107_07',
-					duration:1000,
+					duration:4000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
 					}
@@ -674,7 +674,7 @@
 				{
 					text: '그중에서, 내가 제일 좋아하는 장소가 어디인지 맞춰볼래?',
 					voice: 'SSJ310107_08',
-					duration:1000,
+					duration:5000,
 					endBack: function(){
 						// 여기서 박스 나타남
 						win[namespace].progressStatus('ing', 1);
@@ -698,7 +698,7 @@
 				{
 					text: '이곳은, 친구들과 함께 교실에서 공부하고 운동장에서 재미있게 놀 수 있는 곳이야.',
 					voice: 'SSJ310107_09',
-					duration:1000,
+					duration:8000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][2]);
 					}
@@ -706,7 +706,7 @@
 				{
 					text: '친구들과 함께 교실에서 공부하고 운동장에서 재미있게 노는 곳은 학교이지.',
 					voice: 'SSJ310107_10',
-					duration:1000,
+					duration:7000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
 					}
@@ -714,7 +714,7 @@
 				{
 					text: '나중에 우리 고장의 장소 알림판에 학교를 꼭 소개할 테야. ',
 					voice: 'SSJ310107_11',
-					duration:1000,
+					duration:6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][4]);
 					}
@@ -722,7 +722,7 @@
 				{
 					text: '그때 꼭 도와줘야 해! 알겠지?',
 					voice: 'SSJ310107_12',
-					duration: 1000,
+					duration: 4000,
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
 						win[namespace].askQuestion(
@@ -742,7 +742,7 @@
 				{
 					text: '그런데, 친구들 각자의 고장에 대한 생각과 느낌은 서로 같을까 다를까?',
 					voice: 'SSJ310107_13',
-					duration: 1000,
+					duration: 7000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][1]);
 					}
@@ -750,7 +750,7 @@
 				{
 					text: '고장에 대한 생각과 느낌은 각자의 경험에 따라 서로 다를 수 있어.',
 					voice: 'SSJ310107_15',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][2]);
 					}
@@ -758,7 +758,7 @@
 				{
 					text: '그래! 고장에 대한 서로 다른 생각과 느낌을 이해하고 존중하는 자세가 필요하다는 점',
 					voice: 'SSJ310107_16',
-					duration: 1000,
+					duration: 7000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
 					}
@@ -766,7 +766,7 @@
 				{
 					text: '절대 잊지 말자고~!',
 					voice: 'SSJ310107_17',
-					duration: 1000,
+					duration: 3000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][0]);
 						/* 여기서 배경 디지털 지도로 바꿈 */
@@ -778,7 +778,7 @@
 				{
 					text: '이번에는 하늘에서 내려다본 고장의 모습을 살펴보자.',
 					voice: 'SSJ310107_18',
-					duration: 1000,
+					duration: 5000,
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(win[namespace].speak[4][1],
@@ -800,7 +800,7 @@
 				{
 					text: '사람들이 만들어 쏘아 올린 비행 물체를 뭐라고 부르는지 아니?',
 					voice: 'SSJ310107_19',
-					duration: 1000,
+					duration: 5000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][2]);
 					}
@@ -808,7 +808,7 @@
 				{
 					text: '사람들이 만들어 쏘아 올린 비행 물체를 인공위성이라고 해.',
 					voice: 'SSJ310107_20',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][3]);
 					}
@@ -816,7 +816,7 @@
 				{
 					text: '인공위성 사진은 우주에서 찍었기 때문에 어떤 장소의 위치를 쉽게 알게 해주지.',
 					voice: 'SSJ310107_21',
-					duration: 1000,
+					duration: 8000,
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
 						win[namespace].askQuestion(win[namespace].speak[5][0],
@@ -840,7 +840,7 @@
 				{ // 5 - 0
 					text: '그렇다면, 인공위성 사진을 이용해 만든 지도를 무엇이라고 할까?',
 					voice: 'SSJ310107_22',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][1]);
 					}
@@ -848,7 +848,7 @@
 				{
 					text: '인공위성 사진을 이용해서 만든 지도를 디지털 영상 지도라고 해.',
 					voice: 'SSJ310107_23',
-					duration: 1000,
+					duration: 5000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][2]);
 					}
@@ -856,7 +856,7 @@
 				{
 					text: '디지털 영상 지도를 통해서 우리 고장을 우주에서 내려다본 것처럼 살펴볼 수 있어.',
 					voice: 'SSJ310107_24',
-					duration: 1000,
+					duration: 7000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
@@ -864,7 +864,7 @@
 				{
 					text: '이동, 확대, 다른 종류의 지도로 바꾸기 등 여러 가지 기능을 이용할 수도 있다고~!',
 					voice: 'SSJ310107_25',
-					duration: 1000,
+					duration: 7000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
 					}
@@ -874,7 +874,7 @@
 				{
 					text: '자 그러면, 이제 우리 고장의 안내도를 만들 때 필요한 지도에 대해 알아보자.',
 					voice: 'SSJ310107_26',
-					duration: 1000,
+					duration: 7000,
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
 						win[namespace].askQuestion(
@@ -897,7 +897,7 @@
 				{
 					text: '산, 강, 큰길 등의 밑그림만 그려져 있는 지도를 무엇이라고 하지?',
 					voice: 'SSJ310107_27',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][2]);
 					}
@@ -905,7 +905,7 @@
 				{
 					text: '산, 강, 큰길 등의 밑그림만 그려져 있는 지도를 백지도라고 해.',
 					voice: 'SSJ310107_28',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
@@ -913,7 +913,7 @@
 				{
 					text: '그래, 백지도에 우리 고장의 주요 장소를 나타내어, 우리 고장의 안내도를 만들 수 있지!',
 					voice: 'SSJ310107_29',
-					duration: 1000,
+					duration: 8000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
 						/* 화면 전환하기 */
@@ -924,7 +924,7 @@
 				{
 					text: '우와! 이야기 나누다 보니까 시간이 금방 갔네!',
 					voice: 'SSJ310107_30',
-					duration: 1000,
+					duration: 5000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
@@ -932,7 +932,7 @@
 				{
 					text: '덕분에 사회시간에 배운 내용들 절대 잊어버리지 않을 것 같아.',
 					voice: 'SSJ310107_31',
-					duration: 1000,
+					duration: 6000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][2]);
 					}
@@ -940,7 +940,7 @@
 				{
 					text: '다음에 또 만나서 이야기 나누자.',
 					voice: 'SSJ310107_32',
-					duration: 1000,
+					duration: 3000,
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][3]);
 					}
@@ -948,7 +948,7 @@
 				{
 					text: '안녕~!',
 					voice: 'SSJ310107_33',
-					duration: 1000,
+					duration: 2000,
 					endBack: function(){
 						win[namespace].calcEndResult(document.querySelectorAll('.progress-area .right').length);
 					}
