@@ -247,6 +247,10 @@
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
 						}
+						window.HybridApp.onResultError = function() {
+							voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
+							startVoiceCheck(voiceText);
+						}
 					} else {
 						// if (test === 1) {
 						// 	voiceText = {text: '음 고장 같아', reduceText: '음 고장 같아'.replace(/(\s*)/g,'')};
@@ -345,7 +349,6 @@
 					} else {
 						/* 성공일 시, 정답 모션
 						============================== */
-						setInitialAnswer(answerText);
 						if (tryNum === 3) {
 							$questionInner.classList.add('answer-right');
 							question.answer[1].forEach(function(item, index){
@@ -354,6 +357,7 @@
 								}
 							})
 						} else {
+							setInitialAnswer(answerText);
 							$questionInner.classList.add('right');
 						}
 						win[namespace].soundStatus('play', 'effect', 'right');
@@ -395,7 +399,7 @@
 							startVoiceCheck(voiceText);
 						} // 여기 풀기
 					} else {
-						voiceText = {text: '같아요', reduceText: '같아요'.replace(/(\s*)/g,'')};
+						voiceText = {text: '달라요', reduceText: '달라요'.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
 					}
 
@@ -427,16 +431,12 @@
 									function(){ 
 										// !!resultBack && resultBack.wrong();
 										win[namespace].checkAnswerTry = 1;
+										$questionArea.style.display='none';
+										$btnVoice.style.display='none';
+										!!resultBack && resultBack.wrong();
 									},
 									true
 								);
-								win[namespace].checkAnswerTry = 1;
-								setTimeout(function(){
-									// debugger;
-									$questionArea.style.display='none';
-									$btnVoice.style.display='none';
-									!!resultBack && resultBack.wrong();
-								}, 2000);
 							}, 2000);
 						}
 					}
