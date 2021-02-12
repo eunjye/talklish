@@ -129,7 +129,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .img-character { position:absolute; left:50%; bottom:0; width:46.1%; transform:translateX(-50%); text-align:center; }
 .img-character img { width:100%; height:auto; }
 
-.question-area { z-index:11; position:absolute; bottom:11.71vw; left:50%; min-width:32.06vw; height:8.36vw; background:rgba(255,255,255,.9); transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.15em; text-align:center; padding:1.5vw 3.4vw 0; border-radius:2.34vw; background:rgba(255,235,94,.8); border:0.234vw solid rgba(0,0,0,.46); box-shadow:0.2vw 0.93vw 0.78vw rgba(0,0,0,.6); }
+.question-area { z-index:11; position:absolute; bottom:11.71vw; left:50%; min-width:32.06vw; height:8.36vw; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.15em; text-align:center; padding:1.5vw 3.4vw 0; border-radius:2.34vw; background:rgba(255,235,94,.8); border:0.234vw solid rgba(0,0,0,.46); box-shadow:0.2vw 0.93vw 0.78vw rgba(0,0,0,.6); }
 .question-area:before { z-index:-1; position:absolute; top:0.39vw; left:0.39vw; display:block; width:calc(100% - 0.8vw); background:#fff; height:calc(100% - 0.8vw); border-radius:1.95vw; box-sizing:border-box; content:""; }
 .question-area.wide { width:auto; }
 .question-area .single { position:relative; z-index:10; margin:0 -1vw; line-height:4.2vw; }

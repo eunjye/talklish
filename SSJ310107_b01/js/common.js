@@ -102,7 +102,7 @@
 				}
 			}
 
-			function muteByType(type) {
+			function muteByType(soundType) {
 				var $otherAudio = document.querySelectorAll('[class*=audio-' + soundType + ']');
 				var otherAudioindex = 0;
 				while (otherAudioindex < $otherAudio.length) {
@@ -186,6 +186,12 @@
 				// debugger;
 			}, duration)
 		},
+		introAnimation: function() {
+			document.querySelector('.page-area.intro').classList.remove('on');
+			setTimeout(function(){
+				document.querySelector('.page-area.intro').classList.add('on');
+			}, 200)
+		},
 		setText: function(text){
 			var $text = document.querySelector('.txt-script span');
 			$text.innerHTML = text;
@@ -213,12 +219,13 @@
 
 			$questionArea.style.display='block';
 			$btnVoice.style.display='block';
-			$btnVoice.disabled = false;
+			$btnVoice.disabled = true;
 
 			function blinkBtnVoice() {
 				clearTimeout(win[namespace].blinkTimer);
 				win[namespace].blinkTimer = setTimeout(function(){
 					$btnVoice.classList.add('blink');
+					question.type === 'word' ? $btnVoice.disabled = false : '';
 				}, script.duration)
 			}
 			blinkBtnVoice();
@@ -261,12 +268,6 @@
 							startVoiceCheck(voiceText);
 						}
 					} else {
-						// if (test === 1) {
-						// 	voiceText = {text: '음 고장 같아', reduceText: '음 고장 같아'.replace(/(\s*)/g,'')};
-						// 	test++;
-						// } else {
-						// 	voiceText = {text: '고장 같아', reduceText: '고장 같아'.replace(/(\s*)/g,'')};
-						// }
 						voiceText = {text: '고장', reduceText: '고장'.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
 					}
@@ -279,6 +280,7 @@
 					win[namespace].soundStatus('stop', 'script');
 					clearTimeout(win[namespace].blinkTimer);
 					$btnVoice.classList.remove('blink');
+					$btnVoice.disabled = true;
 					
 					if (voiceText.reduceText.slice(0, reduceAnswerText.length) !== reduceAnswerText) {
 						// 1트에 실패일 시, 초성 나옴
@@ -294,7 +296,6 @@
 									setInitialAnswer(question.answer[0][0]);
 									win[namespace].soundStatus('play', 'script', script.voice);
 									win[namespace].setText(script.text);
-									$btnVoice.disabled = false;
 									blinkBtnVoice();
 								},
 								true
@@ -311,7 +312,6 @@
 									setWordsAnswer(); // multiple
 									win[namespace].soundStatus('play', 'script', script.voice);
 									win[namespace].setText(script.text);
-									$btnVoice.disabled = false;
 									blinkBtnVoice();
 								},
 								true
@@ -394,19 +394,27 @@
 				$btnVoice.addEventListener('click', evtStartVoiceCheck);
 
 				var guideVoiceTimer = setTimeout(function(){
-					win[namespace].soundStatus('play', 'script', 'SSJ310107_14');
-				}, script.duration)
+					win[namespace].soundStatus('play', 'script', 'SSJ310107_14', function(){
+						setTimeout(function(){
+							$btnVoice.disabled = false;
+						},5000)
+					});
+				}, script.duration);
 
 				function evtStartVoiceCheck(){
 					clearTimeout(guideVoiceTimer);
 					$btnVoice.disabled = true;
 
 					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(0); // 여기 풀기
-						window.HybridApp.onResultSTTMode = function(str) { // 여기 풀기
+						window.HybridApp.startSilvySTTMode(0);
+						window.HybridApp.onResultSTTMode = function(str) {
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
-						} // 여기 풀기
+						} 
+						window.HybridApp.onResultError = function() {
+							voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
+							startVoiceCheck(voiceText);
+						}
 					} else {
 						voiceText = {text: '달라요', reduceText: '달라요'.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
@@ -470,26 +478,6 @@
 				$questionInner.innerHTML = resultHTML;
 			}
 
-			
-			// 음성인식 실행해서 값 가져오기
-			// function getVoice(){
-			// 	var resultText = '';
-
-			// 	$btnVoice.disabled = true;
-
-      //   if (externalManager.isPlayer()) {
-			// 		window.HybridApp.startSilvySTTMode(0); // 여기 풀기
-			// 		window.HybridApp.onResultSTTMode = function(str) { // 여기 풀기
-			// 			alert(str);
-			// 			resultText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
-			// 			return resultText;
-			// 		} // 여기 풀기
-			// 	} else {
-			// 		resultText = {text: '고장 같아', reduceText: '고장 같아'.replace(/(\s*)/g,'')};
-			// 		return resultText;
-			// 	}
-			// }
-
 			function fnEndBack() {
 				setTimeout(function(){
 					$questionArea.style.display='none';
@@ -527,6 +515,7 @@
 				item.style.display = 'none';
 			})
 			document.querySelector('#modalEnding').classList.remove('open');
+			win[namespace].introAnimation();
 			win[namespace].goPage(0);
 			win[namespace].setBgImg('bg_main1');
 			win[namespace].setText(win[namespace].speak[0][0].text);
@@ -649,7 +638,7 @@
 								type: 'word',
 								answer: [
 									['ㄱㅈ'],
-									['고지', '고증', '고장'],
+									['고장', '공주', '기지'],
 									['고장']
 								],
 								resultBack: {
@@ -881,7 +870,7 @@
 					}
 				},
 				{
-					text: '이동, 확대, 다른 종류의 지도로 바꾸기 등<br>여러 가지 기능을 이용할 수도 있다고~!',
+					text: '이동, 확대, 다른 종류의 지도로 바꾸기 등<br>여러 가지 기능을 이용할 수 있다고~!',
 					voice: 'SSJ310107_25',
 					duration: 7000,
 					endBack: function(){
@@ -949,7 +938,7 @@
 					}
 				},
 				{
-					text: '덕분에 사회시간에 배운 내용들 절대 잊어버리지<br>않을 것 같아.',
+					text: '덕분에 사회 시간에 배운 내용들 절대 잊어버리지<br>않을 것 같아.',
 					voice: 'SSJ310107_31',
 					duration: 6000,
 					endBack: function(){
@@ -976,6 +965,7 @@
 			]
 		],
 		init: function(){
+			win[namespace].introAnimation();
 			win[namespace].goPage(0);
 		}
 	}
@@ -983,5 +973,74 @@
 	document.addEventListener('DOMContentLoaded', function(){
 		win[namespace].init();
 	})
+
+var createPraiseAnimation = function (spec) {
+	var exporter = {};
+	var box;
+	var button;
+	var canvas;
+	var aniModule;
+	var type;
+
+	exporter.name = spec.moduleName;
+
+	init();
+
+	function init() {
+		box = spec.box;
+		button = amt.get('.praise-button', box);
+		canvas = amt.get('canvas', box);
+		type = parseInt(spec.type);
+
+		var src = '../img/ani/' + type + '.png';
+		var data = window[data];
+
+		aniModule = canvasAnimation({
+			canvas: canvas,
+			imageSrc: src,
+			data: data,
+			autoPlay: false,
+			usePoster: false,
+			loop: false,
+		}).init();
+
+		// button.addEventListener(amt.mouseTouchEvent.click, hnClickButton);
+		canvas.addEventListener('CANVAS_ANIMATION_ENDED', hnAniEnd);
+	}
+
+	// function hnClickButton(e) {
+	// 	amt.sendMessage(document, 'DOC_EVENT', {
+	// 		message: 'RESET_ANIMATION',
+	// 		module: exporter,
+	// 		callback: play,
+	// 	});
+	// }
+
+	function hnAniEnd(e) {}
+
+	function play() {
+		aniModule.playAni();
+	}
+
+	exporter.start = function () {
+		console.log('start :: ', exporter.name);
+	};
+
+	exporter.reset = function () {
+		aniModule.stopAni();
+	};
+
+	return exporter;
+};
+
+var box = document.querySelector('.img-character');
+var type = box.dataset.type;
+console.log(type)
+var module = createPraiseAnimation({
+		moduleName: 'PRAISE_ANIMATION',
+		box: box,
+		type: type
+})
+module.start();
 
 })(window, document);
