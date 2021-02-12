@@ -43,7 +43,6 @@ var canvasAnimation = function (spec) {
 
     // var json = JSON.parse(spec.data);
     var json = spec.data;
-    console.log(spec.data)
     data = Object.keys(json.frames).map(function (value) {
         return json.frames[value];
     });
