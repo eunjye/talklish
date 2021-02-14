@@ -91,7 +91,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 }
 .result-area p { position:absolute; top:28.9vw; left:50%; width:100%; transform:translateX(-50%); font-size:3.13vw; color:#3b2801; }
 .result-area p strong { color:#ff3600; }
-.result-area .img-character2 { z-index:-1; position:absolute; right:85%; top:26.4%; width:22.19vw; height:40vw; }
+.result-area .img-character2 { z-index:-1; position:absolute; right:85%; top:26.4%; width:22.19vw; height:auto; }
 .btn-area2.type-end { position:absolute; bottom:16.6%; left:50%; width:100%; transform:translateX(-50%); }
 .btn-area2 .btn-reset { width:13.44vw; height:6.02vw; margin:0 0.5vw; background:url('../img/btn_reset.png') 0 0/auto 100% no-repeat; }
 .btn-area2 .btn-end { width:13.44vw; height:6.02vw; margin:0 0.5vw; background:url('../img/btn_end.png') 0 0/auto 100% no-repeat; }
@@ -128,8 +128,13 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .txt-script { position:absolute; top:6.37%; left:0; right:0; margin:0 auto; width:61.88vw; height:11.95vw; background:url('../img/bg_balloon.png') center center/contain no-repeat; }
 .txt-script span { position:absolute; top:50%; left:50%; width:100%; display:block; transform:translate(-50%, -50%); padding:1vw 4vw; color:#fff; font-size:2.5vw; text-align:center; letter-spacing:-0.08vw; word-break:keep-all; }
 
-.img-character { position:absolute; left:50%; bottom:0; width:46.1%; transform:translateX(-50%); text-align:center; }
-.img-character img { width:100%; height:auto; }
+.img-character { display:none; position:absolute; left:50%; bottom:0; width:532px; height:614px; transform:translateX(-50%); text-align:center; }
+.img-character.type-b { left:46.5%; background:url('../img/ani/b.png') 0 0/5500px 4000px; }
+.img-character.type-c { background:url('../img/ani/c.png') 0 0/5500px 5000px; }
+.img-character.type-d { background:url('../img/ani/d.png') 0 0/5500px 5000px; }
+.img-character.type-e1 { background:url('../img/ani/e1.png') 0 0/5500px 6500px; }
+.img-character.type-e2 { background:url('../img/ani/e2.png') 0 0/5500px 4000px; }
+.img-character.type-f { left:52%; background:url('../img/ani/f.png') 0 0/4096px 4096px; }
 
 .question-area { z-index:11; position:absolute; bottom:11.71vw; left:50%; min-width:32.06vw; height:8.36vw; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.15em; text-align:center; padding:1.5vw 3.4vw 0; border-radius:2.34vw; background:rgba(255,235,94,.8); border:0.234vw solid rgba(0,0,0,.46); box-shadow:0.2vw 0.93vw 0.78vw rgba(0,0,0,.6); }
 .question-area:before { z-index:-1; position:absolute; top:0.39vw; left:0.39vw; display:block; width:calc(100% - 0.8vw); background:#fff; height:calc(100% - 0.8vw); border-radius:1.95vw; box-sizing:border-box; content:""; }

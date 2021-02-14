@@ -16,7 +16,14 @@
 	<div class="container-area">
 		<div class="container-inner">
 
+			<img src="img/bg_main1.jpg" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
 			<img src="img/bg_main2.jpg" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/b.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/c.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/d.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/e1.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/e2.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
+			<img src="img/ani/f.png" alt="" style="opacity:0; width:1px; height:1px; z-index:-1; position:absolute; overflow:hidden;">
 			<!-- [Page 0 : intro - 시작하기 화면] -->
 			<div class="intro page-area" data-index="0" data-bgm="bgm_intro" style="background-image:url('img/bg_intro.jpg');">
 				<!-- <a href="_font.html" style="width:30%; height:15%; background:black; color:white; position:absolute; top:0; left:0; z-index:10; font-size:3vw;">폰트보기</a> -->
@@ -25,8 +32,9 @@
 					<img src="img/btn_intro.png" alt="">
 					<button type="button" class="" id="btnStart" onclick="
 						window.speakUp.goPage(1, this, function(){
+							window.speakUp.animationStatus('', 'b');
 							setTimeout(function(){
-								window.speakUp.askQuestion(window.speakUp.speak[3][2])
+								window.speakUp.askQuestion(window.speakUp.speak[0][0]);
 							}, 2000)
 						});
 					"><span class="blind">시작하기</span></button>
@@ -80,10 +88,12 @@
 				<div class="txt-script">
 					<span>안녕? 나는 천재초등학교 3학년 1반 하늘이라고 해!</span>
 				</div>
-				<div class="img-character" data-type="char01">
-					<!-- <img src="img/character.png" alt=""> -->
-					<!-- <canvas></canvas> -->
-				</div>
+				<div class="img-character type-b"></div>
+				<div class="img-character type-c"></div>
+				<div class="img-character type-d"></div>
+				<div class="img-character type-e1"></div>
+				<div class="img-character type-e2"></div>
+				<div class="img-character type-f"></div>
 
 				<div class="question-area" style="display:none;">
 					<div class="single">
@@ -150,7 +160,7 @@
 		<script src="./js/canvasAnimationData.js" class="hi"></script> -->
 		<!-- <script src="./js/content.js"></script> -->
 		<script src="./js/common.js"></script>
-		<script src="./js/ani/animationData.js"></script>
+		<script src="./js/ani/animation.js"></script>
 </body>
 
 </html>
