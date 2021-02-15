@@ -25,18 +25,22 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			doAnimation();
 		}
 
+		var loop = 0;
 		var frame = 10000;
 		var frameLength = Object.keys(jsonSource.frames).length;
-		clearTimeout(window.speakUp.animationStop);
+		// var frameLength = 50;
+		cancelAnimationFrame(window.speakUp.animationStop);
 		doAnimation();
-
+		console.log(frameLength);
+				
 		function doAnimation() {
-			clearTimeout(window.speakUp.animationTimer);
+			cancelAnimationFrame(window.speakUp.animationTimer);
+			loop++;
+			frame = 10000 + parseInt(loop/3);
 			if (frame - 10000 < frameLength - 1) {
-				frame++;
 				setBgAndTimer();
 			} else if (!duration) { // duration이 없을 땐 1세트만
-				clearTimeout(window.speakUp.animationTimer);
+				cancelAnimationFrame(window.speakUp.animationTimer);
 			} else { // duration이 있고 시간이 아직 남았으면
 				frame = 10000;
 				setBgAndTimer();
@@ -45,10 +49,9 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			function setBgAndTimer() {
 				// $character.style.backgroundPosition = (-jsonSource.frames['character'+frame].frame.x + 'px ') + (-jsonSource.frames['character'+frame].frame.y + 'px');		
 				_cvs.width = _cvs.width;
+				// _ctx.drawImage(_img, jsonSource.frames['character'+frame].frame.x, jsonSource.frames['character'+frame].frame.y, 532, 604, 0, 0, 532, 604); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 				_ctx.drawImage(_img, jsonSource.frames['character'+frame].frame.x, jsonSource.frames['character'+frame].frame.y, 532, 604, 0, 0, 532, 604); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-				window.speakUp.animationTimer = setTimeout(function(){
-					doAnimation();
-				}, 60)
+				window.speakUp.animationTimer = requestAnimationFrame(doAnimation)
 			}
 		}
 
@@ -64,7 +67,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 		if (!!duration && duration !== 'infinite') {
 			window.speakUp.animationStop = setTimeout(function(){
-				clearTimeout(window.speakUp.animationTimer);
+				cancelAnimationFrame(window.speakUp.animationTimer);
 				endMotion();
 			}, duration)
 		} 
