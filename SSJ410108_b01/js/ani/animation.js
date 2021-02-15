@@ -28,6 +28,8 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		var loop = 0;
 		var frame = 10000;
 		var frameLength = Object.keys(jsonSource.frames).length;
+
+		var _flag = false;
 		// var frameLength = 50;
 		cancelAnimationFrame(window.speakUp.animationStop);
 		doAnimation();
@@ -37,12 +39,18 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			cancelAnimationFrame(window.speakUp.animationTimer);
 			loop++;
 			frame = 10000 + parseInt(loop/3);
+
+			if (type === 'f'){
+				frameLength = 50;
+			} 
+
 			if (frame - 10000 < frameLength - 1) {
 				setBgAndTimer();
 			} else if (!duration) { // duration이 없을 땐 1세트만
 				cancelAnimationFrame(window.speakUp.animationTimer);
 			} else { // duration이 있고 시간이 아직 남았으면
 				frame = 10000;
+				loop = 0;
 				setBgAndTimer();
 			}
 
