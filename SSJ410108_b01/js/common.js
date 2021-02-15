@@ -142,18 +142,23 @@
 			win[namespace].setText(text);
 
 			var animationSpec = script.animation;
-			win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
+			console.log(animationSpec.type);
+			win[namespace].animationStatus('', animationSpec.type);
 
-			// 질문이 있을때는 checkAnswer로 넘어감
-			clearTimeout(win[namespace].willTimer);
-			if (question === undefined){
-				win[namespace].soundStatus('play', 'script', voice, fnEndBack);
-			} else {
-				win[namespace].soundStatus('play', 'script', voice);
-				// win[namespace].checkAnswer(script, question, script.endBack);
-				win[namespace].checkAnswer(script, question, question.resultBack);
-				// fnEndBack();
-			}
+			setTimeout(function(){
+				win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
+	
+				// 질문이 있을때는 checkAnswer로 넘어감
+				clearTimeout(win[namespace].willTimer);
+				if (question === undefined){
+					win[namespace].soundStatus('play', 'script', voice, fnEndBack);
+				} else {
+					win[namespace].soundStatus('play', 'script', voice);
+					// win[namespace].checkAnswer(script, question, script.endBack);
+					win[namespace].checkAnswer(script, question, question.resultBack);
+					// fnEndBack();
+				}
+			}, 1000);
 		},
 		
 		/**
@@ -797,7 +802,7 @@
 					voice: 'SSJ410108_13',
 					duration:4000,
 					animation: {
-						type: 'f',
+						type: 'b', // 여기 f임
 						duration:3500
 					},
 					endBack: function(){

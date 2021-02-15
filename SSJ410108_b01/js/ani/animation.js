@@ -8,24 +8,23 @@
 window.speakUp.animationTimer = {};
 window.speakUp.animationStop = {};
 window.speakUp.animationStatus = function(status, type, duration, callback) {
-	var $characters = document.querySelectorAll('.img-character');
-	var $character = document.querySelector('.img-character.type-'+type);
 	var jsonSource = window.speakUp.sequence[type];
-	
-	// $character.style.width = jsonSource.frames.character10000.frame.w + 'px';
-	// $character.style.height = jsonSource.frames.character10000.frame.h * 100 / 1280 + 'vw';
-	// $character.style.height = 600 + 'px';
-	// $character.style.backgroundImage = 'url("img/ani/' + type + '.png")';
-	// console.log(jsonSource.meta.size.w + 'px auto')
-	// $character.style.backgroundSize = jsonSource.meta.size.w + 'px ' + jsonSource.meta.size.h + 'px';
-	
-	$characters.forEach(function(item, index){
-		item.style.display = 'none';
-	})
-	$character.style.display = 'block';
-	$character.style.backgroundPosition = '0 0';
+	var _cvs = document.querySelector('#canvasCharacter');
+	var _ctx = _cvs.getContext('2d');
+	var _maxFrame = 30;
+	var _img = new Image();
+	_img.src = 'img/ani/'+type+'.png';
+	_img.onload = function(e) {
+		_cvs.width = 532;
+		_cvs.height = 604;
+		_ctx.drawImage(_img, 0, 0, 532, 604, 0, 0, 532, 604); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+	}
 
 	if (status === 'play'){
+		_img.onload = function(e) {
+			doAnimation();
+		}
+
 		var frame = 10000;
 		var frameLength = Object.keys(jsonSource.frames).length;
 		clearTimeout(window.speakUp.animationStop);
@@ -44,7 +43,9 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			}
 
 			function setBgAndTimer() {
-				$character.style.backgroundPosition = (-jsonSource.frames['character'+frame].frame.x + 'px ') + (-jsonSource.frames['character'+frame].frame.y + 'px');
+				// $character.style.backgroundPosition = (-jsonSource.frames['character'+frame].frame.x + 'px ') + (-jsonSource.frames['character'+frame].frame.y + 'px');		
+				_cvs.width = _cvs.width;
+				_ctx.drawImage(_img, jsonSource.frames['character'+frame].frame.x, jsonSource.frames['character'+frame].frame.y, 532, 604, 0, 0, 532, 604); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 				window.speakUp.animationTimer = setTimeout(function(){
 					doAnimation();
 				}, 60)
@@ -57,8 +58,8 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			} else {
 				frame = frameLength - 1 + 10000;
 			}
-			console.log(frame);
-			$character.style.backgroundPosition = (-jsonSource.frames['character'+frame].frame.x + 'px ') + (-jsonSource.frames['character'+frame].frame.y + 'px');
+			_cvs.width = _cvs.width;
+			_ctx.drawImage(_img, jsonSource.frames['character'+frame].frame.x, jsonSource.frames['character'+frame].frame.y, 532, 604, 0, 0, 532, 604); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 		}
 
 		if (!!duration && duration !== 'infinite') {

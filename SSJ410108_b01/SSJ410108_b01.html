@@ -34,7 +34,7 @@
 						window.speakUp.goPage(1, this, function(){
 							window.speakUp.animationStatus('', 'b');
 							setTimeout(function(){
-								window.speakUp.askQuestion(window.speakUp.speak[0][0]);
+								window.speakUp.askQuestion(window.speakUp.speak[2][3]);
 							}, 2000)
 						});
 					"><span class="blind">시작하기</span></button>
@@ -93,6 +93,10 @@
 				<div class="img-character type-e1"></div>
 				<div class="img-character type-e2"></div>
 				<div class="img-character type-f"></div>
+
+				<div class="img-character" style="display:block;">
+					<canvas id="canvasCharacter"></canvas>
+				</div>
 
 				<div class="question-area" style="display:none;">
 					<div class="single">
