@@ -33,9 +33,8 @@
 					<button type="button" class="" id="btnStart" onclick="
 						window.speakUp.goPage(1, this, function(){
 							window.speakUp.animationStatus('', 'b');
-							setTimeout(function(){
-								window.speakUp.askQuestion(window.speakUp.speak[2][3]);
-							}, 2000)
+							window.speakUp.goStep(1);
+							// window.speakUp.askQuestion(window.speakUp.speak[4][3]);
 						});
 					"><span class="blind">시작하기</span></button>
 					<button type="button" class="" id="btnHowTo" onclick="
@@ -62,7 +61,7 @@
 			<!-- // [Page 0 : intro - 시작하기 화면] -->
 
 			<!-- [Page 1 : question area ] -->
-			<div class="question page-area" data-index="1" data-bgm="bgm_01_03" style="background-image:url('img/bg_main1.jpg');">
+			<div class="question page-area" data-index="1" data-bgm="bgm_01" style="background-image:url('img/bg_main1.jpg');">
 				<ul class="progress-area">
 					<!-- li class : ing, wrong, right -->
 					<li><span class="blind">1단계</span></li>
@@ -117,6 +116,26 @@
 				</div>
 
 				<button type="button" class="btn-voice" style="display:none;"><span class="blind">녹음하기</span></button>
+
+				<div class="page-btns">
+					<button type="button" class="btn-prev" onclick="
+						window.speakUp.goStep(1);
+							window.speakUp.pageBtnsStatus('disabled', 'prev');
+							window.speakUp.pageBtnsStatus('hide');
+					"><span class="blind">처음으로</span></button>
+					<button type="button" class="btn-next" onclick="
+						if (window.speakUp.currentStep === 1) {
+							window.speakUp.goStep(2);
+							window.speakUp.pageBtnsStatus('show', 'prev');
+							window.speakUp.pageBtnsStatus('abled', 'prev');
+							window.speakUp.pageBtnsStatus('disabled', 'next');
+						} else {
+							window.speakUp.calcEndResult(document.querySelectorAll('.progress-area .right').length);
+							window.speakUp.soundStatus('play', 'bgm', 'bgm_intro');
+							window.speakUp.pageBtnsStatus('abled', 'next');
+						}
+					"><span class="blind">다음으로</span></button>
+				</div>
 
 				<!-- [modal] ending popup Start -->
 				<div class="modal-area" id="modalEnding" style="display:none;">

@@ -51,6 +51,45 @@
 
 			!!callback && callback();
 		},
+		currentStep: 1,
+		goStep: function(targetStep) {
+			clearTimeout(win[namespace].willTimer);
+			if (targetStep === 1){
+				win[namespace].progressStatus('reset');
+				setTimeout(function(){
+					win[namespace].askQuestion(win[namespace].speak[0][0]);
+				}, 2000);
+			} else if (targetStep === 2){
+				win[namespace].askQuestion(win[namespace].speak[5][0]);
+			}
+			win[namespace].setBgImg('bg_main'+targetStep);
+			var bgmStatus = win[namespace].currentBgmStatus.status;
+			win[namespace].soundStatus('play', 'bgm', 'bgm_0'+targetStep);
+			if (bgmStatus !== 'play'){
+				win[namespace].soundStatus('stop', 'bgm');
+			}
+			win[namespace].currentStep = targetStep;
+		},
+		/**
+		 * 
+		 * @param {String} status 'disabled', 'abled', 'show', 'hide'
+		 * @param {HTMLElement} target 
+		 */
+		pageBtnsStatus: function(status, target) {
+			var $target = '.page-btns button';
+			if (!!target) {
+				$target = target === 'next' ? '.btn-next' : '.btn-prev';
+			}
+			if (status === 'disabled' || status === 'abled') {
+				document.querySelectorAll($target).forEach(function(item) {
+					item.disabled = status === 'disabled' ? true : false;
+				})
+			} else {
+				document.querySelectorAll($target).forEach(function(item) {
+					item.style.display = status === 'show' ? 'block' : 'none';
+				})
+			}
+		},
 		/**
 		 * 
 		 * @param {String} status (stop, play)
@@ -113,19 +152,25 @@
 		},
 		/**
 		 * 
-		 * @param {String} status (right, wrong, ing)
+		 * @param {String} status (right, wrong, ing || reset)
 		 * @param {Number} progressStep ing index
 		 */
 		progressStatus: function(status, ingStep){
 			var $progressArea = document.querySelector('.progress-area');
 			var $progress = $progressArea.querySelectorAll('li');
 			var progressStep = 0;
-			if (status === 'ing') {
-				progressStep = ingStep;
+			if (status === 'reset') {
+				$progress.forEach(function(item, index) {
+					item.classList = '';
+				})
 			} else {
-				progressStep = $progressArea.querySelectorAll('.wrong, .right').length;
+				if (status === 'ing') {
+					progressStep = ingStep;
+				} else {
+					progressStep = $progressArea.querySelectorAll('.wrong, .right').length;
+				}
+				$progress[progressStep].classList.add(status);
 			}
-			$progress[progressStep].classList.add(status);
 		},
 		/**
 		 * 
@@ -145,20 +190,18 @@
 			console.log(animationSpec.type);
 			win[namespace].animationStatus('', animationSpec.type);
 
-			setTimeout(function(){
-				win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
-	
-				// 질문이 있을때는 checkAnswer로 넘어감
-				clearTimeout(win[namespace].willTimer);
-				if (question === undefined){
-					win[namespace].soundStatus('play', 'script', voice, fnEndBack);
-				} else {
-					win[namespace].soundStatus('play', 'script', voice);
-					// win[namespace].checkAnswer(script, question, script.endBack);
-					win[namespace].checkAnswer(script, question, question.resultBack);
-					// fnEndBack();
-				}
-			}, 1000);
+			win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
+
+			// 질문이 있을때는 checkAnswer로 넘어감
+			clearTimeout(win[namespace].willTimer);
+			if (question === undefined){
+				win[namespace].soundStatus('play', 'script', voice, fnEndBack);
+			} else {
+				win[namespace].soundStatus('play', 'script', voice);
+				// win[namespace].checkAnswer(script, question, script.endBack);
+				win[namespace].checkAnswer(script, question, question.resultBack);
+				// fnEndBack();
+			}
 		},
 		
 		/**
@@ -535,17 +578,12 @@
 			document.querySelector('#modalEnding').classList.remove('open');
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
-			win[namespace].setBgImg('bg_main1');
+			// win[namespace].goStep(1);
 			win[namespace].setText(win[namespace].speak[0][0].text);
 			document.querySelector('.btn-audio').classList.remove('off');
-			var progressHTML = '';
-			progressHTML += '<li><span class="blind">1단계</span></li>';
-			progressHTML += '<li><span class="blind">2단계</span></li>';
-			progressHTML += '<li><span class="blind">3단계</span></li>';
-			progressHTML += '<li><span class="blind">4단계</span></li>';
-			progressHTML += '<li><span class="blind">5단계</span></li>';
-			progressHTML += '<li><span class="blind">6단계</span></li>';
-			document.querySelector('.progress-area').innerHTML = progressHTML;
+			
+			win[namespace].pageBtnsStatus('hide');
+			win[namespace].pageBtnsStatus('disabled');
 		},
 		resultScript: [
 			{
@@ -802,7 +840,7 @@
 					voice: 'SSJ410108_13',
 					duration:4000,
 					animation: {
-						type: 'b', // 여기 f임
+						type: 'f', // 여기 f임
 						duration:3500
 					},
 					endBack: function(){
@@ -948,12 +986,9 @@
 						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][0]);
-						win[namespace].setBgImg('bg_main2');
-						win[namespace].soundStatus('play', 'bgm', 'bgm_02');
-						if (win[namespace].currentBgmStatus.status !== 'play'){
-							win[namespace].soundStatus('stop', 'bgm');
-						}
+						win[namespace].currentStep = 1;
+						win[namespace].pageBtnsStatus('abled', 'next');
+						win[namespace].pageBtnsStatus('show', 'next');
 					}
 				},
 			],
@@ -1112,28 +1147,18 @@
 			],
 			[
 				{
-					text: '고마워! 그럼 다음에 또 만나자~',
+					text: '고마워! 그럼 다음에 또 만나자~ 안녕!',
 					voice: 'SSJ410108_33',
-					duration: 4000,
-					animation: {
-						type: 'c',
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][1]);
-					}
-				},
-				{
-					text: '안녕!',
-					voice: 'SSJ410108_34',
-					duration: 2000,
+					duration: 5000,
 					animation: {
 						type: 'b',
-						duration:2000
+						duration:5000
 					},
 					endBack: function(){
-						win[namespace].calcEndResult(document.querySelectorAll('.progress-area .right').length);
-						win[namespace].soundStatus('play', 'bgm', 'bgm_intro');
+						win[namespace].currentStep = 2;
+						win[namespace].pageBtnsStatus('show');
+						win[namespace].pageBtnsStatus('abled', 'prev');
+						win[namespace].pageBtnsStatus('abled', 'next');
 					}
 				},
 			]
@@ -1141,6 +1166,9 @@
 		init: function(){
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
+			
+			win[namespace].pageBtnsStatus('hide');
+			win[namespace].pageBtnsStatus('disabled');
 		}
 	}
 
