@@ -56,9 +56,8 @@
 			clearTimeout(win[namespace].willTimer);
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
-				setTimeout(function(){
-					win[namespace].askQuestion(win[namespace].speak[0][0]);
-				}, 2000);
+				win[namespace].animationStatus('', 'b');
+				win[namespace].askQuestion(win[namespace].speak[0][0]);
 			} else if (targetStep === 2){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
 			}
@@ -180,6 +179,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
+			script.duration += 1000;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -187,7 +187,6 @@
 			win[namespace].setText(text);
 
 			var animationSpec = script.animation;
-			console.log(animationSpec.type);
 			win[namespace].animationStatus('', animationSpec.type);
 
 			win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
@@ -711,7 +710,7 @@
 					duration:4000,
 					animation: {
 						type: 'c',
-						duration: 4000
+						duration: 3500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
@@ -739,7 +738,7 @@
 					duration:6000,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:5800
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][4]);
@@ -751,7 +750,7 @@
 					duration:6000,
 					animation: {
 						type: 'f',
-						duration:6000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][5]);
@@ -789,7 +788,7 @@
 					duration:7000,
 					animation: {
 						type: 'c',
-						duration:7000
+						duration:6600
 					},
 					endBack: function(){
 						// 여기서 박스 나타남
@@ -817,7 +816,7 @@
 					duration:9000,
 					animation: {
 						type: 'd',
-						duration:9000
+						duration:8500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
