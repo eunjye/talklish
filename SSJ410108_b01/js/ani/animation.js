@@ -9,13 +9,6 @@ window.speakUp.animationTimer = {};
 window.speakUp.animationStop = {};
 window.speakUp.animationStatus = function(status, type, duration, callback) {
 	var jsonSource = window.speakUp.sequence[type];
-	var isOnce = false; // 한바퀴 돌았는지 체크
-	var sectionRepeat = [
-		{
-			type: 'f',
-			restartFrame: 37
-		},
-	]
 
 	var _cvs = document.querySelector('#canvasCharacter');
 	var _ctx = _cvs.getContext('2d');
@@ -41,6 +34,8 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		_cvs.height = _minHeight;
 
 		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, 0, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+		!!callback && callback();
 	}
 
 	if (status === 'play'){
@@ -68,7 +63,6 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 				if (type === 'f') {
 					count = 27*3;
-					isOnce = true;
 				}
 
 				setBgAndTimer();

@@ -39,24 +39,30 @@
 		 */
 		goPage: function(targetIndex, $evtEl, callback){
 			var $targetPage = document.querySelector('[data-index="' + targetIndex + '"]');
-			if (!!$evtEl) {
-				var $evtPage = $evtEl.closestByClass('page-area');
-				$evtPage.style.display = 'none';
-			}
-			$targetPage.style.display = 'block';
 
+			// bgm은 먼저 틀고
 			if (!!$targetPage.getAttribute('data-bgm')) {
 				win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
 			}
 
-			!!callback && callback();
+			// 캔버스에 다 그리고 난 뒤 이벤트 실행
+			win[namespace].animationStatus('', 'b', '', function(){
+				if (!!$evtEl) {
+					var $evtPage = $evtEl.closestByClass('page-area');
+					$evtPage.style.display = 'none';
+				}
+				$targetPage.style.display = 'block';
+				!!callback && callback();
+			});
+
 		},
 		currentStep: 1,
 		goStep: function(targetStep) {
 			clearTimeout(win[namespace].willTimer);
+			document.querySelector('.question-area').style.display = 'none';
+			document.querySelector('.btn-voice').style.display = 'none';
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
-				win[namespace].animationStatus('', 'b');
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
 			} else if (targetStep === 2){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -75,6 +81,9 @@
 		 * @param {HTMLElement} target 
 		 */
 		pageBtnsStatus: function(status, target) {
+			return;
+
+			
 			var $target = '.page-btns button';
 			if (!!target) {
 				$target = target === 'next' ? '.btn-next' : '.btn-prev';
@@ -129,7 +138,9 @@
 				if (!$audio.ended) {
 					$audio.currentTime = 0;
 				}
-				$audio.play();
+				$audio.oncanplaythrough = function(){
+					$audio.play();
+				}
 
 				// tobe : mp3 재생 끝날때 callback 실행시키도록
 				!!callback && callback();
@@ -224,7 +235,6 @@
 			
 			var motionIndex = win[namespace].getRandomInt(1, 2);
 			win[namespace].animationStatus('play', 'e'+motionIndex, duration);
-			console.log(motionIndex);
 
 			clearTimeout(win[namespace].willTimer);
 			win[namespace].willTimer = setTimeout(function(){

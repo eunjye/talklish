@@ -32,10 +32,8 @@
 					<img src="img/btn_intro.png" alt="">
 					<button type="button" class="" id="btnStart" onclick="
 						window.speakUp.goPage(1, this, function(){
-							window.speakUp.animationStatus('', 'b');
-							setTimeout(function(){
-								window.speakUp.askQuestion(window.speakUp.speak[0][0]);
-							}, 2000)
+							window.speakUp.goStep(1);
+							// window.speakUp.askQuestion(window.speakUp.speak[4][2]);
 						});
 					"><span class="blind">시작하기</span></button>
 					<button type="button" class="" id="btnHowTo" onclick="
@@ -48,7 +46,6 @@
 						<div class="howto-area">
 							<img src="img/bg_howto.png" alt="" class="img-bg">
 							<img src="img/txt_howto.png" alt="" class="txt-howto">
-							<!-- <p>학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다. 학습안내 설명 내용입니다.</p> -->
 							<div class="btn-area type-howto">
 								<img src="img/btn_howto_confirm.png" alt="">
 								<button type="button" class="btn-confirm modal-close" onclick="
@@ -63,7 +60,7 @@
 			<!-- // [Page 0 : intro - 시작하기 화면] -->
 
 			<!-- [Page 1 : question area ] -->
-			<div class="question page-area" data-index="1" data-bgm="bgm_01_03" style="background-image:url('img/bg_main1.jpg');">
+			<div class="question page-area" data-index="1" data-bgm="bgm_01" style="background-image:url('img/bg_main1.jpg');">
 				<ul class="progress-area">
 					<!-- li class : ing, wrong, right -->
 					<li><span class="blind">1단계</span></li>
@@ -95,6 +92,10 @@
 				<div class="img-character type-e2"></div>
 				<div class="img-character type-f"></div>
 
+				<div class="img-character" style="display:block;">
+					<canvas id="canvasCharacter"></canvas>
+				</div>
+
 				<div class="question-area" style="display:none;">
 					<div class="single">
 						<span>디</span>
@@ -114,6 +115,26 @@
 				</div>
 
 				<button type="button" class="btn-voice" style="display:none;"><span class="blind">녹음하기</span></button>
+
+				<div class="page-btns">
+					<button type="button" class="btn-prev" onclick="
+						window.speakUp.goStep(1);
+							window.speakUp.pageBtnsStatus('disabled', 'prev');
+							window.speakUp.pageBtnsStatus('hide');
+					"><span class="blind">처음으로</span></button>
+					<button type="button" class="btn-next" onclick="
+						if (window.speakUp.currentStep === 1) {
+							window.speakUp.goStep(2);
+							window.speakUp.pageBtnsStatus('show', 'prev');
+							window.speakUp.pageBtnsStatus('abled', 'prev');
+							window.speakUp.pageBtnsStatus('disabled', 'next');
+						} else {
+							window.speakUp.calcEndResult(document.querySelectorAll('.progress-area .right').length);
+							window.speakUp.soundStatus('play', 'bgm', 'bgm_intro');
+							window.speakUp.pageBtnsStatus('abled', 'next');
+						}
+					"><span class="blind">다음으로</span></button>
+				</div>
 
 				<!-- [modal] ending popup Start -->
 				<div class="modal-area" id="modalEnding" style="display:none;">
@@ -155,12 +176,9 @@
 	<!-- <script src="./animation.js"></script> -->
 	<!-- <script src="./js/cc.init.js"></script> -->
 	<script src="./js/externalManager.js"></script>
-	<!-- <script src="./js/amt.js"></script> -->
-	<!-- <script src="./js/canvasAnimation.js"></script>
-		<script src="./js/canvasAnimationData.js" class="hi"></script> -->
-		<!-- <script src="./js/content.js"></script> -->
-		<script src="./js/common.js"></script>
-		<script src="./js/ani/animation.js"></script>
+	<!-- <script src="./js/content.js"></script> -->
+	<script src="./js/common.js"></script>
+	<script src="./js/ani/animation.js"></script>
 </body>
 
 </html>

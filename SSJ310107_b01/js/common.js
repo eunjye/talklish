@@ -39,17 +39,63 @@
 		 */
 		goPage: function(targetIndex, $evtEl, callback){
 			var $targetPage = document.querySelector('[data-index="' + targetIndex + '"]');
-			if (!!$evtEl) {
-				var $evtPage = $evtEl.closestByClass('page-area');
-				$evtPage.style.display = 'none';
-			}
-			$targetPage.style.display = 'block';
 
+			// bgm은 먼저 틀고
 			if (!!$targetPage.getAttribute('data-bgm')) {
 				win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
 			}
 
-			!!callback && callback();
+			// 캔버스에 다 그리고 난 뒤 이벤트 실행
+			win[namespace].animationStatus('', 'b', '', function(){
+				if (!!$evtEl) {
+					var $evtPage = $evtEl.closestByClass('page-area');
+					$evtPage.style.display = 'none';
+				}
+				$targetPage.style.display = 'block';
+				!!callback && callback();
+			});
+
+		},
+		currentStep: 1,
+		goStep: function(targetStep) {
+			clearTimeout(win[namespace].willTimer);
+			document.querySelector('.question-area').style.display = 'none';
+			document.querySelector('.btn-voice').style.display = 'none';
+			if (targetStep === 1){
+				win[namespace].progressStatus('reset');
+				win[namespace].askQuestion(win[namespace].speak[0][0]);
+			} else if (targetStep === 2){
+				win[namespace].askQuestion(win[namespace].speak[4][0]);
+			}
+			win[namespace].setBgImg('bg_main'+targetStep);
+			var bgmStatus = win[namespace].currentBgmStatus.status;
+			win[namespace].soundStatus('play', 'bgm', 'bgm_0'+targetStep);
+			if (bgmStatus !== 'play'){
+				win[namespace].soundStatus('stop', 'bgm');
+			}
+			win[namespace].currentStep = targetStep;
+		},
+		/**
+		 * 
+		 * @param {String} status 'disabled', 'abled', 'show', 'hide'
+		 * @param {HTMLElement} target 
+		 */
+		pageBtnsStatus: function(status, target) {
+			return; 
+
+			var $target = '.page-btns button';
+			if (!!target) {
+				$target = target === 'next' ? '.btn-next' : '.btn-prev';
+			}
+			if (status === 'disabled' || status === 'abled') {
+				document.querySelectorAll($target).forEach(function(item) {
+					item.disabled = status === 'disabled' ? true : false;
+				})
+			} else {
+				document.querySelectorAll($target).forEach(function(item) {
+					item.style.display = status === 'show' ? 'block' : 'none';
+				})
+			}
 		},
 		/**
 		 * 
@@ -74,6 +120,7 @@
 					$audio.setAttribute('class', name);
 					$audio.classList.add('class', 'audio-' + soundType);
 					$audio.setAttribute('src', url);
+					// $audio.src(url);
 					$audio.setAttribute('name', 'audio/mpeg');
 					if (type === 'bgm') {
 						$audio.setAttribute('loop' ,'');
@@ -91,7 +138,9 @@
 				if (!$audio.ended) {
 					$audio.currentTime = 0;
 				}
-				$audio.play();
+				$audio.oncanplaythrough = function(){
+					$audio.play();
+				}
 
 				// tobe : mp3 재생 끝날때 callback 실행시키도록
 				!!callback && callback();
@@ -113,19 +162,25 @@
 		},
 		/**
 		 * 
-		 * @param {String} status (right, wrong, ing)
+		 * @param {String} status (right, wrong, ing || reset)
 		 * @param {Number} progressStep ing index
 		 */
 		progressStatus: function(status, ingStep){
 			var $progressArea = document.querySelector('.progress-area');
 			var $progress = $progressArea.querySelectorAll('li');
 			var progressStep = 0;
-			if (status === 'ing') {
-				progressStep = ingStep;
+			if (status === 'reset') {
+				$progress.forEach(function(item, index) {
+					item.classList = '';
+				})
 			} else {
-				progressStep = $progressArea.querySelectorAll('.wrong, .right').length;
+				if (status === 'ing') {
+					progressStep = ingStep;
+				} else {
+					progressStep = $progressArea.querySelectorAll('.wrong, .right').length;
+				}
+				$progress[progressStep].classList.add(status);
 			}
-			$progress[progressStep].classList.add(status);
 		},
 		/**
 		 * 
@@ -135,6 +190,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
+			script.duration += 1000;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -142,6 +198,8 @@
 			win[namespace].setText(text);
 
 			var animationSpec = script.animation;
+			win[namespace].animationStatus('', animationSpec.type);
+
 			win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
 
 			// 질문이 있을때는 checkAnswer로 넘어감
@@ -529,17 +587,12 @@
 			document.querySelector('#modalEnding').classList.remove('open');
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
-			win[namespace].setBgImg('bg_main1');
+			// win[namespace].goStep(1);
 			win[namespace].setText(win[namespace].speak[0][0].text);
 			document.querySelector('.btn-audio').classList.remove('off');
-			var progressHTML = '';
-			progressHTML += '<li><span class="blind">1단계</span></li>';
-			progressHTML += '<li><span class="blind">2단계</span></li>';
-			progressHTML += '<li><span class="blind">3단계</span></li>';
-			progressHTML += '<li><span class="blind">4단계</span></li>';
-			progressHTML += '<li><span class="blind">5단계</span></li>';
-			progressHTML += '<li><span class="blind">6단계</span></li>';
-			document.querySelector('.progress-area').innerHTML = progressHTML;
+			
+			win[namespace].pageBtnsStatus('hide');
+			win[namespace].pageBtnsStatus('disabled');
 		},
 		resultScript: [
 			{
@@ -684,10 +737,10 @@
 				{
 					text: '사람들이 모여 사는 곳을 무엇이라고 하더라?',
 					voice: 'SSJ310107_05',
-					duration:4200,
+					duration:3700,
 					animation: {
 						type: 'd',
-						duration: 3000
+						duration: 3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][2]);
@@ -860,13 +913,11 @@
 						duration: 2500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
-						/* 여기서 배경 디지털 지도로 바꿈 */
-						win[namespace].setBgImg('bg_main2');
-						win[namespace].soundStatus('play', 'bgm', 'bgm_02');
-						if (win[namespace].currentBgmStatus.status !== 'play'){
-							win[namespace].soundStatus('stop', 'bgm');
-						};
+						win[namespace].currentStep = 1;
+						// win[namespace].pageBtnsStatus('abled', 'next');
+						// win[namespace].pageBtnsStatus('show', 'next');
+						
+						window.speakUp.goStep(2);
 					}
 				},
 			],
@@ -1097,28 +1148,24 @@
 					}
 				},
 				{
-					text: '다음에 또 만나서 이야기 나누자.',
+					text: '다음에 또 만나서 이야기 나누자. 안녕~!',
 					voice: 'SSJ310107_32',
-					duration: 3000,
-					animation: {
-						type: 'c',
-						duration: 2500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][3]);
-					}
-				},
-				{
-					text: '안녕~!',
-					voice: 'SSJ310107_33',
-					duration: 2000,
+					duration: 4000,
 					animation: {
 						type: 'b',
-						duration: 2000
+						duration: 4000
 					},
 					endBack: function(){
-						win[namespace].calcEndResult(document.querySelectorAll('.progress-area .right').length);
-						win[namespace].soundStatus('play', 'bgm', 'bgm_intro');
+						win[namespace].currentStep = 2;
+						// win[namespace].pageBtnsStatus('show');
+						// win[namespace].pageBtnsStatus('abled', 'prev');
+						// win[namespace].pageBtnsStatus('abled', 'next');
+						
+						externalManager.completeContents(); // 학습 완료
+
+						window.speakUp.calcEndResult(document.querySelectorAll('.progress-area .right').length);
+						window.speakUp.soundStatus('play', 'bgm', 'bgm_intro');
+
 					}
 				},
 			]
@@ -1126,6 +1173,9 @@
 		init: function(){
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
+			
+			win[namespace].pageBtnsStatus('hide');
+			win[namespace].pageBtnsStatus('disabled');
 		}
 	}
 
