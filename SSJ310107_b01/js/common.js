@@ -120,7 +120,7 @@
 					$audio.setAttribute('class', name);
 					$audio.classList.add('class', 'audio-' + soundType);
 					$audio.setAttribute('src', url);
-					// $audio.src(url);
+					
 					$audio.setAttribute('name', 'audio/mpeg');
 					if (type === 'bgm') {
 						$audio.setAttribute('loop' ,'');
@@ -280,8 +280,6 @@
 			var $questionArea = document.querySelector('.question-area');
 			var $btnVoice = document.querySelector('.btn-voice');
 
-			$questionArea.style.display='block';
-			$btnVoice.style.display='block';
 			$btnVoice.disabled = true;
 
 			function blinkBtnVoice() {
@@ -317,6 +315,9 @@
 
 				// 첫번째 (글자수만 나오는거)
 				setInitialAnswer(answerText, true);
+
+				showQuestionArea();
+
 				function evtStartVoiceCheck(){
 					$btnVoice.disabled = true;
 
@@ -460,6 +461,8 @@
 
 				setInitialAnswer(answerText, true);
 
+				showQuestionArea();
+
 				$btnVoice.removeEventListener('click', evtStartVoiceCheck);
 				$btnVoice.addEventListener('click', evtStartVoiceCheck);
 
@@ -553,6 +556,11 @@
 					$questionArea.style.display='none';
 					$btnVoice.style.display='none';
 				}, script.duration)
+			}
+
+			function showQuestionArea() {
+				$questionArea.style.display='block';
+				$btnVoice.style.display='block';
 			}
 		},
 		calcEndResult: function(rightNum){

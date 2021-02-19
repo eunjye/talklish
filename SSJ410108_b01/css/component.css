@@ -139,7 +139,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .question-area { z-index:11; position:absolute; bottom:11.71vw; left:50%; min-width:32.06vw; height:8.36vw; transform:translateX(-50%); font-size:3.59vw; font-family:'HU네모의꿈180'; color:#442f0a; letter-spacing:-0.15em; text-align:center; padding:1.5vw 3.4vw 0; border-radius:2.34vw; background:rgba(255,235,94,.8); border:0.234vw solid rgba(0,0,0,.46); box-shadow:0.2vw 0.93vw 0.78vw rgba(0,0,0,.6); }
 .question-area:before { z-index:-1; position:absolute; top:0.39vw; left:0.39vw; display:block; width:calc(100% - 0.8vw); background:#fff; height:calc(100% - 0.8vw); border-radius:1.95vw; box-sizing:border-box; content:""; }
 .question-area.wide { width:auto; }
-.question-area .single { position:relative; z-index:10; margin:0 -1vw; line-height:4.2vw; }
+.question-area .single { position:relative; z-index:10; margin:0.4vw -1vw 0; line-height:0; }
 .question-area .single span { display:inline-block; width:4.2vw; height:4.2vw; margin:0 0.2vw; background:#F3E2B6; border-radius:15px; text-align:center; line-height:4.2vw; vertical-align:middle; padding-right:.5vw; }
 .question-area .single:after { z-index:10; position:absolute; top:50%; left:50%; display:block; width:19.84vw; height:19.21vw; background:url('../img/img_answer_right.png') 0 0/100% auto no-repeat; transform:translate(-50%, -50%) rotate(0deg) scale(.8); content:""; opacity:0; transition:all ease-in-out .3s; pointer-events:none;}
 .question-area .single.right:after { transform:translate(-50%, -50%) rotate(180deg) scale(1); opacity:1; }
@@ -158,7 +158,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .question-area .multiple.answer-right span.right:after { opacity:1; }
 .question-area .multiple.answer-right span.right:before { z-index:10; position:absolute; top:50%; left:50%; display:block; width:19.84vw; height:19.21vw; background:url('../img/img_answer_right.png') 0 100%/100% auto no-repeat; transform:translate(-50%, -50%); animation:aniRight ease-in-out .3s; pointer-events:none; content:""; }
 
-.page-btns { z-index:10; position:absolute; left:0; right:0; bottom:0; }
+.page-btns { z-index:10; position:absolute; left:0; right:0; bottom:0; display:none !important; }
 /* .page-btns:before,
 .page-btns:after { z-index:-1; display:block; position:absolute; right:0; bottom:0; width:90px; height:90px; background:url('../img/btn_nextprev.png') 0 -92px/256px auto no-repeat; content:""; }
 .page-btns:after { right:auto; left:0; transform:scaleX(-1); } */
