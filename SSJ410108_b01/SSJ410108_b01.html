@@ -31,11 +31,15 @@
 				<div class="btn-area type-intro">
 					<img src="img/btn_intro.png" alt="">
 					<button type="button" class="" id="btnStart" onclick="
-						window.speakUp.goPage(1, this, function(){
-							window.speakUp.animationStatus('', 'b');
-							window.speakUp.goStep(1);
-							// window.speakUp.askQuestion(window.speakUp.speak[4][2]);
-						});
+						var $btnStart = document.querySelector('#btnStart');
+						if ($btnStart.classList[0] !== 'start') {
+							$btnStart.classList.add('start');
+							window.speakUp.goPage(1, this, function(){
+								window.speakUp.animationStatus('', 'b');
+								window.speakUp.goStep(1);
+								// window.speakUp.askQuestion(window.speakUp.speak[1][0]);
+							});
+						}
 					"><span class="blind">시작하기</span></button>
 					<button type="button" class="" id="btnHowTo" onclick="
 						document.querySelector('#modalHowTo').style.display='block';

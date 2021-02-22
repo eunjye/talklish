@@ -47,12 +47,19 @@
 
 			// 캔버스에 다 그리고 난 뒤 이벤트 실행
 			win[namespace].animationStatus('', 'b', '', function(){
-				if (!!$evtEl) {
-					var $evtPage = $evtEl.closestByClass('page-area');
-					$evtPage.style.display = 'none';
+				var _firstBgm = new Audio('audio/bgm/bgm_01.mp3');
+				_firstBgm.oncanplaythrough  = function(){
+					if (!!$evtEl) {
+						var $evtPage = $evtEl.closestByClass('page-area');
+						$evtPage.style.opacity = '0';
+						$evtPage.style.zIndex = '-10';
+						$evtPage.style.position = 'absolute';
+					}
+					$targetPage.style.opacity = '1';
+					$targetPage.style.zIndex = '10';
+					$targetPage.style.position = 'relative';
+					!!callback && callback();
 				}
-				$targetPage.style.display = 'block';
-				!!callback && callback();
 			});
 
 		},
@@ -110,12 +117,13 @@
 		},
 		soundStatus: function(status, type, name, callback){
 			var soundType = type;
+			var $audio;
 			if (type === 'wrong' || type === 'script') {
 				soundType = 'script';
 			}
 			if (status === 'play') { // play status
-				if (!document.querySelector('.audio-' + name)) { // no have bgm tag
-					var $audio = document.createElement('audio');
+				if (!document.querySelector('audio.' + name)) { // no have bgm tag
+					$audio = document.createElement('audio');
 					var url = 'audio/' + type + '/' + name + '.mp3';
 					$audio.setAttribute('class', name);
 					$audio.classList.add('class', 'audio-' + soundType);
@@ -130,7 +138,7 @@
 					}
 					document.querySelector('body').appendChild($audio);
 				} else {
-					var $audio = document.querySelector('.' + name);
+					$audio = document.querySelector('audio.' + name);
 				}
 				if (type !== 'effect') {
 					muteByType(type);
@@ -138,9 +146,11 @@
 				if (!$audio.ended) {
 					$audio.currentTime = 0;
 				}
-				$audio.oncanplaythrough = function(){
-					$audio.play();
-				}
+				// $audio.oncanplaythrough = function(){
+				// 	$audio.play();
+				// }
+				
+				$audio.play();
 
 				// tobe : mp3 재생 끝날때 callback 실행시키도록
 				!!callback && callback();
@@ -245,7 +255,10 @@
 					document.querySelector('.question-area').style.display = 'none';
 					document.querySelector('.btn-voice').style.display = 'none';
 				}
-				endBack();
+				win[namespace].animationStatus('stop');
+				setTimeout(function(){
+					endBack();
+				}, 1200)
 				// debugger;
 			}, duration)
 		},
@@ -284,12 +297,17 @@
 
 			function blinkBtnVoice() {
 				clearTimeout(win[namespace].blinkTimer);
-				win[namespace].blinkTimer = setTimeout(function(){
-					$btnVoice.classList.add('blink');
-					question.type === 'word' ? $btnVoice.disabled = false : '';
-				}, script.duration)
+				$btnVoice.classList.add('blink');
+				question.type === 'word' ? $btnVoice.disabled = false : '';
+
+				// win[namespace].blinkTimer = setTimeout(function(){
+				// 	$btnVoice.classList.add('blink');
+				// 	question.type === 'word' ? $btnVoice.disabled = false : '';
+				// }, script.duration)
 			}
-			blinkBtnVoice();
+			win[namespace].blinkTimer = setTimeout(function(){
+				blinkBtnVoice();
+			}, script.duration);
 
 			// [QuizType1] 단답형일 시
 			if (question.type === 'word') {
@@ -320,9 +338,11 @@
 
 				function evtStartVoiceCheck(){
 					$btnVoice.disabled = true;
+					
+					win[namespace].animationStatus('stop');
 
 					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(0);
+						window.HybridApp.startSilvySTTMode(7);
 						window.HybridApp.onResultSTTMode = function(str) {
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
@@ -348,10 +368,10 @@
 					
 					if (voiceText.reduceText.slice(0, reduceAnswerText.length) !== reduceAnswerText) {
 						// 1트에 실패일 시, 초성 나옴
-						if (tryNum === 1){
+						if (tryNum === 1){ // 첫번째로 틀렸을 시
 							$btnVoice.disabled = true;
 							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
-							// [To-be]
+							
 							setTimeout(function(){
 								var wrongIndex = win[namespace].getRandomInt(0, 4);
 								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
@@ -359,8 +379,9 @@
 									win[namespace].wrongScript[0][wrongIndex], 
 									function(){
 										setInitialAnswer(question.answer[0][0]);
-										win[namespace].soundStatus('play', 'script', script.voice);
-										win[namespace].animationStatus('play', 'd', script.animation.duration);
+										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
+											win[namespace].soundStatus('play', 'script', script.voice);
+										});
 										win[namespace].setText(script.text);
 										blinkBtnVoice();
 									},
@@ -370,6 +391,8 @@
 						} else if (tryNum === 2){
 							$btnVoice.disabled = true;
 							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
+							win[namespace].soundStatus('stop', 'script');
+
 							setTimeout(function(){
 								var wrongIndex = win[namespace].getRandomInt(0, 4);
 								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
@@ -377,8 +400,9 @@
 									win[namespace].wrongScript[0][wrongIndex], 
 									function(){
 										setWordsAnswer(); // multiple
-										win[namespace].soundStatus('play', 'script', script.voice);
-										win[namespace].animationStatus('play', 'd', script.animation.duration);
+										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
+											win[namespace].soundStatus('play', 'script', script.voice);
+										});
 										win[namespace].setText(script.text);
 										blinkBtnVoice();
 									},
@@ -479,7 +503,7 @@
 					$btnVoice.disabled = true;
 
 					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(0);
+						window.HybridApp.startSilvySTTMode(7);
 						window.HybridApp.onResultSTTMode = function(str) {
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
@@ -589,6 +613,7 @@
 			$pageArea.style.backgroundImage = 'url("img/'+fileName+'.jpg")';
 		},
 		restart: function(){
+			document.querySelector('#btnStart').classList.remove('start');
 			document.querySelectorAll('.modal-area').forEach(function(item){
 				item.style.display = 'none';
 			})
@@ -678,7 +703,7 @@
 					duration:5000,
 					animation: {
 						type: 'b',
-						duration: 5000
+						duration: 4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
@@ -687,7 +712,7 @@
 				{
 					text: '만나서 반가워~ 헤헷!',
 					voice: 'SSJ310107_02',
-					duration:3000,
+					duration:2500,
 					animation: {
 						type: 'c',
 						duration: 2500
@@ -699,7 +724,7 @@
 				{
 					text: '그런데, 여기가 어디냐고?',
 					voice: 'SSJ310107_03',
-					duration:3000,
+					duration:2500,
 					animation: {
 						type: 'c',
 						duration: 2500
@@ -748,7 +773,7 @@
 					duration:3700,
 					animation: {
 						type: 'd',
-						duration: 3500
+						duration: 3000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][2]);
@@ -839,7 +864,7 @@
 				{
 					text: '나중에 우리 고장의 장소 알림판에 학교를 꼭 소개할 테야. ',
 					voice: 'SSJ310107_11',
-					duration:6000,
+					duration:5500,
 					animation: {
 						type: 'f',
 						duration: 5500
@@ -882,7 +907,7 @@
 					duration: 7000,
 					animation: {
 						type: 'd',
-						duration: 10500
+						duration: 12500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][1]);
@@ -903,7 +928,7 @@
 				{
 					text: '그래! 고장에 대한 서로 다른 생각과 느낌을 이해하고 존중하는 자세가 필요하다는 점',
 					voice: 'SSJ310107_16',
-					duration: 7000,
+					duration: 6500,
 					animation: {
 						type: 'f',
 						duration: 6500
@@ -977,7 +1002,7 @@
 				{
 					text: '사람들이 만들어 쏘아 올린 비행 물체를 인공위성이라고 해.',
 					voice: 'SSJ310107_20',
-					duration: 6000,
+					duration: 5500,
 					animation: {
 						type: 'f',
 						duration: 5500
@@ -990,7 +1015,7 @@
 				{
 					text: '인공위성 사진은 우주에서 찍었기 때문에<br>어떤 장소의 위치를 쉽게 알게 해주지.',
 					voice: 'SSJ310107_21',
-					duration: 8000,
+					duration: 7500,
 					animation: {
 						type: 'f',
 						duration: 7500
@@ -1042,7 +1067,7 @@
 				{
 					text: '디지털 영상 지도를 통해서 우리 고장을<br>우주에서 내려다본 것처럼 살펴볼 수 있어.',
 					voice: 'SSJ310107_24',
-					duration: 7000,
+					duration: 6500,
 					animation: {
 						type: 'f',
 						duration: 6500
@@ -1068,7 +1093,7 @@
 				{
 					text: '자 그러면, 이제 우리 고장의 안내도를 만들 때 필요한<br>지도에 대해 알아보자.',
 					voice: 'SSJ310107_26',
-					duration: 7000,
+					duration: 6500,
 					animation: {
 						type: 'c',
 						duration: 7000

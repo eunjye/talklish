@@ -47,12 +47,19 @@
 
 			// 캔버스에 다 그리고 난 뒤 이벤트 실행
 			win[namespace].animationStatus('', 'b', '', function(){
-				if (!!$evtEl) {
-					var $evtPage = $evtEl.closestByClass('page-area');
-					$evtPage.style.display = 'none';
+				var _firstBgm = new Audio('audio/bgm/bgm_01.mp3');
+				_firstBgm.oncanplaythrough  = function(){
+					if (!!$evtEl) {
+						var $evtPage = $evtEl.closestByClass('page-area');
+						$evtPage.style.opacity = '0';
+						$evtPage.style.zIndex = '-10';
+						$evtPage.style.position = 'absolute';
+					}
+					$targetPage.style.opacity = '1';
+					$targetPage.style.zIndex = '10';
+					$targetPage.style.position = 'relative';
+					!!callback && callback();
 				}
-				$targetPage.style.display = 'block';
-				!!callback && callback();
 			});
 
 		},
@@ -110,17 +117,18 @@
 		},
 		soundStatus: function(status, type, name, callback){
 			var soundType = type;
+			var $audio;
 			if (type === 'wrong' || type === 'script') {
 				soundType = 'script';
 			}
 			if (status === 'play') { // play status
-				if (!document.querySelector('.audio-' + name)) { // no have bgm tag
-					var $audio = document.createElement('audio');
+				if (!document.querySelector('audio.' + name)) { // no have bgm tag
+					$audio = document.createElement('audio');
 					var url = 'audio/' + type + '/' + name + '.mp3';
 					$audio.setAttribute('class', name);
 					$audio.classList.add('class', 'audio-' + soundType);
 					$audio.setAttribute('src', url);
-
+					
 					$audio.setAttribute('name', 'audio/mpeg');
 					if (type === 'bgm') {
 						$audio.setAttribute('loop' ,'');
@@ -130,7 +138,7 @@
 					}
 					document.querySelector('body').appendChild($audio);
 				} else {
-					var $audio = document.querySelector('.' + name);
+					$audio = document.querySelector('audio.' + name);
 				}
 				if (type !== 'effect') {
 					muteByType(type);
@@ -138,9 +146,11 @@
 				if (!$audio.ended) {
 					$audio.currentTime = 0;
 				}
-				$audio.oncanplaythrough = function(){
-					$audio.play();
-				}
+				// $audio.oncanplaythrough = function(){
+				// 	$audio.play();
+				// }
+				
+				$audio.play();
 
 				// tobe : mp3 재생 끝날때 callback 실행시키도록
 				!!callback && callback();
@@ -190,7 +200,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1000;
+			script.duration += 800;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -245,7 +255,10 @@
 					document.querySelector('.question-area').style.display = 'none';
 					document.querySelector('.btn-voice').style.display = 'none';
 				}
-				endBack();
+				win[namespace].animationStatus('stop');
+				setTimeout(function(){
+					endBack();
+				}, 1200)
 				// debugger;
 			}, duration)
 		},
@@ -284,12 +297,17 @@
 
 			function blinkBtnVoice() {
 				clearTimeout(win[namespace].blinkTimer);
-				win[namespace].blinkTimer = setTimeout(function(){
-					$btnVoice.classList.add('blink');
-					question.type === 'word' ? $btnVoice.disabled = false : '';
-				}, script.duration)
+				$btnVoice.classList.add('blink');
+				question.type === 'word' ? $btnVoice.disabled = false : '';
+
+				// win[namespace].blinkTimer = setTimeout(function(){
+				// 	$btnVoice.classList.add('blink');
+				// 	question.type === 'word' ? $btnVoice.disabled = false : '';
+				// }, script.duration)
 			}
-			blinkBtnVoice();
+			win[namespace].blinkTimer = setTimeout(function(){
+				blinkBtnVoice();
+			}, script.duration);
 
 			// [QuizType1] 단답형일 시
 			if (question.type === 'word') {
@@ -320,9 +338,11 @@
 
 				function evtStartVoiceCheck(){
 					$btnVoice.disabled = true;
+					
+					win[namespace].animationStatus('stop');
 
 					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(0);
+						window.HybridApp.startSilvySTTMode(7);
 						window.HybridApp.onResultSTTMode = function(str) {
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
@@ -351,7 +371,6 @@
 						if (tryNum === 1){
 							$btnVoice.disabled = true;
 							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
-							// [To-be]
 							setTimeout(function(){
 								var wrongIndex = win[namespace].getRandomInt(0, 4);
 								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
@@ -359,8 +378,9 @@
 									win[namespace].wrongScript[0][wrongIndex], 
 									function(){
 										setInitialAnswer(question.answer[0][0]);
-										win[namespace].soundStatus('play', 'script', script.voice);
-										win[namespace].animationStatus('play', 'd', script.animation.duration);
+										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
+											win[namespace].soundStatus('play', 'script', script.voice);
+										});
 										win[namespace].setText(script.text);
 										blinkBtnVoice();
 									},
@@ -370,6 +390,8 @@
 						} else if (tryNum === 2){
 							$btnVoice.disabled = true;
 							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
+							win[namespace].soundStatus('stop', 'script');
+
 							setTimeout(function(){
 								var wrongIndex = win[namespace].getRandomInt(0, 4);
 								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
@@ -377,8 +399,9 @@
 									win[namespace].wrongScript[0][wrongIndex], 
 									function(){
 										setWordsAnswer(); // multiple
-										win[namespace].soundStatus('play', 'script', script.voice);
-										win[namespace].animationStatus('play', 'd', script.animation.duration);
+										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
+											win[namespace].soundStatus('play', 'script', script.voice);
+										});
 										win[namespace].setText(script.text);
 										blinkBtnVoice();
 									},
@@ -479,7 +502,7 @@
 					$btnVoice.disabled = true;
 
 					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(0);
+						window.HybridApp.startSilvySTTMode(7);
 						window.HybridApp.onResultSTTMode = function(str) {
 							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 							startVoiceCheck(voiceText);
@@ -589,6 +612,7 @@
 			$pageArea.style.backgroundImage = 'url("img/'+fileName+'.jpg")';
 		},
 		restart: function(){
+			document.querySelector('#btnStart').classList.remove('start');
 			document.querySelectorAll('.modal-area').forEach(function(item){
 				item.style.display = 'none';
 			})
@@ -690,7 +714,7 @@
 					duration:2500,
 					animation: {
 						type: 'c',
-						duration: 2500
+						duration: 2000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -701,7 +725,7 @@
 				{
 					text: '여기, 우리 지역을 나타낸 지도를 한번 가지고 와봤어.',
 					voice: 'SSJ410108_03',
-					duration:5000,
+					duration:5200,
 					animation: {
 						type: 'c',
 						duration: 4500
@@ -765,10 +789,10 @@
 				{
 					text: '지도에서 방위를 나타내주는 역할을 하는 것을<br>방위표라고 해.',
 					voice: 'SSJ410108_07',
-					duration:6000,
+					duration:5800,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:5100
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][5]);
@@ -855,7 +879,7 @@
 				{
 					text: '범례 덕분에 각 기호의 뜻을 확인할 수가 있네!',
 					voice: 'SSJ410108_13',
-					duration:4000,
+					duration:4300,
 					animation: {
 						type: 'f', // 여기 f임
 						duration:3500
@@ -973,7 +997,7 @@
 				{
 					text: '지도에서 높이가 같은 곳을 연결하여<br>땅의 높낮이를 나타낸 선을 등고선이라고 해.',
 					voice: 'SSJ410108_20',
-					duration: 7000,
+					duration: 7300,
 					animation: {
 						type: 'f',
 						duration:7000
@@ -1089,7 +1113,7 @@
 			],
 			[ // 6 - 0
 				{
-					text: '사실 내가 오늘 시장에 온 이유는,<br>시장에 대해 조사해보기 위해서야.',
+					text: '사실 내가 오늘 시장에 온 이유는,<br>시장에 대해 조사해 보기 위해서야.',
 					voice: 'SSJ410108_28',
 					duration: 7000,
 					animation: {
@@ -1168,7 +1192,7 @@
 				{
 					text: '고마워! 그럼 다음에 또 만나자~ 안녕!',
 					voice: 'SSJ410108_33',
-					duration: 5000,
+					duration: 6000,
 					animation: {
 						type: 'b',
 						duration:5000

@@ -8,6 +8,12 @@
 window.speakUp.animationTimer = {};
 window.speakUp.animationStop = {};
 window.speakUp.animationStatus = function(status, type, duration, callback) {
+	if (status === 'stop') {
+		clearTimeout(window.speakUp.animationStop);
+		cancelAnimationFrame(window.speakUp.animationTimer);
+		return; 
+	}
+	
 	var jsonSource = window.speakUp.sequence[type];
 
 	var _cvs = document.querySelector('#canvasCharacter');
@@ -41,6 +47,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 	if (status === 'play'){
 		_img.onload = function(e) {
 			doAnimation();
+			!!callback && callback();
 		}
 
 		var count = 0;
