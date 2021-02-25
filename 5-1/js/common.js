@@ -697,7 +697,7 @@
 		speak: [
 			[
 				{
-					text: '안녕~ 나는 천재초등학교 4학년 1반 노을이라고 해! ',
+					text: '안녕? 나는 천재초등학교 5학년 1반 바다라고 해!',
 					voice: 'SSJ410108_01',
 					duration:6000,
 					animation: {
@@ -709,7 +709,7 @@
 					}
 				},
 				{
-					text: '만나서 반가워.',
+					text: '만나서 반가워 친구야!',
 					voice: 'SSJ410108_02',
 					duration:2500,
 					animation: {
@@ -723,31 +723,7 @@
 			],
 			[
 				{
-					text: '여기, 우리 지역을 나타낸 지도를 한번 가지고 와봤어.',
-					voice: 'SSJ410108_03',
-					duration:5200,
-					animation: {
-						type: 'c',
-						duration: 4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][1]);
-					}
-				},
-				{
-					text: '지도에는 정말 다양한 정보들이 있네?',
-					voice: 'SSJ410108_04',
-					duration:4000,
-					animation: {
-						type: 'c',
-						duration: 3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][2]);
-					}
-				},
-				{
-					text: '나랑 같이 하나하나 살펴보자!',
+					text: '나는 지금 특별한 곳으로 여행을 와 있어. 여기가 어디냐고?',
 					voice: 'SSJ410108_05',
 					duration:4000,
 					animation: {
@@ -758,24 +734,24 @@
 						win[namespace].progressStatus('ing', 0);
 						// 여기서 박스 나타남
 						win[namespace].askQuestion(
-							win[namespace].speak[1][3],
+							win[namespace].speak[1][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅂㅇㅍ'],
-									['방위판', '방위표', '방위편'],
-									['방위표']
+									['ㄷㄷ'],
+									['도덕', '등대', '독도'],
+									['독도']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][5])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][4])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[1][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][2])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '음...지도에서 방위를 나타내주는 역할을 하는 걸<br>뭐라고 부르더라?',
+					text: '우리나라 영토의 동쪽 끝에 있는 섬이야.',
 					voice: 'SSJ410108_06',
 					duration:6000,
 					animation: {
@@ -783,11 +759,11 @@
 						duration:5800
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][4]);
+						win[namespace].askQuestion(win[namespace].speak[1][2]);
 					}
 				},
 				{
-					text: '지도에서 방위를 나타내주는 역할을 하는 것을<br>방위표라고 해.',
+					text: '우리나라 영토의 동쪽 끝에는 독도가 있지.',
 					voice: 'SSJ410108_07',
 					duration:5800,
 					animation: {
@@ -795,11 +771,11 @@
 						duration:5100
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][5]);
+						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
 				},
 				{
-					text: '그래. 방위표를 이용하면 사람이나 건물이 향한<br>방향에 관계없이 위치를 나타낼 수 있어.',
+					text: '독도는 경상북도 울릉군에 속해 있는 섬이야. ',
 					voice: 'SSJ410108_08',
 					duration:8000,
 					animation: {
@@ -813,19 +789,7 @@
 			],
 			[
 				{
-					text: '지도에는 여러 가지 기호도 사용되고 있다는 것 알고 있지?',
-					voice: 'SSJ410108_09',
-					duration:5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][1]);
-					}
-				},
-				{
-					text: '그런데, 지도마다 쓰이는 기호가 다르고,<br>모든 기호를 외울 수도 없을 텐데…',
+					text: '우리나라는 경상북도, 전라남도, 강원도 등으로 나뉘는 것 알고 있지?',
 					voice: 'SSJ410108_10',
 					duration:7000,
 					animation: {
@@ -836,24 +800,24 @@
 						// 여기서 박스 나타남
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
-							win[namespace].speak[2][2],
+							win[namespace].speak[2][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅂㄹ'],
-									['범례', '분류', '법령'],
-									['범례']
+									['ㅎㅈ'],
+									['효자', '행정', '현장'],
+									['행정']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[2][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][2])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '그래서 지도에는 기호의 뜻이 무엇인지<br>나타내주는 역할을 하는 것이 있대. 그걸 뭐라고 부를까?',
+					text: '이렇게 나라를 효율적으로 관리하려고 나눈 지역을 무슨 구역이라고 하더라?',
 					voice: 'SSJ410108_11',
 					duration:9000,
 					animation: {
@@ -865,7 +829,7 @@
 					}
 				},
 				{
-					text: '지도에 쓰인 기호와 그 뜻을 나타내주는 역할을 하는 것을 범례라고 해.',
+					text: '우리나라는 나라를 효율적으로 관리하기 위해 행정 구역을 나눴어.',
 					voice: 'SSJ410108_12',
 					duration:6000,
 					animation: {
@@ -877,7 +841,7 @@
 					}
 				},
 				{
-					text: '범례 덕분에 각 기호의 뜻을 확인할 수가 있네!',
+					text: '좋아! 다음에는 강원도로 여행을 떠나 볼래!',
 					voice: 'SSJ410108_13',
 					duration:4300,
 					animation: {
@@ -891,7 +855,19 @@
 			],
 			[
 				{
-					text: '지도는 땅의 실제 모습을 줄여서 나타내고 있어.',
+					text: '짜잔~ 이곳은 강원도에 있는 동강이라고 해.',
+					voice: 'SSJ410108_13',
+					duration:4300,
+					animation: {
+						type: 'f', // 여기 f임
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][1]);
+					}
+				},
+				{
+					text: '하천 사이에 있는 산이 꼭 한반도의 땅의 생김새를 닮았지?',
 					voice: 'SSJ410108_14',
 					duration: 5000,
 					animation: {
@@ -901,24 +877,24 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
 						win[namespace].askQuestion(
-							win[namespace].speak[3][1], 
+							win[namespace].speak[3][2], 
 							{
 								type: 'word',
 								answer: [
-									['ㅊㅊ'],
-									['추천', '초청', '축척'],
-									['축척']
+									['ㅈㅎ'],
+									['지형', '재해', '지하'],
+									['지형']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[3][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '지도에서 실제 거리를 줄인 정도를 뭐라고 부르더라?',
+					text: '이러한 산지와 하천 등 땅의 생김새를 무엇이라고 하는지 알고 있니?',
 					voice: 'SSJ410108_15',
 					duration: 4000,
 					animation: {
@@ -926,11 +902,11 @@
 						duration:4000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][2]);
+						win[namespace].askQuestion(win[namespace].speak[3][3]);
 					}
 				},
 				{
-					text: '지도에서 실제 거리를 줄인 정도를 축척이라고 해.',
+					text: '땅의 생김새는 지형이라고 말해.',
 					voice: 'SSJ410108_16',
 					duration: 5000,
 					animation: {
@@ -938,11 +914,11 @@
 						duration:5000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][3]);
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
 					}
 				},
 				{
-					text: '축척에 따라 지도의 자세한 정도가 달라지게 되지. ',
+					text: '우리나라에서는 산지, 하천, 평야, 해안, 섬 등과 같은 다양한 지형을 볼 수 있지.',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -956,7 +932,19 @@
 			],
 			[
 				{
-					text: '지도에서 땅의 높낮이를 표현할 수 있다는 것도 알고 있니?',
+					text: '앗! 그런데 오늘은 날씨가 너무 덥고 습하네.',
+					voice: 'SSJ410108_17',
+					duration: 5000,
+					animation: {
+						type: 'f',
+						duration:4800
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][1]);
+					}
+				},
+				{
+					text: '하늘이 흐리고 바람이 강한 걸 보니 곧 많은 비가 내릴 것 같아.',
 					voice: 'SSJ410108_18',
 					duration: 5000,
 					animation: {
@@ -966,24 +954,24 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(
-							win[namespace].speak[4][1],
+							win[namespace].speak[4][2],
 							{
 								type: 'word',
 								answer: [
-									['ㄷㄱㅅ'],
-									['등고선', '단계선', '등급선'],
-									['등고선']
+									['ㅌㅍ'],
+									['통풍', '테풍', '탕평'],
+									['테풍']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '지도에서 높이가 같은 곳을 연결하여<br>땅의 높낮이를 나타낸 선을 무엇이라고 할까?',
+					text: '적도 부근에서 발생해 이동하는 열대 저기압 때문이라던데, 무엇인지 알고 있어?',
 					voice: 'SSJ410108_19',
 					duration: 7000,
 					animation: {
@@ -991,11 +979,11 @@
 						duration:7000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][2]);
+						win[namespace].askQuestion(win[namespace].speak[4][3]);
 					}
 				},
 				{
-					text: '지도에서 높이가 같은 곳을 연결하여<br>땅의 높낮이를 나타낸 선을 등고선이라고 해.',
+					text: '적도 부근에서 발생해 우리나라에 영향을 주는 열대 저기압은 태풍이야.',
 					voice: 'SSJ410108_20',
 					duration: 7300,
 					animation: {
@@ -1003,11 +991,11 @@
 						duration:7000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][3]);
+						win[namespace].askQuestion(win[namespace].speak[4][4]);
 					}
 				},
 				{
-					text: '지도에서는 땅의 높낮이를 등고선과 색깔로 나타내지. ',
+					text: '거센 태풍이 오기 전에 어서 집으로 돌아가야겠어!',
 					voice: 'SSJ410108_21',
 					duration: 5000,
 					animation: {
@@ -1015,26 +1003,12 @@
 						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][4]);
-					}
-				},
-				{
-					text: '땅의 높이가 높을수록 색이 진해진다는 점 잊지 마~!',
-					voice: 'SSJ410108_22',
-					duration: 7000,
-					animation: {
-						type: 'f',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].currentStep = 1;
-						// win[namespace].pageBtnsStatus('abled', 'next');
-						// win[namespace].pageBtnsStatus('show', 'next');
-						
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[5][0]);
 					}
 				},
 			],
+
+			///////////////////////// [To-BE]
 			[
 				{
 					text: '이곳은 시장이네! 사람이 정말 많다.',
