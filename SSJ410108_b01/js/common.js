@@ -352,7 +352,7 @@
 							startVoiceCheck(voiceText);
 						}
 					} else {
-						voiceText = {text: '으으으', reduceText: '으으으'.replace(/(\s*)/g,'')};
+						voiceText = {text: '방위표', reduceText: '방위표'.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
 					}
 				}
@@ -638,7 +638,7 @@
 				duration: 4000
 			},
 			{
-				text: '다음 번엔 더 잘할 수 있을 거야.',
+				text: '다음번엔 더 잘할 수 있을 거야.',
 				voice: 'SSJ3g_ending_03',
 				duration: 3000
 			},

@@ -352,7 +352,7 @@
 							startVoiceCheck(voiceText);
 						}
 					} else {
-						voiceText = {text: '백 지도', reduceText: '백지도'.replace(/(\s*)/g,'')};
+						voiceText = {text: '디지털 영상 지도', reduceText: '디지털영상지도'.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
 					}
 				}
@@ -639,7 +639,7 @@
 				duration: 4000
 			},
 			{
-				text: '다음 번엔 더 잘할 수 있을 거야.',
+				text: '다음번엔 더 잘할 수 있을 거야.',
 				voice: 'SSJ3b_ending_03',
 				duration: 4000
 			},
@@ -806,7 +806,7 @@
 			],
 			[
 				{
-					text: '그중에서, 내가 제일 좋아하는 장소가 어디인지 맞춰볼래?',
+					text: '그중에서, 내가 제일 좋아하는 장소가 어디인지 맞혀 볼래?',
 					voice: 'SSJ310107_08',
 					duration:5000,
 					animation: {
@@ -1031,8 +1031,8 @@
 									['디지털 영상 지도']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[5][1])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[5][2])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][1])}
 								}
 							}
 						);
