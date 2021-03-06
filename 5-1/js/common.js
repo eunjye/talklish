@@ -71,12 +71,16 @@
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
+				win[namespace].askQuestion(win[namespace].speak[3][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_02');
+			} else if (targetStep === 3){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			}
 			win[namespace].setBgImg('bg_main'+targetStep);
 			var bgmStatus = win[namespace].currentBgmStatus.status;
-			win[namespace].soundStatus('play', 'bgm', 'bgm_0'+targetStep);
 			if (bgmStatus !== 'play'){
 				win[namespace].soundStatus('stop', 'bgm');
 			}
@@ -640,22 +644,22 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3g_ending_01',
+				voice: 'SSJ5g_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3g_ending_02',
+				voice: 'SSJ5g_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3g_ending_03',
+				voice: 'SSJ5g_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3g_ending_04',
+				voice: 'SSJ5g_ending_04',
 				duration: 4000
 			},
 		],
@@ -663,44 +667,44 @@
 			[
 				{
 					text: '다시 한번 생각해볼까?',
-					voice: 'SSJ3g_A_01',
+					voice: 'SSJ5g_A_01',
 					duration: 3000
 				},
 				{
 					text: '조금 더 생각해볼까?',
-					voice: 'SSJ3g_A_02',
+					voice: 'SSJ5g_A_02',
 					duration: 3000
 				},
 				{
 					text: '한 번 더 생각해보자!',
-					voice: 'SSJ3g_A_03',
+					voice: 'SSJ5g_A_03',
 					duration: 3000
 				},
 				{
 					text: '글쎄, 한 번 더 생각해볼까?',
-					voice: 'SSJ3g_A_04',
+					voice: 'SSJ5g_A_04',
 					duration: 4000
 				},
 				{
 					text: '아쉬워~ 한 번 더 생각해봐!',
-					voice: 'SSJ3g_A_05',
+					voice: 'SSJ5g_A_05',
 					duration: 4000
 				},
 			],
 			[
 				{
 					text: '아쉬워~ 내가 알려줄게!',
-					voice: 'SSJ3g_B_01',
+					voice: 'SSJ5g_B_01',
 					duration: 3000
 				},
 				{
 					text: '잘 모르겠다면 내가 설명해 줄게!',
-					voice: 'SSJ3g_B_02',
-					duration: 4000
+					voice: 'SSJ5g_B_02',
+					duration: 3000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3g_B_03',
+					voice: 'SSJ5g_B_03',
 					duration: 4000
 				},
 			]
@@ -709,11 +713,11 @@
 			[
 				{
 					text: '안녕? 나는 천재초등학교 5학년 1반 바다라고 해!',
-					voice: 'SSJ410108_01',
-					duration:6000,
+					voice: 'SSJ510118_01',
+					duration:5000,
 					animation: {
 						type: 'b',
-						duration: 5500
+						duration: 4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
@@ -721,10 +725,10 @@
 				},
 				{
 					text: '만나서 반가워 친구야!',
-					voice: 'SSJ410108_02',
-					duration:2500,
+					voice: 'SSJ510118_02',
+					duration:2000,
 					animation: {
-						type: 'c',
+						type: 'b',
 						duration: 2000
 					},
 					endBack: function(){
@@ -736,11 +740,11 @@
 			[
 				{
 					text: '나는 지금 특별한 곳으로 여행을 와 있어.<br>여기가 어디냐고?',
-					voice: 'SSJ410108_05',
-					duration:4000,
+					voice: 'SSJ510118_03',
+					duration:5000,
 					animation: {
 						type: 'c',
-						duration: 3500
+						duration: 4600
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
@@ -764,11 +768,11 @@
 				},
 				{
 					text: '우리나라 영토의 동쪽 끝에 있는 섬이야.',
-					voice: 'SSJ410108_06',
-					duration:6000,
+					voice: 'SSJ510118_04',
+					duration:4000,
 					animation: {
 						type: 'd',
-						duration:5800
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][2]);
@@ -776,11 +780,11 @@
 				},
 				{
 					text: '우리나라 영토의 동쪽 끝에는 독도가 있지.',
-					voice: 'SSJ410108_07',
-					duration:5800,
+					voice: 'SSJ510118_05',
+					duration:4000,
 					animation: {
 						type: 'f',
-						duration:5100
+						duration:4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
@@ -788,15 +792,14 @@
 				},
 				{
 					text: '독도는 경상북도 울릉군에 속해 있는 섬이야. ',
-					voice: 'SSJ410108_08',
-					duration:8000,
+					voice: 'SSJ510118_06',
+					duration:4000,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
-						window.speakUp.goStep(2);
 					}
 				},
 			],
@@ -804,11 +807,11 @@
 			[
 				{
 					text: '우리나라는 경상북도, 전라남도, 강원도 등으로<br>나뉘는 것 알고 있지?',
-					voice: 'SSJ410108_10',
-					duration:7000,
+					voice: 'SSJ510118_07',
+					duration:6000,
 					animation: {
 						type: 'c',
-						duration:6600
+						duration:6000
 					},
 					endBack: function(){
 						// 여기서 박스 나타남
@@ -832,11 +835,11 @@
 				},
 				{
 					text: '이렇게 나라를 효율적으로 관리하려고 나눈 지역을<br>무슨 구역이라고 하더라?',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					voice: 'SSJ510118_08',
+					duration:6000,
 					animation: {
 						type: 'd',
-						duration:8500
+						duration:6000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][2]);
@@ -844,11 +847,11 @@
 				},
 				{
 					text: '우리나라는 나라를 효율적으로 관리하기 위해<br>행정 구역을 나눴어.',
-					voice: 'SSJ410108_12',
+					voice: 'SSJ510118_09',
 					duration:6000,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:6000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
@@ -856,14 +859,15 @@
 				},
 				{
 					text: '좋아! 다음에는 강원도로 여행을 떠나 볼래!',
-					voice: 'SSJ410108_13',
-					duration:4300,
+					voice: 'SSJ510118_10',
+					duration:4000,
 					animation: {
-						type: 'f', // 여기 f임
-						duration:3500
+						type: 'f',
+						duration:4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][0]);
+						window.speakUp.goStep(2);
 					}
 				},
 			],
@@ -871,11 +875,11 @@
 			[
 				{
 					text: '짜잔~ 이곳은 강원도에 있는 동강이라고 해.',
-					voice: 'SSJ410108_13',
-					duration:4300,
+					voice: 'SSJ510118_11',
+					duration:4500,
 					animation: {
-						type: 'f', // 여기 f임
-						duration:3500
+						type: 'c',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][1]);
@@ -883,8 +887,8 @@
 				},
 				{
 					text: '하천 사이에 있는 산이 꼭 한반도의 땅의 생김새를 닮았지?',
-					voice: 'SSJ410108_14',
-					duration: 5000,
+					voice: 'SSJ510118_12',
+					duration: 4500,
 					animation: {
 						type: 'c',
 						duration:4500
@@ -910,11 +914,11 @@
 				},
 				{
 					text: '이러한 산지와 하천 등 땅의 생김새를<br>무엇이라고 하는지 알고 있니?',
-					voice: 'SSJ410108_15',
-					duration: 4000,
+					voice: 'SSJ510118_13',
+					duration: 5500,
 					animation: {
 						type: 'd',
-						duration:4000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
@@ -922,11 +926,11 @@
 				},
 				{
 					text: '땅의 생김새는 지형이라고 말해.',
-					voice: 'SSJ410108_16',
-					duration: 5000,
+					voice: 'SSJ510118_14',
+					duration: 2500,
 					animation: {
 						type: 'f',
-						duration:5000
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][4]);
@@ -934,11 +938,11 @@
 				},
 				{
 					text: '우리나라에서는 산지, 하천, 평야, 해안, 섬 등과 같은<br>다양한 지형을 볼 수 있지.',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					voice: 'SSJ510118_15',
+					duration: 7500,
 					animation: {
 						type: 'f',
-						duration:4800
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][0]);
@@ -949,11 +953,11 @@
 			[
 				{
 					text: '앗! 그런데 오늘은 날씨가 너무 덥고 습하네.',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					voice: 'SSJ510118_16',
+					duration: 4500,
 					animation: {
-						type: 'f',
-						duration:4800
+						type: 'c',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][1]);
@@ -961,11 +965,11 @@
 				},
 				{
 					text: '하늘이 흐리고 바람이 강한 걸 보니<br>곧 많은 비가 내릴 것 같아.',
-					voice: 'SSJ410108_18',
-					duration: 5000,
+					voice: 'SSJ510118_17',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
@@ -975,8 +979,8 @@
 								type: 'word',
 								answer: [
 									['ㅌㅍ'],
-									['통풍', '테풍', '탕평'],
-									['테풍']
+									['통풍', '태풍', '탕평'],
+									['태풍']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[4][4])},
@@ -988,11 +992,11 @@
 				},
 				{
 					text: '적도 부근에서 발생해 이동하는 열대 저기압<br>때문이라던데, 무엇인지 알고 있어?',
-					voice: 'SSJ410108_19',
-					duration: 7000,
+					voice: 'SSJ510118_18',
+					duration: 6500,
 					animation: {
 						type: 'd',
-						duration:7000
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][3]);
@@ -1000,11 +1004,11 @@
 				},
 				{
 					text: '적도 부근에서 발생해 우리나라에 영향을 주는<br>열대 저기압은 태풍이야.',
-					voice: 'SSJ410108_20',
-					duration: 7300,
+					voice: 'SSJ510118_19',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:7000
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][4]);
@@ -1012,14 +1016,15 @@
 				},
 				{
 					text: '거센 태풍이 오기 전에 어서 집으로 돌아가야겠어!',
-					voice: 'SSJ410108_21',
-					duration: 5000,
+					voice: 'SSJ510118_20',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:4500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][0]);
+						window.speakUp.goStep(3);
 					}
 				},
 			],
@@ -1027,8 +1032,8 @@
 			[
 				{
 					text: '여기는 내가 살고 있는 도시야. 정말 복잡하지?',
-					voice: 'SSJ410108_23',
-					duration: 5000,
+					voice: 'SSJ510118_21',
+					duration: 4500,
 					animation: {
 						type: 'c',
 						duration:4500
@@ -1039,11 +1044,11 @@
 				},
 				{
 					text: '이곳은 일자리가 풍부하고 교통도 편리해서<br>많은 사람이 살고 있어.',
-					voice: 'SSJ410108_24',
-					duration: 5000,
+					voice: 'SSJ510118_22',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:5000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1052,8 +1057,8 @@
 							{
 								type: 'ox',
 								answer: '인문적 조건',
-								guideDuration: 3000,
-								guideVoice: 'SSJ410108_23',
+								guideDuration: 5000,
+								guideVoice: 'SSJ510118_24',
 								resultBack: {
 									right: function(){
 										win[namespace].askQuestion(win[namespace].speak[5][4])
@@ -1068,11 +1073,11 @@
 				},
 				{ 
 					text: '오늘날 인구 분포에는 자연적 조건과 인문적 조건 중<br>어느 것의 영향이 더 큰 걸까?',
-					voice: 'SSJ410108_25',
-					duration: 6000,
+					voice: 'SSJ510118_23',
+					duration: 7500,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:12500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
@@ -1080,11 +1085,11 @@
 				},
 				{
 					text: '오늘날에는 인문적인 조건이 인구 분포에<br>더 큰 영향을 미치고 있어.',
-					voice: 'SSJ410108_26',
-					duration: 7000,
+					voice: 'SSJ510118_25',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][4]);
@@ -1092,11 +1097,11 @@
 				},
 				{
 					text: '이곳 역시 산업과 교통 등 인문적 조건이 발달해서<br>많은 인구가 살고 있지!',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					voice: 'SSJ510118_26',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
@@ -1107,11 +1112,11 @@
 			[ 
 				{
 					text: '교통이 발달하면서 지역 간의 교류도<br>더욱 활발해지고 있다는 사실, 알고 있어?',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					voice: 'SSJ510118_27',
+					duration: 6500,
 					animation: {
-						type: 'f',
-						duration:7500
+						type: 'c',
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][1]);
@@ -1119,11 +1124,11 @@
 				},
 				{
 					text: '나처럼 다른 지역으로 여행을 떠나는 사람들도<br>점점 늘어나고,',
-					voice: 'SSJ410108_29',
-					duration: 6000,
+					voice: 'SSJ510118_28',
+					duration: 5500,
 					animation: {
-						type: 'd',
-						duration:6000
+						type: 'c',
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][2]);
@@ -1131,11 +1136,11 @@
 				},
 				{
 					text: '다른 지역에 있는 회사나 학교에 다니거나 필요한 일을<br>처리하기 위해 멀리까지 다녀오는 사람들도 많다고.',
-					voice: 'SSJ410108_28',
-					duration: 7000,
+					voice: 'SSJ510118_29',
+					duration: 7500,
 					animation: {
 						type: 'c',
-						duration:7000
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
@@ -1158,11 +1163,11 @@
 				},
 				{
 					text: '이렇게 통학, 통근 등 일상생활을 할 때<br>활동하는 범위를 무엇이라고 하더라?',
-					voice: 'SSJ410108_29',
-					duration: 6000,
+					voice: 'SSJ510118_30',
+					duration: 6500,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][4]);
@@ -1170,8 +1175,8 @@
 				},
 				{
 					text: '사람들이 일상생활을 할 때 활동하는 범위를<br>생활권이라고 하지.',
-					voice: 'SSJ410108_30',
-					duration: 6000,
+					voice: 'SSJ510118_31',
+					duration: 5500,
 					animation: {
 						type: 'f',
 						duration:5500
@@ -1182,11 +1187,11 @@
 				},
 				{
 					text: '너희 가족의 생활권은 어디까지인지 궁금해지는걸~?',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					voice: 'SSJ510118_32',
+					duration: 4500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
@@ -1196,11 +1201,11 @@
 			[
 				{
 					text: '우와~ 이야기를 나누다 보니까 시간이 금방 갔네!',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					voice: 'SSJ510118_33',
+					duration: 4500,
 					animation: {
-						type: 'f',
-						duration:8500
+						type: 'c',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][1]);
@@ -1208,11 +1213,11 @@
 				},
 				{
 					text: '친구도 즐거운 시간이었기를 바랄게.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					voice: 'SSJ510118_34',
+					duration: 2500,
 					animation: {
-						type: 'f',
-						duration:8500
+						type: 'c',
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][2]);
@@ -1220,11 +1225,11 @@
 				},
 				{
 					text: '그럼 다음에 또 만나~ 안녕!',
-					voice: 'SSJ410108_33',
-					duration: 6000,
+					voice: 'SSJ510118_35',
+					duration: 4500,
 					animation: {
 						type: 'b',
-						duration:5000
+						duration:3000
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;
