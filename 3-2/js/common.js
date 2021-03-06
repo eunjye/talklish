@@ -74,7 +74,7 @@
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
-				win[namespace].askQuestion(win[namespace].speak[3][0]);
+				win[namespace].askQuestion(win[namespace].speak[4][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_02');
 			} else if (targetStep === 3){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -629,7 +629,7 @@
 		speak: [
 			[
 				{
-					text: '안녕? 난 천재초등학교에 6학년 우주라고 해.',
+					text: '안녕? 난 천재초등학교 3학년 2반 노을이라고 해. <br>반가워!',
 					voice: 'SSJ410108_01',
 					duration:6000,
 					animation: {
@@ -641,7 +641,7 @@
 					}
 				},
 				{
-					text: '오늘은 우리나라의 경제에 대해 알아보자.',
+					text: '선생님께서 옛이야기와 자연환경 모습에서 유래한 <br>고장의 지명에 대해 알아보라는 숙제를 내셨어.',
 					voice: 'SSJ410108_02',
 					duration:2500,
 					animation: {
@@ -653,19 +653,7 @@
 					}
 				},
 				{
-					text: '경제, 말만 들어도 너무 어렵지? 사실 나도 그래. ',
-					voice: 'SSJ410108_02',
-					duration:2500,
-					animation: {
-						type: 'c',
-						duration: 2000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][0]);
-					}
-				},
-				{
-					text: '그래도 우리 생활에 아주 밀접하게 관련된 분야니까 <br>잘 알아둬야겠지?',
+					text: '우리 같이 한번 살펴보지 않을래?',
 					voice: 'SSJ410108_02',
 					duration:2500,
 					animation: {
@@ -679,7 +667,7 @@
 			],
 			[
 				{
-					text: '가계는 생활에 필요한 물건과 서비스를 구매하고, <br>기업은 이를 통해 이윤을 얻게 돼.',
+					text: '그럼 첫 번째 질문이야.',
 					voice: 'SSJ410108_03',
 					duration:5200,
 					animation: {
@@ -706,7 +694,7 @@
 					}
 				},
 				{
-					text: '이렇게 가계와 기업이 물건과 서비스를 거래하는 곳을 <br>뭐라고 할까?',
+					text: '양반들의 말을 피해 백성들이 편하게 다니기 위해 만든 <br>좁은 길이라는 뜻을 가진 곳의 이름이 뭐더라?',
 					voice: 'SSJ410108_03',
 					duration:5200,
 					animation: {
@@ -718,7 +706,7 @@
 					}
 				},
 				{
-					text: '시장에서 가계는 생활에 필요한 물건과 서비스를 구매하고, 기업은 이를 통해 이윤을 얻게 돼.',
+					text: '양반들의 말을 피해 백성들이 편하게 다니기 위해 만든 <br>좁은 길의 이름은 피맛골이야.',
 					voice: 'SSJ410108_06',
 					duration:6000,
 					animation: {
@@ -730,7 +718,7 @@
 					}
 				},
 				{
-					text: '우리나라는 자유로운 시장 거래를 보장하고 있어.',
+					text: '\'말\'을 \'피\'하는 \'골\'목이라는 뜻에서 <br>피맛골이라는 이름이 붙었다고 하네?',
 					voice: 'SSJ410108_07',
 					duration:5800,
 					animation: {
@@ -744,19 +732,7 @@
 			],
 			[
 				{
-					text: '자신의 능력과 적성에 따라 자유롭게 <br>직업을 선택할 수도 있고,',
-					voice: 'SSJ410108_09',
-					duration:5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][1]);
-					}
-				},
-				{
-					text: '또, 기업은 이윤을 얻기 위해 자유롭게 <br>경제 활동을 할 수 있지.',
+					text: '자 이제 다음 문제야!',
 					voice: 'SSJ410108_09',
 					duration:5000,
 					animation: {
@@ -784,7 +760,7 @@
 					}
 				},
 				{
-					text: '우리나라 경제의 특징에는 자유 말고도 <br>한 가지가 더 있는데, 그게 뭘까?',
+					text: '북한강과 남한강의 두 물줄기가 만나는 곳이라는 <br>뜻을 가진 곳을 뭐라고 부르더라?',
 					voice: 'SSJ410108_11',
 					duration:9000,
 					animation: {
@@ -796,7 +772,7 @@
 					}
 				},
 				{
-					text: '우리나라 경제의 특징은 자유와 경쟁이야.',
+					text: '북한강과 남한강의 두 물줄기가 만나는 곳은 <br>두물머리라고 해.',
 					voice: 'SSJ410108_11',
 					duration:9000,
 					animation: {
@@ -808,7 +784,7 @@
 					}
 				},
 				{
-					text: '개인은 더 좋은 일자리를 얻기 위해 경쟁하고, <br>기업은 더 많은 이윤을 얻기 위해 경쟁하게 돼.',
+					text: '두물머리, 정말 재미있는 이름이네. <br>언제 한번 꼭 가보고 싶은걸?',
 					voice: 'SSJ410108_12',
 					duration:6000,
 					animation: {
@@ -816,50 +792,14 @@
 						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][4]);
-					}
-				},
-				{
-					text: '개인과 기업의 자유로운 경쟁은 <br>국가 전체 경제 발전에 도움을 주게 되지.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[3][0]);
 					}
 				},
 			],
 			[
 				// idx 3
 				{
-					text: '이번에는 도시로 나가 보자. <br>우와~ 크고 멋진 건물들이 많다.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '우리나라는 6·25 전쟁을 겪고 나서 <br>경제적으로 상당한 어려움을 겪었대.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '그렇지만 지금은 이렇게 멋진 도시들이 많아질 정도로 <br>경제가 발전했지?',
+					text: '이제 마지막 문제만 남았네.',
 					voice: 'SSJ410108_14',
 					duration: 5000,
 					animation: {
@@ -884,7 +824,7 @@
 					}
 				},
 				{
-					text: '이렇게 한 나라가 경제적으로 발전하는 것을 뭐라고 할까?',
+					text: '서울을 오가는 사람들이 말에게 죽을 끓여 먹인 곳이라...<br>이곳은 어디일까?',
 					voice: 'SSJ410108_15',
 					duration: 4000,
 					animation: {
@@ -896,7 +836,7 @@
 					}
 				},
 				{
-					text: '한 나라가 경제적으로 발전하는 것을 경제 성장이라고 해.',
+					text: '서울을 오가는 사람들이 말에게 죽을 끓여 <br>먹인 곳의 이름은 말죽거리야.',
 					voice: 'SSJ410108_16',
 					duration: 5000,
 					animation: {
@@ -908,7 +848,19 @@
 					}
 				},
 				{
-					text: '우리나라는 경제가 성장하면서 <br>산업 분야도 점점 다양해지고 발전하게 됐어.',
+					text: '말죽거리라는 이름에 이러한 유래가 있었구나.',
+					voice: 'SSJ410108_16',
+					duration: 5000,
+					animation: {
+						type: 'f',
+						duration:5000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][3]);
+					}
+				},
+				{
+					text: '벌써 숙제를 다 했네? <br>야호! 그럼 이제 밖으로 나가보자고~!',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -916,13 +868,13 @@
 						duration:4800
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
+						window.speakUp.goStep(2);
 					}
 				},
 			],
 			[
 				{
-					text: '이렇게 경제가 성장하면서 우리나라는 <br>사회적으로도 크게 변화하게 됐지.',
+					text: '짜잔! 여긴 경상북도 경주야.',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -934,7 +886,7 @@
 					}
 				},
 				{
-					text: '특히 해외여행객도 증가하고, <br>우리 문화와 관련된 상품들이 외국에서 인기를 얻고 있어.',
+					text: '이곳을 둘러보기 전에, 내가 문제 하나 낼게.',
 					voice: 'SSJ410108_18',
 					duration: 5000,
 					animation: {
@@ -961,7 +913,7 @@
 					}
 				},
 				{
-					text: '우리나라의 대중가요나 드라마 같은 문화가 <br>전 세계로 퍼지는 현상을 뭐라고 부를까?',
+					text: '우리 조상 대대로 전해 내려온 문화 중에서 다음 세대에 <br>물려줄 만한 가치가 있는 것을 뭐라고 하는지 아니?',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -973,7 +925,7 @@
 					}
 				},
 				{
-					text: '우리 문화가 전 세계로 퍼지는 현상을 한류라고 해.',
+					text: '우리 조상 대대로 전해 내려온 문화 중에서 다음 세대에 <br>물려줄 만한 가치가 있는 것을 문화유산이라고 해.',
 					voice: 'SSJ410108_19',
 					duration: 7000,
 					animation: {
@@ -985,7 +937,7 @@
 					}
 				},
 				{
-					text: '한류를 즐기는 외국인이 급증하는 현상은 <br>경제 발전에 큰 기여를 하고 있대.',
+					text: '이곳 경주에서는 우리 조상들의 생활 모습, 슬기와 멋을 <br>알게 해 주는 문화유산을 많이 찾아볼 수가 있어.',
 					voice: 'SSJ410108_20',
 					duration: 7300,
 					animation: {
@@ -993,55 +945,18 @@
 						duration:7000
 					},
 					endBack: function(){
-						win[namespace].currentStep = 1;
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[5][0]);
 					}
 				},
 			],
 			[
 				{
-					text: '우와~ 여긴 항구야! <br>저기 보이는 것들은 배로 싣고 나르는 상자들인가 봐.',
+					text: '저 뒤에, 우리나라를 대표하는 문화유산 중 <br>하나가 보인다!',
 					voice: 'SSJ410108_23',
 					duration: 5000,
 					animation: {
 						type: 'c',
 						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '모두 어디로 가는 걸까? 다른 나라로 가는 걸까?',
-					voice: 'SSJ410108_23',
-					duration: 5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '수업 시간에 다른 나라와의 경제 교류에 대해 <br>배웠었는데,',
-					voice: 'SSJ410108_23',
-					duration: 5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '각 나라가 더 잘 만들 수 있는 상품을 생산하고, <br>이를 상호 교류하면 서로 경제적 이익이 생긴대.',
-					voice: 'SSJ410108_24',
-					duration: 9000,
-					animation: {
-						type: 'c',
-						duration:8500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1062,7 +977,7 @@
 					}
 				},
 				{ 
-					text: '이렇게 나라 간에 물건과 서비스를 사고파는 것을 <br>뭐라고 그럴까?',
+					text: '하늘의 별을 관찰하고 연구하던 시설인 <br>이 문화유산의 이름이 뭘까?',
 					voice: 'SSJ410108_25',
 					duration: 6000,
 					animation: {
@@ -1074,7 +989,7 @@
 					}
 				},
 				{
-					text: '나라와 나라 사이에 물건과 서비스를 사고파는 것을 <br>무역이라고 해.',
+					text: '하늘의 별을 관찰하고 연구하던 시설인 <br>이 문화유산의 이름은 첨성대야.',
 					voice: 'SSJ410108_26',
 					duration: 7000,
 					animation: {
@@ -1086,7 +1001,7 @@
 					}
 				},
 				{
-					text: '무역을 할 때 다른 나라에 상품을 파는 것을 수출, <br>다른 나라에서 상품을 사 오는 것을 수입이라고 해.',
+					text: '첨성대는 신라 시대의 천문 관측대인데, <br>옛날에도 별을 관찰하고 기록했음을 알 수 있게 해줘.',
 					voice: 'SSJ410108_27',
 					duration: 8000,
 					animation: {
@@ -1100,7 +1015,7 @@
 			],
 			[ // 6 - 0
 				{
-					text: '이렇게 무역을 하는 나라들은 서로 도움을 주고받지만 <br>동시에 경쟁 상대가 되기도 해.',
+					text: '그런데, 선생님께서 문화유산에는 <br>유형 문화유산과 무형 문화유산이 있다고 그러셨는데…',
 					voice: 'SSJ410108_27',
 					duration: 8000,
 					animation: {
@@ -1108,42 +1023,40 @@
 						duration:7500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][0]);
-					}
-				},
-				{
-					text: '그래서 무역을 하다 보면 문제가 발생하기도 하고, <br>서로 자기 나라 경제를 보호하려고 하지.',
-					voice: 'SSJ410108_28',
-					duration: 7000,
-					animation: {
-						type: 'c',
-						duration:7000
-					},
-					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
 						win[namespace].askQuestion(
-							win[namespace].speak[6][1],
+							win[namespace].speak[1][2],
 							{
-								type: 'word',
-								answer: [
-									['ㄷㅅ'],
-									['독서', '도시', '답사'],
-									['답사']
-								],
+								type: 'ox',
+								answer: '모든 사람',
+								guideDuration: 4500,
+								guideVoice: 'SSJ610216_06',
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[1][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '자기 나라 경제를 보호하는 방법 중, 국외에서 수입하는 <br>물건에 부과하는 세금을 뭐라고 할까?',
+					text: '첨성대는 유형 문화유산일까, 무형 문화유산일까?',
+					voice: 'SSJ410108_28',
+					duration: 7000,
+					animation: {
+						type: 'd',
+						duration:7000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][2]);
+					}
+				},
+				{
+					text: '첨성대는 유형 문화유산이야.',
 					voice: 'SSJ410108_29',
 					duration: 6000,
 					animation: {
-						type: 'd',
+						type: 'f',
 						duration:6000
 					},
 					endBack: function(){
@@ -1151,7 +1064,7 @@
 					}
 				},
 				{
-					text: '국외에서 수입하는 물건에 부과하는 세금을 관세라고 해.',
+					text: '유형 문화유산은 형태가 있는 <br>건축물, 공예품, 과학 발명품 등이고,',
 					voice: 'SSJ410108_30',
 					duration: 6000,
 					animation: {
@@ -1163,7 +1076,7 @@
 					}
 				},
 				{
-					text: '관세는 자기 나라의 경제를 보호하는 수단이 될 수 있지만, 자유로운 무역을 방해하기도 해.',
+					text: '무형 문화유산은 형태가 없는 <br>예술 활동, 기술 등을 의미해.',
 					voice: 'SSJ410108_31',
 					duration: 9000,
 					animation: {
@@ -1172,24 +1085,12 @@
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
-					}
-				},
-				{
-					text: '그래서 서로 의존하는 나라끼리는 \'자유 무역 협정\'이라는 걸 맺어서 관세를 줄이거나 없애기도 하지.',
-					voice: 'SSJ410108_30',
-					duration: 6000,
-					animation: {
-						type: 'f',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 			],
 			[
 				{
-					text: '벌써 한 학기 내용이 모두 끝났네.',
+					text: '앗, 벌써 집에 돌아가야 할 시간이네. <br>시간 가는 줄 몰랐어!',
 					voice: 'SSJ410108_31',
 					duration: 9000,
 					animation: {
@@ -1201,7 +1102,7 @@
 					}
 				},
 				{
-					text: '나랑 같이 2단원 내용을 정리한 시간이 즐거웠길 바라.',
+					text: '사회 공부가 이렇게 재밌는지 몰랐는걸?',
 					voice: 'SSJ410108_31',
 					duration: 9000,
 					animation: {
@@ -1213,7 +1114,7 @@
 					}
 				},
 				{
-					text: '그럼 다음에 또 만나자~ 안녕!',
+					text: '오늘 이야기 나눈 내용 잊어버리지 않길 바라~! <br>그럼 다음에 또 만나.',
 					voice: 'SSJ410108_33',
 					duration: 6000,
 					animation: {
