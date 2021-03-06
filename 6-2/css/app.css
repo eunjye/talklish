@@ -1,0 +1,8 @@
+@charset 'UTF-8';
+
+/* basic */
+@import './base.css';
+@import './font.css';
+
+/* style */
+@import './component.css';
