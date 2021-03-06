@@ -68,15 +68,19 @@
 			clearTimeout(win[namespace].willTimer);
 			document.querySelector('.question-area').style.display = 'none';
 			document.querySelector('.btn-voice').style.display = 'none';
+			var bgmStatus = win[namespace].currentBgmStatus.status;
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
+				win[namespace].askQuestion(win[namespace].speak[3][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_02');
+			} else if (targetStep === 3){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
+				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			}
 			win[namespace].setBgImg('bg_main'+targetStep);
-			var bgmStatus = win[namespace].currentBgmStatus.status;
-			win[namespace].soundStatus('play', 'bgm', 'bgm_0'+targetStep);
 			if (bgmStatus !== 'play'){
 				win[namespace].soundStatus('stop', 'bgm');
 			}
@@ -200,7 +204,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 800;
+			script.duration += 1500;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -218,7 +222,6 @@
 				win[namespace].soundStatus('play', 'script', voice, fnEndBack);
 			} else {
 				win[namespace].soundStatus('play', 'script', voice);
-				// win[namespace].checkAnswer(script, question, script.endBack);
 				win[namespace].checkAnswer(script, question, question.resultBack);
 				// fnEndBack();
 			}
@@ -298,80 +301,86 @@
 			function blinkBtnVoice() {
 				clearTimeout(win[namespace].blinkTimer);
 				$btnVoice.classList.add('blink');
-				question.type === 'word' ? $btnVoice.disabled = false : '';
-
-				// win[namespace].blinkTimer = setTimeout(function(){
-				// 	$btnVoice.classList.add('blink');
-				// 	question.type === 'word' ? $btnVoice.disabled = false : '';
-				// }, script.duration)
+				$btnVoice.disabled = false;
+				// question.type === 'word' ? $btnVoice.disabled = false : '';
 			}
 			win[namespace].blinkTimer = setTimeout(function(){
-				blinkBtnVoice();
+				if (question.type === 'ox') {
+					win[namespace].soundStatus('play', 'script', question.guideVoice);
+					setTimeout(blinkBtnVoice, question.guideDuration);
+				} else {
+					blinkBtnVoice();
+				}
 			}, script.duration);
 
-			// [QuizType1] 단답형일 시
-			if (question.type === 'word') {
-				// answer check !! (question.answer[0])
-				$questionArea.innerHTML = '<div class="single"></div>';
-				var $questionInner = $questionArea.querySelector('.single');
-				var answerText = question.answer[2][0];
-				var reduceAnswerText = answerText.replace(/ /g,'');
+			$questionArea.innerHTML = '<div class="single"></div>';
+			var $questionInner = $questionArea.querySelector('.single');
+			var answerText = question.type === 'word' ? question.answer[2][0] : question.answer;
+			var reduceAnswerText = answerText.replace(/ /g,'');
 
-				// 단어 세개 중 선택하기
-				function setWordsAnswer() {
-					$questionArea.classList.add('wide');
-					$questionArea.innerHTML = '<div class="multiple"></div>';
-					$questionInner = $questionArea.querySelector('.multiple');
-					var answerWords = question.answer[1];
-					var multipleHTML = '';
+			// 단어 세개 중 선택하기
+			function setWordsAnswer() {
+				$questionArea.classList.add('wide');
+				$questionArea.innerHTML = '<div class="multiple"></div>';
+				$questionInner = $questionArea.querySelector('.multiple');
+				var answerWords = question.answer[1];
+				var multipleHTML = '';
 
-					answerWords.forEach(function(item){
-						multipleHTML += '<span>' + item + '</span>';
-					})
-					$questionInner.innerHTML = multipleHTML;
-				}
+				answerWords.forEach(function(item){
+					multipleHTML += '<span>' + item + '</span>';
+				})
+				$questionInner.innerHTML = multipleHTML;
+			}
 
-				// 첫번째 (글자수만 나오는거)
-				setInitialAnswer(answerText, true);
+			// 첫번째 (글자수만 나오는거)
+			setInitialAnswer(answerText, true);
 
-				showQuestionArea();
+			showQuestionArea();
 
-				function evtStartVoiceCheck(){
-					$btnVoice.disabled = true;
-					
-					win[namespace].animationStatus('stop');
+			function evtStartVoiceCheck(){
+				$btnVoice.disabled = true;
+				
+				win[namespace].animationStatus('stop');
 
-					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(7);
-						window.HybridApp.onResultSTTMode = function(str) {
-							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
-							startVoiceCheck(voiceText);
-						}
-						window.HybridApp.onResultError = function() {
-							voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
-							startVoiceCheck(voiceText);
-						}
-					} else {
-						voiceText = {text: '방위표', reduceText: '방위표'.replace(/(\s*)/g,'')};
+				if (externalManager.isPlayer()) {
+					window.HybridApp.startSilvySTTMode(7);
+					window.HybridApp.onResultSTTMode = function(str) {
+						voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
 						startVoiceCheck(voiceText);
 					}
+					window.HybridApp.onResultError = function() {
+						voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
+						startVoiceCheck(voiceText);
+					}
+				} else {
+					var promtText = prompt('text 입력') || '';
+					voiceText = {text: promtText, reduceText: promtText.replace(/(\s*)/g,'')};
+					startVoiceCheck(voiceText);
 				}
-				$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-				$btnVoice.addEventListener('click', evtStartVoiceCheck);
+			}
+			$btnVoice.removeEventListener('click', evtStartVoiceCheck);
+			$btnVoice.addEventListener('click', evtStartVoiceCheck);
 
-				function startVoiceCheck(voiceText){
-					var tryNum = win[namespace].checkAnswerTry;
-					win[namespace].soundStatus('stop', 'script');
-					clearTimeout(win[namespace].blinkTimer);
-					$btnVoice.classList.remove('blink');
-					$btnVoice.disabled = true;
-					
-					if (voiceText.reduceText.slice(0, reduceAnswerText.length) !== reduceAnswerText) {
-						// 1트에 실패일 시, 초성 나옴
-						if (tryNum === 1){
-							$btnVoice.disabled = true;
-							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
-							setTimeout(function(){
+			/* Start answer check !!
+			======================= */
+			function startVoiceCheck(voiceText){
+				var tryNum = win[namespace].checkAnswerTry;
+				win[namespace].soundStatus('stop', 'script');
+				clearTimeout(win[namespace].blinkTimer);
+				$btnVoice.classList.remove('blink');
+				$btnVoice.disabled = true;
+				console.log(voiceText.reduceText);
+				
+				if (voiceText.reduceText.slice(0, reduceAnswerText.length) !== reduceAnswerText) {
+					// 1트에 실패일 시, 초성 나옴
+					if (tryNum === 1){
+						$btnVoice.disabled = true;
+						setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
+						setTimeout(function(){
+							if (question.type === 'ox') {
+								lastWrongAnswer();
+								return;
+							} else {
 								var wrongIndex = win[namespace].getRandomInt(0, 4);
 								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
 								win[namespace].wrongAnswer(
@@ -386,177 +395,100 @@
 									},
 									true
 								);
-							}, 1000)
-						} else if (tryNum === 2){
-							$btnVoice.disabled = true;
-							setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
-							win[namespace].soundStatus('stop', 'script');
+							}
+						}, 1000)
+					} else if (tryNum === 2){
+						$btnVoice.disabled = true;
+						setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
+						win[namespace].soundStatus('stop', 'script');
 
-							setTimeout(function(){
-								var wrongIndex = win[namespace].getRandomInt(0, 4);
-								win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
-								win[namespace].wrongAnswer(
-									win[namespace].wrongScript[0][wrongIndex], 
-									function(){
-										setWordsAnswer(); // multiple
-										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
-											win[namespace].soundStatus('play', 'script', script.voice);
-										});
-										win[namespace].setText(script.text);
-										blinkBtnVoice();
-									},
-									true
-								); 
-							}, 1000);
-						} else if (tryNum === 3){
-							// 보기 중에 단어가 있을 땐 체크해서 잠시 멈췄다가
-							var timer = 0;
-							var selectedAnswer = false;
-							question.answer[1].forEach(function(item, index){
-								if (item === voiceText.reduceText.slice(0, reduceAnswerText.length)) {
-									$questionInner.querySelectorAll('span')[index].classList.add('selected');
-									timer = 1500;
-									selectedAnswer = index;
-								}
-							})
-							setTimeout(function(){
-								$questionInner.classList.add('answer-wrong');
-								question.answer[1].forEach(function(item, index){
-									if (item === answerText) {
-										$questionInner.querySelectorAll('span')[index].classList.add('right');
-									}
-								})
-								!!selectedAnswer && $questionInner.querySelectorAll('span')[selectedAnswer].classList.add('wrong');
-								win[namespace].progressStatus('wrong');
-								win[namespace].soundStatus('play', 'effect', 'wrong');
-								$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-
-								setTimeout(function(){
-									var wrongIndex = win[namespace].getRandomInt(0, 2);
-									win[namespace].setText(win[namespace].wrongScript[1][wrongIndex].text);
-									win[namespace].wrongAnswer(// [To-be] wrongAnswer()가 아니라, 으음~아쉬워 알려줄게! 랜덤으로
-										win[namespace].wrongScript[1][wrongIndex], 
-										function(){ 
-											// 여기서 멀티플 중에 .. 발음한 답이 있으면 그거 선택, 그리고 없으면 그냥 땡 하고 정답 선택. 만약 정답 맞으면 정답에 동그라미
-											!!resultBack && resultBack.wrong();
-											fnEndBack();
-										},
-										false
-									);
-								}, 1500)
-								return false;
-							}, timer)
-						}
-					} else {
-						/* 성공일 시, 정답 모션
-						============================== */
-						if (tryNum === 3) {
-							$questionInner.classList.add('answer-right');
+						setTimeout(function(){
+							var wrongIndex = win[namespace].getRandomInt(0, 4);
+							win[namespace].setText(win[namespace].wrongScript[0][wrongIndex].text);
+							win[namespace].wrongAnswer(
+								win[namespace].wrongScript[0][wrongIndex], 
+								function(){
+									setWordsAnswer(); // multiple
+									win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
+										win[namespace].soundStatus('play', 'script', script.voice);
+									});
+									win[namespace].setText(script.text);
+									blinkBtnVoice();
+								},
+								true
+							); 
+						}, 1000);
+					} else if (tryNum === 3){
+						// 보기 중에 단어가 있을 땐 체크해서 잠시 멈췄다가
+						var timer = 0;
+						var selectedAnswer = false;
+						question.answer[1].forEach(function(item, index){
+							if (item.replace(/(\s*)/g,'') === voiceText.reduceText.slice(0, reduceAnswerText.length)) {
+								$questionInner.querySelectorAll('span')[index].classList.add('selected');
+								timer = 1500;
+								selectedAnswer = index;
+							}
+						})
+						setTimeout(function(){
+							$questionInner.classList.add('answer-wrong');
 							question.answer[1].forEach(function(item, index){
 								if (item === answerText) {
 									$questionInner.querySelectorAll('span')[index].classList.add('right');
 								}
 							})
-						} else {
-							setInitialAnswer(answerText);
-							$questionInner.classList.add('right');
-						}
-						setTimeout(function(){
-							win[namespace].soundStatus('play', 'effect', 'right');
-							win[namespace].checkAnswerTry = 1;
-							win[namespace].progressStatus('right');
-							$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-							setTimeout(function(){
-								$questionArea.style.display='none';
-								$btnVoice.style.display='none';
-								!!resultBack && resultBack.right();
-							}, 2000)
-							return true;
-						}, 1000);
-					}
-				}
-
-			} else if (question.type === 'ox') {
-				// [QuizType2] O/X일 시
-				$questionArea.innerHTML = '<div class="single"></div>';
-				var $questionInner = $questionArea.querySelector('.single');
-				var answerText = question.answer ? '같아' : '달라';
-
-				setInitialAnswer(answerText, true);
-
-				showQuestionArea();
-
-				$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-				$btnVoice.addEventListener('click', evtStartVoiceCheck);
-
-				var guideVoiceTimer = setTimeout(function(){
-					win[namespace].soundStatus('play', 'script', 'SSJ410108_14', function(){
-						setTimeout(function(){
-							$btnVoice.disabled = false;
-						},5000)
-					});
-				}, script.duration);
-
-				function evtStartVoiceCheck(){
-					clearTimeout(guideVoiceTimer);
-					$btnVoice.disabled = true;
-
-					if (externalManager.isPlayer()) {
-						window.HybridApp.startSilvySTTMode(7);
-						window.HybridApp.onResultSTTMode = function(str) {
-							voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
-							startVoiceCheck(voiceText);
-						} 
-						window.HybridApp.onResultError = function() {
-							voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
-							startVoiceCheck(voiceText);
-						}
-					} else {
-						voiceText = {text: '달라', reduceText: '달라'.replace(/(\s*)/g,'')};
-						startVoiceCheck(voiceText);
-					}
-
-					function startVoiceCheck() {
-						if (voiceText.reduceText.slice(0, answerText.length) === answerText) {
-							win[namespace].soundStatus('play', 'effect', 'right');
-							win[namespace].progressStatus('right');
-							setInitialAnswer(answerText);
-							fnEndBack();
-							$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-							$questionInner.classList.add('right');
-							setTimeout(function(){
-								win[namespace].checkAnswerTry = 1;
-								$questionArea.style.display='none';
-								$btnVoice.style.display='none';
-								!!resultBack && resultBack.right();
-							}, 2000);
-						} else {
+							!!selectedAnswer && $questionInner.querySelectorAll('span')[selectedAnswer].classList.add('wrong');
 							win[namespace].progressStatus('wrong');
-							setInitialAnswer(voiceText.reduceText.slice(0, answerText.length));
 							win[namespace].soundStatus('play', 'effect', 'wrong');
 							$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-							win[namespace].soundStatus('stop', 'script');
+
 							setTimeout(function(){
-								var wrongIndex = win[namespace].getRandomInt(0, 2);
-								win[namespace].setText(win[namespace].wrongScript[1][wrongIndex].text);
-								win[namespace].wrongAnswer(
-									win[namespace].wrongScript[1][wrongIndex], 
-									function(){ 
-										// !!resultBack && resultBack.wrong();
-										win[namespace].checkAnswerTry = 1;
-										$questionArea.style.display='none';
-										$btnVoice.style.display='none';
-										!!resultBack && resultBack.wrong();
-									},
-									true
-								);
-							}, 2000);
-						}
+								lastWrongAnswer();
+							}, 1500)
+							return false;
+						}, timer)
 					}
+				} else {
+					/* 성공일 시, 정답 모션
+					============================== */
+					if (tryNum === 3) {
+						$questionInner.classList.add('answer-right');
+						question.answer[1].forEach(function(item, index){
+							if (item === answerText) {
+								$questionInner.querySelectorAll('span')[index].classList.add('right');
+							}
+						})
+					} else {
+						setInitialAnswer(answerText);
+						$questionInner.classList.add('right');
+					}
+					setTimeout(function(){
+						win[namespace].soundStatus('play', 'effect', 'right');
+						win[namespace].checkAnswerTry = 1;
+						win[namespace].progressStatus('right');
+						$btnVoice.removeEventListener('click', evtStartVoiceCheck);
+						setTimeout(function(){
+							$questionArea.style.display='none';
+							$btnVoice.style.display='none';
+							!!resultBack && resultBack.right();
+						}, 2000)
+						return true;
+					}, 1000);
 				}
 			}
 
-			// 초성값 .single에 넣기
+			function lastWrongAnswer() {
+				var wrongIndex = win[namespace].getRandomInt(0, 2);
+				win[namespace].setText(win[namespace].wrongScript[1][wrongIndex].text);
+				win[namespace].wrongAnswer(
+					win[namespace].wrongScript[1][wrongIndex], 
+					function(){ 
+						!!resultBack && resultBack.wrong();
+						fnEndBack();
+					},
+					false
+				);
+			}
+			
 			function setInitialAnswer(initial, isTransparent) {
 				$questionArea.classList.remove('wide');
 				var resultHTML = '';
@@ -629,22 +561,22 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3g_ending_01',
+				voice: 'SSJ5g_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3g_ending_02',
+				voice: 'SSJ5g_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3g_ending_03',
+				voice: 'SSJ5g_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3g_ending_04',
+				voice: 'SSJ5g_ending_04',
 				duration: 4000
 			},
 		],
@@ -652,44 +584,44 @@
 			[
 				{
 					text: '다시 한번 생각해볼까?',
-					voice: 'SSJ3g_A_01',
+					voice: 'SSJ5g_A_01',
 					duration: 3000
 				},
 				{
 					text: '조금 더 생각해볼까?',
-					voice: 'SSJ3g_A_02',
+					voice: 'SSJ5g_A_02',
 					duration: 3000
 				},
 				{
 					text: '한 번 더 생각해보자!',
-					voice: 'SSJ3g_A_03',
+					voice: 'SSJ5g_A_03',
 					duration: 3000
 				},
 				{
 					text: '글쎄, 한 번 더 생각해볼까?',
-					voice: 'SSJ3g_A_04',
+					voice: 'SSJ5g_A_04',
 					duration: 4000
 				},
 				{
 					text: '아쉬워~ 한 번 더 생각해봐!',
-					voice: 'SSJ3g_A_05',
+					voice: 'SSJ5g_A_05',
 					duration: 4000
 				},
 			],
 			[
 				{
 					text: '아쉬워~ 내가 알려줄게!',
-					voice: 'SSJ3g_B_01',
+					voice: 'SSJ5g_B_01',
 					duration: 3000
 				},
 				{
 					text: '잘 모르겠다면 내가 설명해 줄게!',
-					voice: 'SSJ3g_B_02',
-					duration: 4000
+					voice: 'SSJ5g_B_02',
+					duration: 3000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3g_B_03',
+					voice: 'SSJ5g_B_03',
 					duration: 4000
 				},
 			]
@@ -697,24 +629,24 @@
 		speak: [
 			[
 				{
-					text: '안녕~ 나는 천재초등학교 4학년 1반 노을이라고 해! ',
-					voice: 'SSJ410108_01',
+					text: '안녕? 천재초등학교에 다니고 있는 바다라고 해!<br>만나서 반가워.',
+					voice: 'SSJ610216_01',
 					duration:6000,
 					animation: {
 						type: 'b',
-						duration: 5500
+						duration: 6000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
 					}
 				},
 				{
-					text: '만나서 반가워.',
-					voice: 'SSJ410108_02',
-					duration:2500,
+					text: '모처럼의 견학인데 같이 재밌게 둘러보자.',
+					voice: 'SSJ610216_02',
+					duration:3500,
 					animation: {
 						type: 'c',
-						duration: 2000
+						duration: 3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -722,89 +654,88 @@
 				},
 			],
 			[
+				// idx 1
 				{
-					text: '여기, 우리 지역을 나타낸 지도를 한번 가지고 와봤어.',
-					voice: 'SSJ410108_03',
-					duration:5200,
+					text: '이곳은 5·18 민주 묘지야.<br>5·18 민주화 운동 때 희생되신 분들을 추모하는 곳이지.',
+					voice: 'SSJ610216_03',
+					duration:7200,
 					animation: {
 						type: 'c',
-						duration: 4500
+						duration: 7200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][1]);
 					}
 				},
 				{
-					text: '지도에는 정말 다양한 정보들이 있네?',
-					voice: 'SSJ410108_04',
-					duration:4000,
+					text: '전두환은 군인들을 동원해서 5·18 민주화 운동을 진압했고, 많은 사상자가 나왔어.',
+					voice: 'SSJ610216_04',
+					duration:6500,
 					animation: {
 						type: 'c',
-						duration: 3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][2]);
-					}
-				},
-				{
-					text: '나랑 같이 하나하나 살펴보자!',
-					voice: 'SSJ410108_05',
-					duration:4000,
-					animation: {
-						type: 'c',
-						duration: 3500
+						duration: 6500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
 						// 여기서 박스 나타남
 						win[namespace].askQuestion(
-							win[namespace].speak[1][3],
+							win[namespace].speak[1][2],
 							{
-								type: 'word',
-								answer: [
-									['ㅂㅇㅍ'],
-									['방위판', '방위표', '방위편'],
-									['방위표']
-								],
+								type: 'ox',
+								answer: '계엄군',
+								guideDuration: 4500,
+								guideVoice: 'SSJ610216_06',
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][5])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][4])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[1][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '음...지도에서 방위를 나타내주는 역할을 하는 걸<br>뭐라고 부르더라?',
-					voice: 'SSJ410108_06',
-					duration:6000,
+					text: '그런데, 전두환의 명에 따라 시위대를 진압한 군대를<br>뭐라고 하는지 아니?',
+					voice: 'SSJ610216_05',
+					duration:5500,
 					animation: {
 						type: 'd',
-						duration:5800
+						duration:10000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][3]);
+					}
+				},
+				{
+					text: '전두환의 명에 따라 시위대를 진압한 군대를<br>계엄군이라고 해.',
+					voice: 'SSJ610216_07',
+					duration:5200,
+					animation: {
+						type: 'f',
+						duration:5200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][4]);
 					}
 				},
 				{
-					text: '지도에서 방위를 나타내주는 역할을 하는 것을<br>방위표라고 해.',
-					voice: 'SSJ410108_07',
-					duration:5800,
+					text: '전두환은 계엄군을 광주로 내려보내서 <br>5·18 민주화 운동에 참가한 시위대를 진압했어.',
+					voice: 'SSJ610216_08',
+					duration:7000,
 					animation: {
 						type: 'f',
-						duration:5100
+						duration:7000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][5]);
 					}
 				},
 				{
-					text: '그래. 방위표를 이용하면 사람이나 건물이 향한<br>방향에 관계없이 위치를 나타낼 수 있어.',
-					voice: 'SSJ410108_08',
-					duration:8000,
+					text: '두 번 다신 일어나선 안 될 슬픈 일이야, 그렇지?',
+					voice: 'SSJ610216_09',
+					duration:4200,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:4200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -813,36 +744,35 @@
 			],
 			[
 				{
-					text: '지도에는 여러 가지 기호도 사용되고 있다는 것 알고 있지?',
-					voice: 'SSJ410108_09',
+					text: '전두환은 5·18 민주화 운동을 진압한 후에도<br>독재 정치를 이어갔어.',
+					voice: 'SSJ610216_10',
 					duration:5000,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:5000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][1]);
 					}
 				},
 				{
-					text: '그런데, 지도마다 쓰이는 기호가 다르고,<br>모든 기호를 외울 수도 없을 텐데…',
-					voice: 'SSJ410108_10',
-					duration:7000,
+					text: '그래서 국민들은 6월 민주 항쟁을 일으켰고, <br>대통령 선거 제도를 바꿔 달라고 요구했어.',
+					voice: 'SSJ610216_11',
+					duration:6500,
 					animation: {
 						type: 'c',
-						duration:6600
+						duration:6500
 					},
 					endBack: function(){
-						// 여기서 박스 나타남
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
 							win[namespace].speak[2][2],
 							{
 								type: 'word',
 								answer: [
-									['ㅂㄹ'],
-									['범례', '분류', '법령'],
-									['범례']
+									['ㅈㅈ ㅅㄱ'],
+									['직접 수고', '직접 선거', '자장 선거'],
+									['직접 선거']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
@@ -853,21 +783,21 @@
 					}
 				},
 				{
-					text: '그래서 지도에는 기호의 뜻이 무엇인지<br>나타내주는 역할을 하는 것이 있대. 그걸 뭐라고 부를까?',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					text: '6월 민주 항쟁에서 국민들이 요구한 <br>선거 방식은 무엇이었을까?',
+					voice: 'SSJ610216_12',
+					duration:5500,
 					animation: {
 						type: 'd',
-						duration:8500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
 					}
 				},
 				{
-					text: '지도에 쓰인 기호와 그 뜻을 나타내주는 역할을 하는 것을 범례라고 해.',
-					voice: 'SSJ410108_12',
-					duration:6000,
+					text: '6월 민주 항쟁에서 국민들이 요구한 선거 방식은 <br>직접 선거야.',
+					voice: 'SSJ610216_13',
+					duration:5500,
 					animation: {
 						type: 'f',
 						duration:5500
@@ -877,26 +807,39 @@
 					}
 				},
 				{
-					text: '범례 덕분에 각 기호의 뜻을 확인할 수가 있네!',
-					voice: 'SSJ410108_13',
-					duration:4300,
+					text: '그래. 국민들의 이러한 요구는 결국 <br>6·29 민주화 선언을 통해 실현되었어.',
+					voice: 'SSJ610216_14',
+					duration:6200,
 					animation: {
-						type: 'f', // 여기 f임
-						duration:3500
+						type: 'f', 
+						duration:6200
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
+						win[namespace].askQuestion(win[namespace].speak[2][5]);
+					}
+				},
+				{
+					text: '민주주의가 훼손될 때는 국민들의 손으로 <br>바로잡을 수 있다는 점을 꼭 기억해야겠네.',
+					voice: 'SSJ610216_15',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						window.speakUp.goStep(2);
 					}
 				},
 			],
 			[
+				// idx 3
 				{
-					text: '지도는 땅의 실제 모습을 줄여서 나타내고 있어.',
-					voice: 'SSJ410108_14',
-					duration: 5000,
+					text: '이번에는 투표소의 모습을 살펴보자.',
+					voice: 'SSJ610216_16',
+					duration: 2500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
@@ -905,9 +848,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㅊㅊ'],
-									['추천', '초청', '축척'],
-									['축척']
+									['ㅅㄱ'],
+									['선거', '상관', '송구'],
+									['선거']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
@@ -918,36 +861,48 @@
 					}
 				},
 				{
-					text: '지도에서 실제 거리를 줄인 정도를 뭐라고 부르더라?',
-					voice: 'SSJ410108_15',
-					duration: 4000,
+					text: '국민들이 투표소에서 하는 일로, 우리의 뜻을 전달할 <br>대표자를 뽑는 일을 뭐라고 하는지 아니?',
+					voice: 'SSJ610216_17',
+					duration: 7200,
 					animation: {
 						type: 'd',
-						duration:4000
+						duration:7200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][2]);
 					}
 				},
 				{
-					text: '지도에서 실제 거리를 줄인 정도를 축척이라고 해.',
-					voice: 'SSJ410108_16',
-					duration: 5000,
+					text: '우리의 뜻을 전달할 대표자를 뽑는 일을 선거라고 해.',
+					voice: 'SSJ610216_18',
+					duration: 4200,
 					animation: {
 						type: 'f',
-						duration:5000
+						duration:4200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
 					}
 				},
 				{
-					text: '축척에 따라 지도의 자세한 정도가 달라지게 되지. ',
-					voice: 'SSJ410108_17',
+					text: '선거를 민주주의의 꽃이라고도 부른다고 해. <br>뭔가 멋있지 않니?',
+					voice: 'SSJ610216_19',
 					duration: 5000,
 					animation: {
 						type: 'f',
-						duration:4800
+						duration:5000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
+					}
+				},
+				{
+					text: '선거를 할 때는 신중하게 투표권을 행사해야겠지.',
+					voice: 'SSJ610216_20',
+					duration: 3200,
+					animation: {
+						type: 'f',
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][0]);
@@ -955,106 +910,129 @@
 				},
 			],
 			[
+				// idx 4
 				{
-					text: '지도에서 땅의 높낮이를 표현할 수 있다는 것도 알고 있니?',
-					voice: 'SSJ410108_18',
-					duration: 5000,
+					text: '민주주의 사회에서는 선거와 같이 <br>더 많은 쪽의 의견을 따르는 방식을 이용하는 경우가 많아.',
+					voice: 'SSJ610216_21',
+					duration: 6200,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:6200
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][1]);
+					}
+				},
+				{
+					text: '일상생활에서도 더 많은 쪽의 의견을 따르는 경험 <br>해본 적 있지?',
+					voice: 'SSJ610216_22',
+					duration: 4200,
+					animation: {
+						type: 'c',
+						duration:4200
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(
-							win[namespace].speak[4][1],
+							win[namespace].speak[4][2],
 							{
 								type: 'word',
 								answer: [
 									['ㄷㄱㅅ'],
-									['등고선', '단계선', '등급선'],
-									['등고선']
+									['도서관', '다수결', '대성공'],
+									['다수결']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '지도에서 높이가 같은 곳을 연결하여<br>땅의 높낮이를 나타낸 선을 무엇이라고 할까?',
-					voice: 'SSJ410108_19',
-					duration: 7000,
+					text: '더 많은 쪽의 의견을 따르는 방식을 뭐라고 할까?',
+					voice: 'SSJ610216_23',
+					duration: 3200,
 					animation: {
 						type: 'd',
-						duration:7000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][2]);
-					}
-				},
-				{
-					text: '지도에서 높이가 같은 곳을 연결하여<br>땅의 높낮이를 나타낸 선을 등고선이라고 해.',
-					voice: 'SSJ410108_20',
-					duration: 7300,
-					animation: {
-						type: 'f',
-						duration:7000
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][3]);
 					}
 				},
 				{
-					text: '지도에서는 땅의 높낮이를 등고선과 색깔로 나타내지. ',
-					voice: 'SSJ410108_21',
-					duration: 5000,
+					text: '더 많은 쪽의 의견을 따르는 방식을 다수결이라고 해.',
+					voice: 'SSJ610216_24',
+					duration: 3200,
 					animation: {
 						type: 'f',
-						duration:4500
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][4]);
 					}
 				},
 				{
-					text: '땅의 높이가 높을수록 색이 진해진다는 점 잊지 마~!',
-					voice: 'SSJ410108_22',
-					duration: 7000,
+					text: '더 많은 쪽의 의견이 더 합리적일 것이라고 <br>가정하고 따르는 것이지.',
+					voice: 'SSJ610216_25',
+					duration: 4200,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:4200
 					},
 					endBack: function(){
-						win[namespace].currentStep = 1;
-						// win[namespace].pageBtnsStatus('abled', 'next');
-						// win[namespace].pageBtnsStatus('show', 'next');
+						win[namespace].askQuestion(win[namespace].speak[4][5]);
+					}
+				},
+				{
+					text: '하지만 다수결의 원칙을 따른다고 해서 항상 합리적인 것은 아니야.',
+					voice: 'SSJ610216_26',
+					duration: 4200,
+					animation: {
+						type: 'f',
+						duration:4200
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][6]);
+					}
+				},
+				{
+					text: '그리고 소수의 의견도 항상 존중해야 한다는 점도 <br>잊지 말아야 해.',
+					voice: 'SSJ610216_27',
+					duration: 5200,
+					animation: {
+						type: 'f',
+						duration:5200
+					},
+					endBack: function(){
 						
-						window.speakUp.goStep(2);
+						window.speakUp.goStep(3);
 					}
 				},
 			],
 			[
+				// idx 5
 				{
-					text: '이곳은 시장이네! 사람이 정말 많다.',
-					voice: 'SSJ410108_23',
-					duration: 5000,
+					text: '자, 여기는 국회 의사당이야. <br>우와~ 생각보다 크고 넓다~',
+					voice: 'SSJ610216_28',
+					duration: 5200,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:5200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][1]);
 					}
 				},
 				{
-					text: '이 시장처럼, 고장에는 군청이나 구청, 버스 터미널 등 사람들이 많이 모이는 곳이 있어. ',
-					voice: 'SSJ410108_24',
-					duration: 9000,
+					text: '국회 의사당에서는 국회 의원들이 모여 <br>주로 법을 만드는 일을 하고 있어.',
+					voice: 'SSJ610216_29',
+					duration: 5200,
 					animation: {
 						type: 'c',
-						duration:8500
+						duration:5200
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1062,9 +1040,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㅈㅅㅈ'],
-									['전시장', '중심지', '자서전'],
-									['중심지']
+									['ㅇㅂ'],
+									['안보', '왕벌', '입법'],
+									['입법']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[5][4])},
@@ -1075,36 +1053,36 @@
 					}
 				},
 				{ 
-					text: '사람들의 생활과 관련된 여러 시설이 모여 있는 곳을 무엇이라고 할까?',
-					voice: 'SSJ410108_25',
-					duration: 6000,
+					text: '법을 만드는 일을 뭐라고 하는지 아니?',
+					voice: 'SSJ610216_30',
+					duration: 3200,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
 				},
 				{
-					text: '사람들의 생활과 관련된 여러 시설이 모여 있는 곳을 중심지라고 해.',
-					voice: 'SSJ410108_26',
-					duration: 7000,
+					text: '법을 만드는 일을 입법이라고 해.',
+					voice: 'SSJ610216_31',
+					duration: 3200,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:3200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][4]);
 					}
 				},
 				{
-					text: '고장 사람들은 필요한 것을 구하거나 다양한 시설을<br>이용하기 위해 지역의 중심지를 방문하지.',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					text: '아하, 그래서 국회를 입법부라고도 부르는 거구나!',
+					voice: 'SSJ610216_32',
+					duration: 4200,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:4200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
@@ -1113,38 +1091,23 @@
 			],
 			[ // 6 - 0
 				{
-					text: '사실 내가 오늘 시장에 온 이유는,<br>시장에 대해 조사해 보기 위해서야.',
-					voice: 'SSJ410108_28',
-					duration: 7000,
+					text: '국가 기관에는 입법부 말고도 행정부와 사법부가 있어.',
+					voice: 'SSJ610216_33',
+					duration: 4200,
 					animation: {
 						type: 'c',
-						duration:7000
+						duration:4200
 					},
 					endBack: function(){
-						win[namespace].progressStatus('ing', 5);
-						win[namespace].askQuestion(
-							win[namespace].speak[6][1],
-							{
-								type: 'word',
-								answer: [
-									['ㄷㅅ'],
-									['독서', '도시', '답사'],
-									['답사']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][2])}
-								}
-							}
-						);
+						win[namespace].askQuestion(win[namespace].speak[6][1]);
 					}
 				},
 				{
-					text: '이와 같이 어떤 곳에 직접 찾아가 조사하는 것을<br>무엇이라고 할까?',
-					voice: 'SSJ410108_29',
+					text: '그런데, 국가 기관이 잘못된 결정을 내리거나 <br>독재를 하면 민주주의가 훼손되겠지?',
+					voice: 'SSJ610216_34',
 					duration: 6000,
 					animation: {
-						type: 'd',
+						type: 'c',
 						duration:6000
 					},
 					endBack: function(){
@@ -1152,36 +1115,75 @@
 					}
 				},
 				{
-					text: '어떤 곳에 직접 찾아가서 조사하는 것을 답사라고 해.',
-					voice: 'SSJ410108_30',
-					duration: 6000,
+					text: '그래서 국가 권력을 한 곳에 집중시키지 않고 나누어야 <br>그 권한을 마음대로 사용하지 못하게 막을 수 있대.',
+					voice: 'SSJ610216_35',
+					duration: 7000,
 					animation: {
-						type: 'f',
-						duration:5500
+						type: 'c',
+						duration:7000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 				{
-					text: '좋아! 답사를 통해 시장의 모습을 자세히 살펴보고,<br>결과를 정리한 후 발표하는 시간을 가져봐야겠어.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					text: '우리나라는 국가 권력을 국회, 정부, 법원이 나누어 맡아.',
+					voice: 'SSJ610216_36',
+					duration: 5000,
 					animation: {
-						type: 'f',
-						duration:8500
+						type: 'c',
+						duration:5000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][4]);
+						win[namespace].progressStatus('ing', 5);
+						win[namespace].askQuestion(
+							win[namespace].speak[6][4],
+							{
+								type: 'word',
+								answer: [
+									['ㅅㄱ ㅂㄹ'],
+									['성공 별로', '삼권 분립', '생기 발랄'],
+									['삼권 분립']
+								],
+								resultBack: {
+									right: function(){win[namespace].askQuestion(win[namespace].speak[6][6])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][5])}
+								}
+							}
+						);
 					}
 				},
 				{
-					text: '덕분에 사회 시간에 배운 내용을 완벽하게 정리한 것 같은데?',
-					voice: 'SSJ410108_32',
+					text: '이렇게 셋으로 국가 권력을 나누는 걸 뭐라고 하더라?',
+					voice: 'SSJ610216_37',
+					duration: 4000,
+					animation: {
+						type: 'd',
+						duration:4000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][5]);
+					}
+				},
+				{
+					text: '국가 권력을 셋으로 나누는 것을 삼권 분립, <br>또는 권력 분립이라고 해.',
+					voice: 'SSJ610216_38',
 					duration: 6000,
 					animation: {
-						type: 'c',
-						duration:5500
+						type: 'f',
+						duration:6000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][6]);
+					}
+				},
+				{
+					text: '삼권 분립을 통해 세 기관이 서로 견제하고 균형을 이룰 때 <br>국민의 자유와 권리가 지켜질 수 있겠지!',
+					voice: 'SSJ610216_39',
+					duration: 7200,
+					animation: {
+						type: 'f',
+						duration:7200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
@@ -1189,9 +1191,34 @@
 				}
 			],
 			[
+				// idx 7
 				{
-					text: '고마워! 그럼 다음에 또 만나자~ 안녕!',
-					voice: 'SSJ410108_33',
+					text: '와, 벌써 견학이 끝났네. 너무 아쉬워.',
+					voice: 'SSJ610216_40',
+					duration: 4000,
+					animation: {
+						type: 'c',
+						duration:4000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[7][1]);
+					}
+				},
+				{
+					text: '그래도 덕분에 6학년 1학기에서 배운 내용을 <br>재미있게 복습했어.',
+					voice: 'SSJ610216_41',
+					duration: 5000,
+					animation: {
+						type: 'c',
+						duration:4200
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[7][2]);
+					}
+				},
+				{
+					text: '그럼 다음에 또 만나자~',
+					voice: 'SSJ610216_42',
 					duration: 6000,
 					animation: {
 						type: 'b',
@@ -1199,9 +1226,6 @@
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;
-						// win[namespace].pageBtnsStatus('show');
-						// win[namespace].pageBtnsStatus('abled', 'prev');
-						// win[namespace].pageBtnsStatus('abled', 'next');
 						
 						externalManager.completeContents(); // 학습 완료
 

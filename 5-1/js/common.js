@@ -68,6 +68,7 @@
 			clearTimeout(win[namespace].willTimer);
 			document.querySelector('.question-area').style.display = 'none';
 			document.querySelector('.btn-voice').style.display = 'none';
+			var bgmStatus = win[namespace].currentBgmStatus.status;
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
@@ -80,7 +81,6 @@
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			}
 			win[namespace].setBgImg('bg_main'+targetStep);
-			var bgmStatus = win[namespace].currentBgmStatus.status;
 			if (bgmStatus !== 'play'){
 				win[namespace].soundStatus('stop', 'bgm');
 			}
@@ -204,7 +204,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 800;
+			script.duration += 1500;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -423,7 +423,7 @@
 						var timer = 0;
 						var selectedAnswer = false;
 						question.answer[1].forEach(function(item, index){
-							if (item === voiceText.reduceText.slice(0, reduceAnswerText.length)) {
+							if (item.replace(/(\s*)/g,'') === voiceText.reduceText.slice(0, reduceAnswerText.length)) {
 								$questionInner.querySelectorAll('span')[index].classList.add('selected');
 								timer = 1500;
 								selectedAnswer = index;
@@ -488,89 +488,6 @@
 					false
 				);
 			}
-
-			// } else if (question.type === 'ox') {
-			// 	// [QuizType2] O/X일 시
-			// 	$questionArea.innerHTML = '<div class="single"></div>';
-			// 	var $questionInner = $questionArea.querySelector('.single');
-			// 	var answerText = question.answer ? '인문적 조건' : '자연적 조건';
-
-			// 	setInitialAnswer(answerText, true);
-
-			// 	showQuestionArea();
-
-			// 	$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-			// 	$btnVoice.addEventListener('click', evtStartVoiceCheck);
-
-			// 	var guideVoiceTimer = setTimeout(function(){
-			// 		win[namespace].soundStatus('play', 'script', 'SSJ410108_14', function(){
-			// 			setTimeout(function(){
-			// 				$btnVoice.disabled = false;
-			// 			},5000)
-			// 		});
-			// 	}, script.duration);
-
-			// 	function evtStartVoiceCheck(){
-			// 		clearTimeout(guideVoiceTimer);
-			// 		$btnVoice.disabled = true;
-
-			// 		if (externalManager.isPlayer()) {
-			// 			window.HybridApp.startSilvySTTMode(7);
-			// 			window.HybridApp.onResultSTTMode = function(str) {
-			// 				voiceText = {text: str, reduceText: str.replace(/(\s*)/g,'')};
-			// 				startVoiceCheck(voiceText);
-			// 			} 
-			// 			window.HybridApp.onResultError = function() {
-			// 				voiceText = {text: '', reduceText: ''.replace(/(\s*)/g,'')};
-			// 				startVoiceCheck(voiceText);
-			// 			}
-			// 		} else {
-			// 			var promtText = prompt('text 입력') || '';
-			// 			voiceText = {text: promtText, reduceText: promtText.replace(/(\s*)/g,'')};
-			// 			startVoiceCheck(voiceText);
-			// 		}
-
-			// 		function startVoiceCheck() {
-			// 			if (voiceText.reduceText.slice(0, answerText.length) === answerText) {
-			// 				win[namespace].soundStatus('play', 'effect', 'right');
-			// 				win[namespace].progressStatus('right');
-			// 				setInitialAnswer(answerText);
-			// 				fnEndBack();
-			// 				$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-			// 				$questionInner.classList.add('right');
-			// 				setTimeout(function(){
-			// 					win[namespace].checkAnswerTry = 1;
-			// 					$questionArea.style.display='none';
-			// 					$btnVoice.style.display='none';
-			// 					!!resultBack && resultBack.right();
-			// 				}, 2000);
-			// 			} else {
-			// 				win[namespace].progressStatus('wrong');
-			// 				setInitialAnswer(voiceText.reduceText.slice(0, answerText.length));
-			// 				win[namespace].soundStatus('play', 'effect', 'wrong');
-			// 				$btnVoice.removeEventListener('click', evtStartVoiceCheck);
-			// 				win[namespace].soundStatus('stop', 'script');
-			// 				setTimeout(function(){
-			// 					var wrongIndex = win[namespace].getRandomInt(0, 2);
-			// 					win[namespace].setText(win[namespace].wrongScript[1][wrongIndex].text);
-			// 					win[namespace].wrongAnswer(
-			// 						win[namespace].wrongScript[1][wrongIndex], 
-			// 						function(){ 
-			// 							// !!resultBack && resultBack.wrong();
-			// 							win[namespace].checkAnswerTry = 1;
-			// 							$questionArea.style.display='none';
-			// 							$btnVoice.style.display='none';
-			// 							!!resultBack && resultBack.wrong();
-			// 						},
-			// 						true
-			// 					);
-			// 				}, 2000);
-			// 			}
-			// 		}
-			// 	}
-			// }
-
-			// 초성값 .single에 넣기
 			
 			function setInitialAnswer(initial, isTransparent) {
 				$questionArea.classList.remove('wide');
