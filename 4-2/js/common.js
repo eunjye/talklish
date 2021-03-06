@@ -74,7 +74,7 @@
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
-				win[namespace].askQuestion(win[namespace].speak[3][0]);
+				win[namespace].askQuestion(win[namespace].speak[4][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_02');
 			} else if (targetStep === 3){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -551,7 +551,6 @@
 			document.querySelector('#modalEnding').classList.remove('open');
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
-			// win[namespace].goStep(1);
 			win[namespace].setText(win[namespace].speak[0][0].text);
 			document.querySelector('.btn-audio').classList.remove('off');
 			
@@ -629,7 +628,7 @@
 		speak: [
 			[
 				{
-					text: '안녕? 난 천재초등학교에 6학년 우주라고 해.',
+					text: '안녕! 난 천재초등학교에 다니는 하늘이라고 해. <br>만나서 반가워.',
 					voice: 'SSJ410108_01',
 					duration:6000,
 					animation: {
@@ -641,7 +640,7 @@
 					}
 				},
 				{
-					text: '오늘은 우리나라의 경제에 대해 알아보자.',
+					text: '우리 고장의 문화유산에 대해 알아보기 위해 <br>답사를 하려고 하는데,',
 					voice: 'SSJ410108_02',
 					duration:2500,
 					animation: {
@@ -653,19 +652,7 @@
 					}
 				},
 				{
-					text: '경제, 말만 들어도 너무 어렵지? 사실 나도 그래. ',
-					voice: 'SSJ410108_02',
-					duration:2500,
-					animation: {
-						type: 'c',
-						duration: 2000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][0]);
-					}
-				},
-				{
-					text: '그래도 우리 생활에 아주 밀접하게 관련된 분야니까 <br>잘 알아둬야겠지?',
+					text: '내가 작성한 답사 계획서 같이 한번 봐줄래?',
 					voice: 'SSJ410108_02',
 					duration:2500,
 					animation: {
@@ -679,7 +666,7 @@
 			],
 			[
 				{
-					text: '가계는 생활에 필요한 물건과 서비스를 구매하고, <br>기업은 이를 통해 이윤을 얻게 돼.',
+					text: '어엇? 답사를 어디로 가는지에 대한 정보가 없잖아?',
 					voice: 'SSJ410108_03',
 					duration:5200,
 					animation: {
@@ -706,7 +693,7 @@
 					}
 				},
 				{
-					text: '이렇게 가계와 기업이 물건과 서비스를 거래하는 곳을 <br>뭐라고 할까?',
+					text: '답사를 가려는 곳이 어디인지 보여주려면, <br>어떤 항목을 추가해야 할까?',
 					voice: 'SSJ410108_03',
 					duration:5200,
 					animation: {
@@ -718,7 +705,7 @@
 					}
 				},
 				{
-					text: '시장에서 가계는 생활에 필요한 물건과 서비스를 구매하고, 기업은 이를 통해 이윤을 얻게 돼.',
+					text: '답사를 가려는 곳이 어디인지 보여주려면 <br>답사 장소 항목을 추가해야 해.',
 					voice: 'SSJ410108_06',
 					duration:6000,
 					animation: {
@@ -730,7 +717,7 @@
 					}
 				},
 				{
-					text: '우리나라는 자유로운 시장 거래를 보장하고 있어.',
+					text: '헤헷, 실수로 빠뜨렸네.<br>답사 장소에 대한 내용을 추가해야겠다.',
 					voice: 'SSJ410108_07',
 					duration:5800,
 					animation: {
@@ -744,19 +731,7 @@
 			],
 			[
 				{
-					text: '자신의 능력과 적성에 따라 자유롭게 <br>직업을 선택할 수도 있고,',
-					voice: 'SSJ410108_09',
-					duration:5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][1]);
-					}
-				},
-				{
-					text: '또, 기업은 이윤을 얻기 위해 자유롭게 <br>경제 활동을 할 수 있지.',
+					text: '이번엔 답사 방법 부분을 한번 볼까?',
 					voice: 'SSJ410108_09',
 					duration:5000,
 					animation: {
@@ -784,7 +759,7 @@
 					}
 				},
 				{
-					text: '우리나라 경제의 특징에는 자유 말고도 <br>한 가지가 더 있는데, 그게 뭘까?',
+					text: '사람을 직접 만나 질문하면서 문화유산을 조사하는 <br>방법이 있다고 하는데…그게 뭐더라?',
 					voice: 'SSJ410108_11',
 					duration:9000,
 					animation: {
@@ -796,7 +771,7 @@
 					}
 				},
 				{
-					text: '우리나라 경제의 특징은 자유와 경쟁이야.',
+					text: '사람을 직접 만나 질문하면서 <br>문화유산을 조사하는 방법을 면담이라고 해.',
 					voice: 'SSJ410108_11',
 					duration:9000,
 					animation: {
@@ -808,7 +783,7 @@
 					}
 				},
 				{
-					text: '개인은 더 좋은 일자리를 얻기 위해 경쟁하고, <br>기업은 더 많은 이윤을 얻기 위해 경쟁하게 돼.',
+					text: '\'면담하기\'를 답사 방법에 추가하는 것이 좋겠어!',
 					voice: 'SSJ410108_12',
 					duration:6000,
 					animation: {
@@ -819,47 +794,11 @@
 						win[namespace].askQuestion(win[namespace].speak[2][4]);
 					}
 				},
-				{
-					text: '개인과 기업의 자유로운 경쟁은 <br>국가 전체 경제 발전에 도움을 주게 되지.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						window.speakUp.goStep(2);
-					}
-				},
 			],
 			[
 				// idx 3
 				{
-					text: '이번에는 도시로 나가 보자. <br>우와~ 크고 멋진 건물들이 많다.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '우리나라는 6·25 전쟁을 겪고 나서 <br>경제적으로 상당한 어려움을 겪었대.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '그렇지만 지금은 이렇게 멋진 도시들이 많아질 정도로 <br>경제가 발전했지?',
+					text: '이제 주의할 점만 작성하면 돼.',
 					voice: 'SSJ410108_14',
 					duration: 5000,
 					animation: {
@@ -872,7 +811,7 @@
 							win[namespace].speak[1][2],
 							{
 								type: 'ox',
-								answer: '모든 사람',
+								answer: '안 돼',
 								guideDuration: 4500,
 								guideVoice: 'SSJ610216_06',
 								resultBack: {
@@ -884,7 +823,7 @@
 					}
 				},
 				{
-					text: '이렇게 한 나라가 경제적으로 발전하는 것을 뭐라고 할까?',
+					text: '답사를 할 때, 문화유산을 직접 만져봐도 괜찮을까?',
 					voice: 'SSJ410108_15',
 					duration: 4000,
 					animation: {
@@ -896,7 +835,7 @@
 					}
 				},
 				{
-					text: '한 나라가 경제적으로 발전하는 것을 경제 성장이라고 해.',
+					text: '문화유산을 함부로 만져서는 안 돼.',
 					voice: 'SSJ410108_16',
 					duration: 5000,
 					animation: {
@@ -908,7 +847,7 @@
 					}
 				},
 				{
-					text: '우리나라는 경제가 성장하면서 <br>산업 분야도 점점 다양해지고 발전하게 됐어.',
+					text: '그래. 문화유산을 함부로 만지지 않는다는 내용을 <br>주의할 점으로 적어야겠다.',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -917,16 +856,28 @@
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][0]);
+					}
+				},
+				{
+					text: '야호! 답사 계획서 완성~ 도와줘서 정말 고마워. ',
+					voice: 'SSJ410108_17',
+					duration: 5000,
+					animation: {
+						type: 'f',
+						duration:4800
+					},
+					endBack: function(){
+						window.speakUp.goStep(2);
 					}
 				},
 			],
 			[
 				{
-					text: '이렇게 경제가 성장하면서 우리나라는 <br>사회적으로도 크게 변화하게 됐지.',
+					text: '이번엔 현장 체험을 통해 <br>우리 지역의 역사적 인물을 조사해 볼 차례야.',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:4800
 					},
 					endBack: function(){
@@ -934,11 +885,23 @@
 					}
 				},
 				{
-					text: '특히 해외여행객도 증가하고, <br>우리 문화와 관련된 상품들이 외국에서 인기를 얻고 있어.',
+					text: '내가 어떤 인물을 조사해 보러 왔는지 한번 맞혀 볼래?',
+					voice: 'SSJ410108_17',
+					duration: 5000,
+					animation: {
+						type: 'd',
+						duration:4800
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][0]);
+					}
+				},
+				{
+					text: '오 저기 혼천의가 보인다! 헤헷, 이거 정말 큰 힌트인걸?',
 					voice: 'SSJ410108_18',
 					duration: 5000,
 					animation: {
-						type: 'c',
+						type: 'd',
 						duration:4500
 					},
 					endBack: function(){
@@ -961,7 +924,7 @@
 					}
 				},
 				{
-					text: '우리나라의 대중가요나 드라마 같은 문화가 <br>전 세계로 퍼지는 현상을 뭐라고 부를까?',
+					text: '혼천의, 앙부일구 등의 발명품을 만든 <br>조선 시대의 과학자가 누군지 아니?',
 					voice: 'SSJ410108_17',
 					duration: 5000,
 					animation: {
@@ -973,7 +936,7 @@
 					}
 				},
 				{
-					text: '우리 문화가 전 세계로 퍼지는 현상을 한류라고 해.',
+					text: '혼천의, 앙부일구 등의 발명품을 만든 <br>조선 시대의 과학자는 장영실이야.',
 					voice: 'SSJ410108_19',
 					duration: 7000,
 					animation: {
@@ -985,7 +948,7 @@
 					}
 				},
 				{
-					text: '한류를 즐기는 외국인이 급증하는 현상은 <br>경제 발전에 큰 기여를 하고 있대.',
+					text: '그래. 장영실이라는 인물에 대해 조사해 보려고 해.',
 					voice: 'SSJ410108_20',
 					duration: 7300,
 					animation: {
@@ -993,14 +956,13 @@
 						duration:7000
 					},
 					endBack: function(){
-						win[namespace].currentStep = 1;
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[5][0]);
 					}
 				},
 			],
 			[
 				{
-					text: '우와~ 여긴 항구야! <br>저기 보이는 것들은 배로 싣고 나르는 상자들인가 봐.',
+					text: '장영실은 원래 동래현에 소속된 노비였대.',
 					voice: 'SSJ410108_23',
 					duration: 5000,
 					animation: {
@@ -1012,36 +974,12 @@
 					}
 				},
 				{
-					text: '모두 어디로 가는 걸까? 다른 나라로 가는 걸까?',
+					text: '그런데 장영실의 스승으로 알려진 \'이천\'이라는 인물이 <br>왕에게 장영실을 인재로 추천했어.',
 					voice: 'SSJ410108_23',
 					duration: 5000,
 					animation: {
 						type: 'c',
 						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '수업 시간에 다른 나라와의 경제 교류에 대해 <br>배웠었는데,',
-					voice: 'SSJ410108_23',
-					duration: 5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '각 나라가 더 잘 만들 수 있는 상품을 생산하고, <br>이를 상호 교류하면 서로 경제적 이익이 생긴대.',
-					voice: 'SSJ410108_24',
-					duration: 9000,
-					animation: {
-						type: 'c',
-						duration:8500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1062,7 +1000,7 @@
 					}
 				},
 				{ 
-					text: '이렇게 나라 간에 물건과 서비스를 사고파는 것을 <br>뭐라고 그럴까?',
+					text: '신분이 낮은 장영실이 능력을 발휘할 수 있도록 <br>기회를 준 왕이 누구였더라?',
 					voice: 'SSJ410108_25',
 					duration: 6000,
 					animation: {
@@ -1074,7 +1012,7 @@
 					}
 				},
 				{
-					text: '나라와 나라 사이에 물건과 서비스를 사고파는 것을 <br>무역이라고 해.',
+					text: '신분이 낮은 장영실이 능력을 발휘할 수 있게 <br>기회를 준 왕은 세종 대왕이야.',
 					voice: 'SSJ410108_26',
 					duration: 7000,
 					animation: {
@@ -1086,7 +1024,19 @@
 					}
 				},
 				{
-					text: '무역을 할 때 다른 나라에 상품을 파는 것을 수출, <br>다른 나라에서 상품을 사 오는 것을 수입이라고 해.',
+					text: '이천과 세종 대왕이 장영실의 뛰어난 창의력과 <br>재주를 알아본 덕분에,',
+					voice: 'SSJ410108_27',
+					duration: 8000,
+					animation: {
+						type: 'f',
+						duration:7500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][0]);
+					}
+				},
+				{
+					text: '이렇게 멋진 발명품들이 만들어지게 된 것이겠지!',
 					voice: 'SSJ410108_27',
 					duration: 8000,
 					animation: {
@@ -1100,7 +1050,7 @@
 			],
 			[ // 6 - 0
 				{
-					text: '이렇게 무역을 하는 나라들은 서로 도움을 주고받지만 <br>동시에 경쟁 상대가 되기도 해.',
+					text: '자, 그럼 이제 장영실에 대해 알아본 내용을 <br>역할극으로 꾸며볼까?',
 					voice: 'SSJ410108_27',
 					duration: 8000,
 					animation: {
@@ -1112,7 +1062,19 @@
 					}
 				},
 				{
-					text: '그래서 무역을 하다 보면 문제가 발생하기도 하고, <br>서로 자기 나라 경제를 보호하려고 하지.',
+					text: '등장인물은 장영실, 세종 대왕, 이천, 백성들이야.',
+					voice: 'SSJ410108_27',
+					duration: 8000,
+					animation: {
+						type: 'c',
+						duration:7500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][0]);
+					}
+				},
+				{
+					text: '세종 대왕의 대사에 해시계인 앙부일구와 물시계를 만든 장영실을 칭찬하는 내용을 넣어야지.',
 					voice: 'SSJ410108_28',
 					duration: 7000,
 					animation: {
@@ -1139,7 +1101,7 @@
 					}
 				},
 				{
-					text: '자기 나라 경제를 보호하는 방법 중, 국외에서 수입하는 <br>물건에 부과하는 세금을 뭐라고 할까?',
+					text: '그런데, 장영실이 만든 물시계의 이름이 정확히 뭐더라?',
 					voice: 'SSJ410108_29',
 					duration: 6000,
 					animation: {
@@ -1151,7 +1113,7 @@
 					}
 				},
 				{
-					text: '국외에서 수입하는 물건에 부과하는 세금을 관세라고 해.',
+					text: '장영실이 만든 물시계의 이름은 자격루야.',
 					voice: 'SSJ410108_30',
 					duration: 6000,
 					animation: {
@@ -1163,7 +1125,7 @@
 					}
 				},
 				{
-					text: '관세는 자기 나라의 경제를 보호하는 수단이 될 수 있지만, 자유로운 무역을 방해하기도 해.',
+					text: '그래! 백성들이 앙부일구와 자격루로 <br>시간을 알 수 있게 되어 기쁘다는 대사까지 넣으면 완성!',
 					voice: 'SSJ410108_31',
 					duration: 9000,
 					animation: {
@@ -1175,7 +1137,7 @@
 					}
 				},
 				{
-					text: '그래서 서로 의존하는 나라끼리는 \'자유 무역 협정\'이라는 걸 맺어서 관세를 줄이거나 없애기도 하지.',
+					text: '친구들 앞에서 역할극을 멋지게 해낼 생각을 하니 <br>정말 신나!',
 					voice: 'SSJ410108_30',
 					duration: 6000,
 					animation: {
@@ -1189,7 +1151,7 @@
 			],
 			[
 				{
-					text: '벌써 한 학기 내용이 모두 끝났네.',
+					text: '덕분에 정말 알찬 하루를 보냈네.',
 					voice: 'SSJ410108_31',
 					duration: 9000,
 					animation: {
@@ -1201,19 +1163,7 @@
 					}
 				},
 				{
-					text: '나랑 같이 2단원 내용을 정리한 시간이 즐거웠길 바라.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
-					animation: {
-						type: 'f',
-						duration:8500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][0]);
-					}
-				},
-				{
-					text: '그럼 다음에 또 만나자~ 안녕!',
+					text: '그럼, 다음에 또 만나서 재밌게 놀자~! 안녕.',
 					voice: 'SSJ410108_33',
 					duration: 6000,
 					animation: {
