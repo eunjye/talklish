@@ -643,10 +643,10 @@
 				{
 					text: '만나서 반가워 친구야!',
 					voice: 'SSJ510118_02',
-					duration:2000,
+					duration:1600,
 					animation: {
 						type: 'b',
-						duration: 2000
+						duration: 1600
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -686,7 +686,7 @@
 				{
 					text: '우리나라 영토의 동쪽 끝에 있는 섬이야.',
 					voice: 'SSJ510118_04',
-					duration:4000,
+					duration:3200,
 					animation: {
 						type: 'd',
 						duration:3200
@@ -698,10 +698,10 @@
 				{
 					text: '우리나라 영토의 동쪽 끝에는 독도가 있지.',
 					voice: 'SSJ510118_05',
-					duration:4000,
+					duration:3700,
 					animation: {
 						type: 'f',
-						duration:4000
+						duration:3700
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
@@ -710,10 +710,10 @@
 				{
 					text: '독도는 경상북도 울릉군에 속해 있는 섬이야. ',
 					voice: 'SSJ510118_06',
-					duration:4000,
+					duration:3700,
 					animation: {
 						type: 'f',
-						duration:4000
+						duration:3700
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -725,10 +725,10 @@
 				{
 					text: '우리나라는 경상북도, 전라남도, 강원도 등으로<br>나뉘는 것 알고 있지?',
 					voice: 'SSJ510118_07',
-					duration:6000,
+					duration:5500,
 					animation: {
 						type: 'c',
-						duration:6000
+						duration:5500
 					},
 					endBack: function(){
 						// 여기서 박스 나타남
@@ -832,10 +832,10 @@
 				{
 					text: '이러한 산지와 하천 등 땅의 생김새를<br>무엇이라고 하는지 알고 있니?',
 					voice: 'SSJ510118_13',
-					duration: 5500,
+					duration: 5100,
 					animation: {
 						type: 'd',
-						duration:5500
+						duration:5100
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
@@ -883,10 +883,10 @@
 				{
 					text: '하늘이 흐리고 바람이 강한 걸 보니<br>곧 많은 비가 내릴 것 같아.',
 					voice: 'SSJ510118_17',
-					duration: 5500,
+					duration: 5000,
 					animation: {
 						type: 'c',
-						duration:5500
+						duration:5000
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
@@ -910,10 +910,10 @@
 				{
 					text: '적도 부근에서 발생해 이동하는 열대 저기압<br>때문이라던데, 무엇인지 알고 있어?',
 					voice: 'SSJ510118_18',
-					duration: 6500,
+					duration: 6200,
 					animation: {
 						type: 'd',
-						duration:6500
+						duration:6200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][3]);
@@ -991,10 +991,10 @@
 				{ 
 					text: '오늘날 인구 분포에는 자연적 조건과 인문적 조건 중<br>어느 것의 영향이 더 큰 걸까?',
 					voice: 'SSJ510118_23',
-					duration: 7500,
+					duration: 7000,
 					animation: {
 						type: 'd',
-						duration:12500
+						duration:13500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
@@ -1081,10 +1081,10 @@
 				{
 					text: '이렇게 통학, 통근 등 일상생활을 할 때<br>활동하는 범위를 무엇이라고 하더라?',
 					voice: 'SSJ510118_30',
-					duration: 6500,
+					duration: 6800,
 					animation: {
 						type: 'd',
-						duration:6500
+						duration:6800
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][4]);
@@ -1146,7 +1146,7 @@
 					duration: 4500,
 					animation: {
 						type: 'b',
-						duration:3000
+						duration:3700
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;

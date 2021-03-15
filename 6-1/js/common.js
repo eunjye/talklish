@@ -631,10 +631,10 @@
 				{
 					text: '안녕? 천재초등학교에 다니고 있는 바다라고 해!<br>만나서 반가워.',
 					voice: 'SSJ610216_01',
-					duration:6000,
+					duration:6500,
 					animation: {
 						type: 'b',
-						duration: 6000
+						duration: 6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
@@ -643,10 +643,10 @@
 				{
 					text: '모처럼의 견학인데 같이 재밌게 둘러보자.',
 					voice: 'SSJ610216_02',
-					duration:3500,
+					duration:3700,
 					animation: {
 						type: 'c',
-						duration: 3500
+						duration: 3700
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -658,10 +658,10 @@
 				{
 					text: '이곳은 5·18 민주 묘지야.<br>5·18 민주화 운동 때 희생되신 분들을 추모하는 곳이지.',
 					voice: 'SSJ610216_03',
-					duration:7200,
+					duration:7400,
 					animation: {
 						type: 'c',
-						duration: 7200
+						duration: 7400
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][1]);
@@ -696,10 +696,10 @@
 				{
 					text: '그런데, 전두환의 명에 따라 시위대를 진압한 군대를<br>뭐라고 하는지 아니?',
 					voice: 'SSJ610216_05',
-					duration:5500,
+					duration:5300,
 					animation: {
 						type: 'd',
-						duration:10000
+						duration:11500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
@@ -1210,7 +1210,7 @@
 					duration: 5000,
 					animation: {
 						type: 'c',
-						duration:4200
+						duration:4700
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][2]);
@@ -1219,10 +1219,10 @@
 				{
 					text: '그럼 다음에 또 만나자~',
 					voice: 'SSJ610216_42',
-					duration: 6000,
+					duration: 3000,
 					animation: {
 						type: 'b',
-						duration:5000
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;

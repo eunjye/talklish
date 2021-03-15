@@ -22,6 +22,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 	var _minHeight = 730;
 
 	var _dx = 370;
+	var _dy = 0;
 
 	switch (type)	{
 		case 'b':
@@ -36,6 +37,24 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		 _dx = 380;
 		 break;
 	}
+	
+	switch (type)	{
+		case 'b':
+		 _dy = 10;
+		 break;
+
+		 case 'c':
+		 _dy = 0;
+		 break;
+
+		 case 'd':
+			_dy = 10;
+			break;
+
+		 case 'e2':
+			_dy = 5;
+			break;
+	}
 
 	var _img = new Image();
 	_img.src = 'img/ani/'+type+'.png';
@@ -43,7 +62,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		_cvs.width = 1200;
 		_cvs.height = _minHeight;
 
-		_ctx.drawImage(_img, 0, 0, 700, _minHeight, _dx, 0, 700, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+		_ctx.drawImage(_img, 0, 0, 700, _minHeight, _dx, _dy, 700, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 		_cvs.classList = 'type-'+type;
 
 		!!callback && callback();
@@ -84,7 +103,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			function setBgAndTimer() {
 				var frameInfo = jsonSource.frames['character'+frame].frame;
 				_cvs.width = _cvs.width;
-				_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, 0, frameInfo.w, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+				_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, _dy, frameInfo.w, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 				window.speakUp.animationTimer = requestAnimationFrame(doAnimation)
 			}
 		}
@@ -105,7 +124,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			var frameInfo = jsonSource.frames['character'+frame].frame;
 
 			_cvs.width = _cvs.width;
-			_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, 0, frameInfo.w, _minHeight);
+			_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, _dy, frameInfo.w, _minHeight);
 		}
 
 		if (!!duration && duration !== 'infinite') {
