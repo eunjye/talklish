@@ -204,7 +204,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1500;
+			script.duration += 1000;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -938,7 +938,7 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄷㄱㅅ'],
+									['ㄷㅅㄱ'],
 									['도서관', '다수결', '대성공'],
 									['다수결']
 								],

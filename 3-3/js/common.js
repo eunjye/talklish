@@ -74,7 +74,7 @@
 				win[namespace].askQuestion(win[namespace].speak[0][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
-				win[namespace].askQuestion(win[namespace].speak[3][0]);
+				win[namespace].askQuestion(win[namespace].speak[4][0]);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_02');
 			} else if (targetStep === 3){
 				win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -204,7 +204,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1500;
+			script.duration += 1000;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -551,7 +551,6 @@
 			document.querySelector('#modalEnding').classList.remove('open');
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
-			// win[namespace].goStep(1);
 			win[namespace].setText(win[namespace].speak[0][0].text);
 			document.querySelector('.btn-audio').classList.remove('off');
 			
@@ -561,67 +560,67 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3g_ending_01',
+				voice: 'SSJ3b_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3g_ending_02',
+				voice: 'SSJ3b_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3g_ending_03',
+				voice: 'SSJ3b_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3g_ending_04',
+				voice: 'SSJ3b_ending_04',
 				duration: 4000
 			},
 		],
 		wrongScript: [
 			[
 				{
-					text: '다시 한번 생각해볼까?',
-					voice: 'SSJ3g_A_01',
+					text: '다시 한번 생각해보자!',
+					voice: 'SSJ3b_A_01',
 					duration: 3000
 				},
 				{
-					text: '조금 더 생각해볼까?',
-					voice: 'SSJ3g_A_02',
+					text: '조금 더 생각해보자!',
+					voice: 'SSJ3b_A_02',
 					duration: 3000
 				},
 				{
-					text: '한 번 더 생각해보자!',
-					voice: 'SSJ3g_A_03',
+					text: '한 번 더 생각해볼까?',
+					voice: 'SSJ3b_A_03',
 					duration: 3000
 				},
 				{
-					text: '글쎄, 한 번 더 생각해볼까?',
-					voice: 'SSJ3g_A_04',
+					text: '글쎄, 한 번 더 생각해봐!',
+					voice: 'SSJ3b_A_04',
 					duration: 4000
 				},
 				{
-					text: '아쉬워~ 한 번 더 생각해봐!',
-					voice: 'SSJ3g_A_05',
+					text: '아쉬워~ 한 번 더 생각해볼까?',
+					voice: 'SSJ3b_A_05',
 					duration: 4000
 				},
 			],
 			[
 				{
 					text: '아쉬워~ 내가 알려줄게!',
-					voice: 'SSJ3g_B_01',
+					voice: 'SSJ3b_B_01',
 					duration: 3000
 				},
 				{
 					text: '잘 모르겠다면 내가 설명해 줄게!',
-					voice: 'SSJ3g_B_02',
+					voice: 'SSJ3b_B_02',
 					duration: 4000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3g_B_03',
+					voice: 'SSJ3b_B_03',
 					duration: 4000
 				},
 			]
@@ -629,48 +628,24 @@
 		speak: [
 			[
 				{
-					text: '안녕? 난 천재초등학교에 6학년 우주라고 해.',
-					voice: 'SSJ410108_01',
-					duration:6000,
+					text: '안녕, 오랜만이다. 그동안 잘 지냈니?',
+					voice: 'SSJ310309_01',
+					duration:3800,
 					animation: {
 						type: 'b',
-						duration: 5500
+						duration: 3800
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
 					}
 				},
 				{
-					text: '오늘은 우리나라의 경제에 대해 알아보자.',
-					voice: 'SSJ410108_02',
-					duration:2500,
+					text: '오늘은 여행을 떠나보려고 해. 함께 가지 않을래?',
+					voice: 'SSJ310309_02',
+					duration:4500,
 					animation: {
 						type: 'c',
-						duration: 2000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[0][2]);
-					}
-				},
-				{
-					text: '경제, 말만 들어도 너무 어렵지? 사실 나도 그래. ',
-					voice: 'SSJ410108_02',
-					duration:2500,
-					animation: {
-						type: 'c',
-						duration: 2000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][0]);
-					}
-				},
-				{
-					text: '그래도 우리 생활에 아주 밀접하게 관련된 분야니까 <br>잘 알아둬야겠지?',
-					voice: 'SSJ410108_02',
-					duration:2500,
-					animation: {
-						type: 'c',
-						duration: 2000
+						duration: 4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -679,63 +654,77 @@
 			],
 			[
 				{
-					text: '가계는 생활에 필요한 물건과 서비스를 구매하고, <br>기업은 이를 통해 이윤을 얻게 돼.',
-					voice: 'SSJ410108_03',
-					duration:5200,
+					text: '우와! 기차가 들어오고 있어. KTX라고 적혀있네.',
+					voice: 'SSJ310309_03',
+					duration:5500,
 					animation: {
 						type: 'c',
-						duration: 4500
-					},
-					endBack: function(){
-						win[namespace].progressStatus('ing', 1);
-						win[namespace].askQuestion(
-							win[namespace].speak[2][2],
-							{
-								type: 'word',
-								answer: [
-									['ㅇㄱ'],
-									['인권', '여권', '왕권'],
-									['인권']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
-								}
-							}
-						);
-					}
-				},
-				{
-					text: '이렇게 가계와 기업이 물건과 서비스를 거래하는 곳을 <br>뭐라고 할까?',
-					voice: 'SSJ410108_03',
-					duration:5200,
-					animation: {
-						type: 'd',
-						duration: 4500
+						duration: 5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][1]);
 					}
 				},
 				{
-					text: '시장에서 가계는 생활에 필요한 물건과 서비스를 구매하고, 기업은 이를 통해 이윤을 얻게 돼.',
-					voice: 'SSJ410108_06',
-					duration:6000,
+					text: '우리나라 최초의 고속 열차야. ',
+					voice: 'SSJ310309_04',
+					duration:2500,
+					animation: {
+						type: 'c',
+						duration: 2500
+					},
+					endBack: function(){
+						win[namespace].progressStatus('ing', 1);
+						win[namespace].askQuestion(
+							win[namespace].speak[1][2],
+							{
+								type: 'ox',
+								answer: '줄어들었어',
+								guideDuration: 5500,
+								guideVoice: 'SSJ310309_06',
+								resultBack: {
+									right: function(){
+										win[namespace].askQuestion(win[namespace].speak[1][4])
+									},
+									wrong: function(){
+										win[namespace].askQuestion(win[namespace].speak[1][3])
+									}
+								}
+							}
+						);
+					}
+				},
+				{
+					text: '교통수단의 발달로 서울에서 부산까지 가는 데 <br>걸리는 시간은 어떻게 변하였을까?',
+					voice: 'SSJ310309_05',
+					duration:5500,
+					animation: {
+						type: 'd',
+						duration: 12000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][3]);
+					}
+				},
+				{
+					text: '교통수단의 발달로 서울에서 부산까지 가는 데 <br>걸리는 시간은 줄어들었어.',
+					voice: 'SSJ310309_07',
+					duration:6500,
 					animation: {
 						type: 'f',
-						duration:5800
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][4]);
 					}
 				},
 				{
-					text: '우리나라는 자유로운 시장 거래를 보장하고 있어.',
-					voice: 'SSJ410108_07',
-					duration:5800,
+					text: '2시간 40분 만에 서울에서 부산까지 갈 수 있다고 해. <br>정말 빠른걸?',
+					voice: 'SSJ310309_08',
+					duration:5500,
 					animation: {
 						type: 'f',
-						duration:5100
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -743,22 +732,23 @@
 				},
 			],
 			[
+				// idx 2
 				{
-					text: '자신의 능력과 적성에 따라 자유롭게 <br>직업을 선택할 수도 있고,',
-					voice: 'SSJ410108_09',
-					duration:5000,
+					text: '옛날에는 서울에서 부산까지 걸어가려면, <br>무려 30일이 걸렸다고 하는데…',
+					voice: 'SSJ310309_09',
+					duration:6500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][1]);
 					}
 				},
 				{
-					text: '또, 기업은 이윤을 얻기 위해 자유롭게 <br>경제 활동을 할 수 있지.',
-					voice: 'SSJ410108_09',
-					duration:5000,
+					text: '그렇다면 옛날 사람들은 어떤 교통수단을 사용했을까?',
+					voice: 'SSJ310309_10',
+					duration:4500,
 					animation: {
 						type: 'c',
 						duration:4500
@@ -771,9 +761,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㅂㄹ'],
-									['범례', '분류', '법령'],
-									['범례']
+									['ㄱㅁ'],
+									['건물', '가마', '골목'],
+									['가마']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
@@ -784,47 +774,139 @@
 					}
 				},
 				{
-					text: '우리나라 경제의 특징에는 자유 말고도 <br>한 가지가 더 있는데, 그게 뭘까?',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					text: '땅에서 사람이 이동할 때 사용했던, 여러 사람이 <br>함께 들고 가는 조그만 집 모양의 탈것이 뭐더라?',
+					voice: 'SSJ310309_11',
+					duration:7500,
 					animation: {
 						type: 'd',
-						duration:8500
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
 					}
 				},
 				{
-					text: '우리나라 경제의 특징은 자유와 경쟁이야.',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					text: '땅에서 사람이 이동할 때 사용했던, 여러 사람이 <br>함께 들고 가는 조그만 집 모양의 탈것을 가마라고 해.',
+					voice: 'SSJ310309_12',
+					duration:8500,
 					animation: {
 						type: 'f',
 						duration:8500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][3]);
-					}
-				},
-				{
-					text: '개인은 더 좋은 일자리를 얻기 위해 경쟁하고, <br>기업은 더 많은 이윤을 얻기 위해 경쟁하게 돼.',
-					voice: 'SSJ410108_12',
-					duration:6000,
-					animation: {
-						type: 'f',
-						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][4]);
 					}
 				},
 				{
-					text: '개인과 기업의 자유로운 경쟁은 <br>국가 전체 경제 발전에 도움을 주게 되지.',
-					voice: 'SSJ410108_13',
-					duration:4300,
+					text: '그래. 가마 말고도 말, 소달구지, 뗏목, 돛단배 등이 있어.',
+					voice: 'SSJ310309_13',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[2][5]);
+					}
+				},
+				{
+					text: '하지만 옛날의 교통수단은 여러 사람이 <br>함께 이용하기에 어렵고, ',
+					voice: 'SSJ310309_14',
+					duration:5500,
 					animation: {
 						type: 'f', 
+						duration:5500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][0]);
+					}
+				},
+			],
+			[
+				// idx 3
+				{
+					text: '많은 물건을 한 번에 옮기기도 어려워 불편했을 것 같아.',
+					voice: 'SSJ310309_15',
+					duration:4500,
+					animation: {
+						type: 'c', 
+						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][1]);
+					}
+				},
+				{
+					text: '반면에, 오늘날의 교통수단은 어떨까?',
+					voice: 'SSJ310309_16',
+					duration: 3500,
+					animation: {
+						type: 'c',
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].progressStatus('ing', 2);
+						win[namespace].askQuestion(
+							win[namespace].speak[3][2],
+							{
+								type: 'ox',
+								answer: '적게 받아',
+								guideDuration: 4500,
+								guideVoice: 'SSJ310309_18',
+								resultBack: {
+									right: function(){
+										win[namespace].askQuestion(win[namespace].speak[3][4])
+									},
+									wrong: function(){
+										win[namespace].askQuestion(win[namespace].speak[3][3])
+									}
+								}
+							}
+						);
+					}
+				},
+				{
+					text: '오늘날의 교통수단은 환경의 영향을 <br>많이 받을까? 적게 받을까?',
+					voice: 'SSJ310309_17',
+					duration: 4500,
+					animation: {
+						type: 'd',
+						duration:11000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][3]);
+					}
+				},
+				{
+					text: '오늘날의 교통수단은 환경의 영향을 적게 받아.',
+					voice: 'SSJ310309_19',
+					duration: 4500,
+					animation: {
+						type: 'f',
+						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
+					}
+				},
+				{
+					text: '기계의 힘을 이용해서, <br>먼 곳까지 빠르고 편리하게 이동할 수 있게 해줘.',
+					voice: 'SSJ310309_20',
+					duration: 5500,
+					animation: {
+						type: 'f',
+						duration:5500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][5]);
+					}
+				},
+				{
+					text: '지금 우리가 보고 있는 이 고속 열차처럼 말이야!',
+					voice: 'SSJ310309_21',
+					duration: 3500,
+					animation: {
+						type: 'f',
 						duration:3500
 					},
 					endBack: function(){
@@ -833,113 +915,13 @@
 				},
 			],
 			[
-				// idx 3
 				{
-					text: '이번에는 도시로 나가 보자. <br>우와~ 크고 멋진 건물들이 많다.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '우리나라는 6·25 전쟁을 겪고 나서 <br>경제적으로 상당한 어려움을 겪었대.',
-					voice: 'SSJ410108_13',
-					duration:4300,
-					animation: {
-						type: 'f', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-					}
-				},
-				{
-					text: '그렇지만 지금은 이렇게 멋진 도시들이 많아질 정도로 <br>경제가 발전했지?',
-					voice: 'SSJ410108_14',
-					duration: 5000,
+					text: '우와~여기가 어디게? 뒤에 보이는 이건 뭘까?',
+					voice: 'SSJ310309_22',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].progressStatus('ing', 2);
-						win[namespace].askQuestion(
-							win[namespace].speak[1][2],
-							{
-								type: 'ox',
-								answer: '모든 사람',
-								guideDuration: 4500,
-								guideVoice: 'SSJ610216_06',
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][3])}
-								}
-							}
-						);
-					}
-				},
-				{
-					text: '이렇게 한 나라가 경제적으로 발전하는 것을 뭐라고 할까?',
-					voice: 'SSJ410108_15',
-					duration: 4000,
-					animation: {
-						type: 'd',
-						duration:4000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][2]);
-					}
-				},
-				{
-					text: '한 나라가 경제적으로 발전하는 것을 경제 성장이라고 해.',
-					voice: 'SSJ410108_16',
-					duration: 5000,
-					animation: {
-						type: 'f',
-						duration:5000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][3]);
-					}
-				},
-				{
-					text: '우리나라는 경제가 성장하면서 <br>산업 분야도 점점 다양해지고 발전하게 됐어.',
-					voice: 'SSJ410108_17',
-					duration: 5000,
-					animation: {
-						type: 'f',
-						duration:4800
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
-					}
-				},
-			],
-			[
-				{
-					text: '이렇게 경제가 성장하면서 우리나라는 <br>사회적으로도 크게 변화하게 됐지.',
-					voice: 'SSJ410108_17',
-					duration: 5000,
-					animation: {
-						type: 'f',
-						duration:4800
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
-					}
-				},
-				{
-					text: '특히 해외여행객도 증가하고, <br>우리 문화와 관련된 상품들이 외국에서 인기를 얻고 있어.',
-					voice: 'SSJ410108_18',
-					duration: 5000,
-					animation: {
-						type: 'c',
-						duration:4500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
@@ -948,9 +930,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄷㄱㅅ'],
-									['등고선', '단계선', '등급선'],
-									['등고선']
+									['ㅂㅅ'],
+									['부산', '봉수', '밥솥'],
+									['봉수']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[4][3])},
@@ -961,87 +943,62 @@
 					}
 				},
 				{
-					text: '우리나라의 대중가요나 드라마 같은 문화가 <br>전 세계로 퍼지는 현상을 뭐라고 부를까?',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					text: '적이 쳐들어오거나 위급한 상황이 발생했을 때 <br>연기를 피워서 급한 일을 전달하였던 통신 수단이야.',
+					voice: 'SSJ310309_23',
+					duration: 8500,
 					animation: {
 						type: 'd',
-						duration:4800
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
-					}
-				},
-				{
-					text: '우리 문화가 전 세계로 퍼지는 현상을 한류라고 해.',
-					voice: 'SSJ410108_19',
-					duration: 7000,
-					animation: {
-						type: 'f',
-						duration:7000
+						duration:8500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][2]);
 					}
 				},
 				{
-					text: '한류를 즐기는 외국인이 급증하는 현상은 <br>경제 발전에 큰 기여를 하고 있대.',
-					voice: 'SSJ410108_20',
-					duration: 7300,
+					text: '적이 쳐들어오거나 위급한 상황이 발생했을 때 연기를 <br>피워 급한 일을 전달하였던 통신 수단을 봉수라고 해.',
+					voice: 'SSJ310309_24',
+					duration: 8500,
 					animation: {
 						type: 'f',
-						duration:7000
+						duration:8500
 					},
 					endBack: function(){
-						win[namespace].currentStep = 1;
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[4][3]);
+					}
+				},
+				{
+					text: '봉수대를 실제로 보니 정말 신기해.',
+					voice: 'SSJ310309_25',
+					duration: 3500,
+					animation: {
+						type: 'f',
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[5][0]);
 					}
 				},
 			],
 			[
 				{
-					text: '우와~ 여긴 항구야! <br>저기 보이는 것들은 배로 싣고 나르는 상자들인가 봐.',
-					voice: 'SSJ410108_23',
-					duration: 5000,
+					text: '그런데, 통신 수단도 계속해서 발전해 왔다는 점, <br>알고 있지?',
+					voice: 'SSJ310309_26',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][1]);
 					}
 				},
 				{
-					text: '모두 어디로 가는 걸까? 다른 나라로 가는 걸까?',
-					voice: 'SSJ410108_23',
-					duration: 5000,
+					text: '오늘날의 통신 수단에는 어떤 것들이 있을까?',
+					voice: 'SSJ310309_27',
+					duration: 3500,
 					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '수업 시간에 다른 나라와의 경제 교류에 대해 <br>배웠었는데,',
-					voice: 'SSJ410108_23',
-					duration: 5000,
-					animation: {
-						type: 'c',
-						duration:4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{
-					text: '각 나라가 더 잘 만들 수 있는 상품을 생산하고, <br>이를 상호 교류하면 서로 경제적 이익이 생긴대.',
-					voice: 'SSJ410108_24',
-					duration: 9000,
-					animation: {
-						type: 'c',
-						duration:8500
+						type: 'd',
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1049,9 +1006,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㅈㅅㅈ'],
-									['전시장', '중심지', '자서전'],
-									['중심지']
+									['ㅌㄹㅂㅈ'],
+									['텔레바지', '텔레비전', '트랙비전'],
+									['텔레비전']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[5][4])},
@@ -1062,21 +1019,21 @@
 					}
 				},
 				{ 
-					text: '이렇게 나라 간에 물건과 서비스를 사고파는 것을 <br>뭐라고 그럴까?',
-					voice: 'SSJ410108_25',
-					duration: 6000,
+					text: '운동 경기, 뉴스 등을 시청할 때 사용하는 <br>오늘날의 통신 수단이 뭐더라?',
+					voice: 'SSJ310309_28',
+					duration: 5500,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
 				},
 				{
-					text: '나라와 나라 사이에 물건과 서비스를 사고파는 것을 <br>무역이라고 해.',
-					voice: 'SSJ410108_26',
-					duration: 7000,
+					text: '운동 경기, 뉴스 등을 시청할 때 사용하는 <br>오늘날의 통신 수단은 텔레비전이야. ',
+					voice: 'SSJ310309_29',
+					duration: 6500,
 					animation: {
 						type: 'f',
 						duration:6500
@@ -1086,12 +1043,24 @@
 					}
 				},
 				{
-					text: '무역을 할 때 다른 나라에 상품을 파는 것을 수출, <br>다른 나라에서 상품을 사 오는 것을 수입이라고 해.',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					text: '나도 텔레비전 보는 걸 참 좋아하는데, 헤헷!',
+					voice: 'SSJ310309_30',
+					duration: 4500,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[5][5]);
+					}
+				},
+				{
+					text: '휴대 전화, 전자 우편 등도 오늘날의 통신 수단이지.',
+					voice: 'SSJ310309_31',
+					duration: 4500,
+					animation: {
+						type: 'f',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
@@ -1100,24 +1069,12 @@
 			],
 			[ // 6 - 0
 				{
-					text: '이렇게 무역을 하는 나라들은 서로 도움을 주고받지만 <br>동시에 경쟁 상대가 되기도 해.',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					text: '그런데, 장소나 하는 일에 따라서도 <br>통신 수단의 이용 모습이 달라진다고 하네?',
+					voice: 'SSJ310309_32',
+					duration: 6500,
 					animation: {
 						type: 'c',
-						duration:7500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][0]);
-					}
-				},
-				{
-					text: '그래서 무역을 하다 보면 문제가 발생하기도 하고, <br>서로 자기 나라 경제를 보호하려고 하지.',
-					voice: 'SSJ410108_28',
-					duration: 7000,
-					animation: {
-						type: 'c',
-						duration:7000
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
@@ -1126,9 +1083,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄷㅅ'],
-									['독서', '도시', '답사'],
-									['답사']
+									['ㅅㅅㅎ'],
+									['수신호', '식생활', '산수화'],
+									['수신호']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
@@ -1139,86 +1096,86 @@
 					}
 				},
 				{
-					text: '자기 나라 경제를 보호하는 방법 중, 국외에서 수입하는 <br>물건에 부과하는 세금을 뭐라고 할까?',
-					voice: 'SSJ410108_29',
-					duration: 6000,
+					text: '물속에서 의사소통을 하기 위해 무엇을 사용할까?',
+					voice: 'SSJ310309_33',
+					duration: 3500,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][2]);
 					}
 				},
 				{
-					text: '국외에서 수입하는 물건에 부과하는 세금을 관세라고 해.',
-					voice: 'SSJ410108_30',
-					duration: 6000,
+					text: '물속에서 의사소통을 할 때는 수신호를 사용해.',
+					voice: 'SSJ310309_34',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 				{
-					text: '관세는 자기 나라의 경제를 보호하는 수단이 될 수 있지만, 자유로운 무역을 방해하기도 해.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					text: '물속이라 말을 할 수 없는 상황에서도 <br>수신호를 통한 통신이 가능하구나!',
+					voice: 'SSJ310309_35',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][4]);
+					}
+				},
+				{
+					text: '우와! 통신 수단의 종류는 정말 다양한 것 같아.',
+					voice: 'SSJ310309_36',
+					duration: 4500,
+					animation: {
+						type: 'f',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
-					}
-				},
-				{
-					text: '그래서 서로 의존하는 나라끼리는 \'자유 무역 협정\'이라는 걸 맺어서 관세를 줄이거나 없애기도 하지.',
-					voice: 'SSJ410108_30',
-					duration: 6000,
-					animation: {
-						type: 'f',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 			],
 			[
 				{
-					text: '벌써 한 학기 내용이 모두 끝났네.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					text: '이제 집으로 돌아가 봐야 할 시간이네.',
+					voice: 'SSJ310309_37',
+					duration: 2500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:2500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][0]);
+						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
 				},
 				{
-					text: '나랑 같이 2단원 내용을 정리한 시간이 즐거웠길 바라.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					text: '사회 시간에 배운 내용들도 정리하고, <br>정말 즐거운 여행이었던 것 같아.',
+					voice: 'SSJ310309_38',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][0]);
+						win[namespace].askQuestion(win[namespace].speak[7][2]);
 					}
 				},
 				{
-					text: '그럼 다음에 또 만나자~ 안녕!',
-					voice: 'SSJ410108_33',
-					duration: 6000,
+					text: '함께해줘서 정말 고마워. 그럼 다음에 또 만나자!',
+					voice: 'SSJ310309_39',
+					duration: 5500,
 					animation: {
 						type: 'b',
-						duration:5000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;

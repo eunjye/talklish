@@ -204,7 +204,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1500;
+			script.duration += 1000;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -551,7 +551,6 @@
 			document.querySelector('#modalEnding').classList.remove('open');
 			win[namespace].introAnimation();
 			win[namespace].goPage(0);
-			// win[namespace].goStep(1);
 			win[namespace].setText(win[namespace].speak[0][0].text);
 			document.querySelector('.btn-audio').classList.remove('off');
 			
@@ -630,8 +629,8 @@
 			[
 				{
 					text: '안녕? 난 천재초등학교 3학년 2반 노을이라고 해. <br>반가워!',
-					voice: 'SSJ410108_01',
-					duration:6000,
+					voice: 'SSJ310208_01',
+					duration:5500,
 					animation: {
 						type: 'b',
 						duration: 5500
@@ -642,11 +641,11 @@
 				},
 				{
 					text: '선생님께서 옛이야기와 자연환경 모습에서 유래한 <br>고장의 지명에 대해 알아보라는 숙제를 내셨어.',
-					voice: 'SSJ410108_02',
-					duration:2500,
+					voice: 'SSJ310208_02',
+					duration:7500,
 					animation: {
 						type: 'c',
-						duration: 2000
+						duration: 7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][2]);
@@ -654,11 +653,11 @@
 				},
 				{
 					text: '우리 같이 한번 살펴보지 않을래?',
-					voice: 'SSJ410108_02',
+					voice: 'SSJ310208_03',
 					duration:2500,
 					animation: {
 						type: 'c',
-						duration: 2000
+						duration: 2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -668,26 +667,26 @@
 			[
 				{
 					text: '그럼 첫 번째 질문이야.',
-					voice: 'SSJ410108_03',
-					duration:5200,
+					voice: 'SSJ310208_04',
+					duration:2500,
 					animation: {
 						type: 'c',
-						duration: 4500
+						duration: 2500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
-							win[namespace].speak[2][2],
+							win[namespace].speak[1][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅇㄱ'],
-									['인권', '여권', '왕권'],
-									['인권']
+									['ㅍㅁㄱ'],
+									['포마골', '풀무골', '피맛골'],
+									['피맛골']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[1][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][2])}
 								}
 							}
 						);
@@ -695,35 +694,35 @@
 				},
 				{
 					text: '양반들의 말을 피해 백성들이 편하게 다니도록 만든 <br>좁은 길이라는 뜻을 가진 곳의 이름이 뭐더라?',
-					voice: 'SSJ410108_03',
-					duration:5200,
+					voice: 'SSJ310208_05',
+					duration:6500,
 					animation: {
 						type: 'd',
-						duration: 4500
+						duration: 6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][1]);
+						win[namespace].askQuestion(win[namespace].speak[1][2]);
 					}
 				},
 				{
 					text: '양반들의 말을 피해 백성들이 편하게 다니기 위해 만든 <br>좁은 길의 이름은 피맛골이야.',
-					voice: 'SSJ410108_06',
-					duration:6000,
+					voice: 'SSJ310208_06',
+					duration:6500,
 					animation: {
 						type: 'f',
-						duration:5800
+						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][4]);
+						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
 				},
 				{
 					text: '\'말\'을 \'피\'하는 \'골\'목이라는 뜻에서 <br>피맛골이라는 이름이 붙었다고 하네?',
-					voice: 'SSJ410108_07',
-					duration:5800,
+					voice: 'SSJ310208_07',
+					duration:5500,
 					animation: {
 						type: 'f',
-						duration:5100
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -733,27 +732,27 @@
 			[
 				{
 					text: '자 이제 다음 문제야!',
-					voice: 'SSJ410108_09',
-					duration:5000,
+					voice: 'SSJ310208_08',
+					duration:2500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:2500
 					},
 					endBack: function(){
 						// 여기서 박스 나타남
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
-							win[namespace].speak[2][2],
+							win[namespace].speak[2][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅂㄹ'],
-									['범례', '분류', '법령'],
-									['범례']
+									['ㄷㅁㅁㄹ'],
+									['동무머리', '두물머리', '도망머리'],
+									['두물머리']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[2][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][2])}
 								}
 							}
 						);
@@ -761,23 +760,23 @@
 				},
 				{
 					text: '북한강과 남한강의 두 물줄기가 만나는 곳이라는 <br>뜻을 가진 곳을 뭐라고 부르더라?',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					voice: 'SSJ310208_09',
+					duration:5500,
 					animation: {
 						type: 'd',
-						duration:8500
+						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][3]);
+						win[namespace].askQuestion(win[namespace].speak[2][2]);
 					}
 				},
 				{
-					text: '북한강과 남한강의 두 물줄기가 만나는 곳은 <br>두물머리라고 해.',
-					voice: 'SSJ410108_11',
-					duration:9000,
+					text: '북한강과 남한강의 두 물줄기가 만나는 곳을 <br>두물머리라고 해.',
+					voice: 'SSJ310208_10',
+					duration:4500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][3]);
@@ -785,11 +784,11 @@
 				},
 				{
 					text: '두물머리, 정말 재미있는 이름이네. <br>언제 한번 꼭 가보고 싶은걸?',
-					voice: 'SSJ410108_12',
-					duration:6000,
+					voice: 'SSJ310208_11',
+					duration:7500,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][0]);
@@ -800,24 +799,26 @@
 				// idx 3
 				{
 					text: '이제 마지막 문제만 남았네.',
-					voice: 'SSJ410108_14',
-					duration: 5000,
+					voice: 'SSJ310208_12',
+					duration: 2500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
 						win[namespace].askQuestion(
-							win[namespace].speak[1][2],
+							win[namespace].speak[3][1],
 							{
-								type: 'ox',
-								answer: '모든 사람',
-								guideDuration: 4500,
-								guideVoice: 'SSJ610216_06',
+								type: 'word',
+								answer: [
+									['ㅁㅈㄱㄹ'],
+									['말죽거리', '민족거리', '모자거리'],
+									['말죽거리']
+								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][2])}
 								}
 							}
 						);
@@ -825,11 +826,11 @@
 				},
 				{
 					text: '서울을 오가는 사람들이 말에게 죽을 끓여 먹인 곳이라...<br>이곳은 어디일까?',
-					voice: 'SSJ410108_15',
-					duration: 4000,
+					voice: 'SSJ310208_13',
+					duration: 6500,
 					animation: {
 						type: 'd',
-						duration:4000
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][2]);
@@ -837,11 +838,11 @@
 				},
 				{
 					text: '서울을 오가는 사람들이 말에게 죽을 끓여 <br>먹인 곳의 이름은 말죽거리야.',
-					voice: 'SSJ410108_16',
-					duration: 5000,
+					voice: 'SSJ310208_14',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:5000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
@@ -849,23 +850,23 @@
 				},
 				{
 					text: '말죽거리라는 이름에 이러한 유래가 있었구나.',
-					voice: 'SSJ410108_16',
-					duration: 5000,
+					voice: 'SSJ310208_15',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:5000
+						duration:3500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][3]);
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
 					}
 				},
 				{
 					text: '벌써 숙제를 다 했네? <br>야호! 그럼 이제 밖으로 나가보자고~!',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					voice: 'SSJ310208_16',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:4800
+						duration:6500
 					},
 					endBack: function(){
 						window.speakUp.goStep(2);
@@ -875,38 +876,38 @@
 			[
 				{
 					text: '짜잔! 여긴 경상북도 경주야.',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					voice: 'SSJ310208_17',
+					duration: 3500,
 					animation: {
-						type: 'f',
-						duration:4800
+						type: 'c',
+						duration:3500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
+						win[namespace].askQuestion(win[namespace].speak[4][1]);
 					}
 				},
 				{
 					text: '이곳을 둘러보기 전에, 내가 문제 하나 낼게.',
-					voice: 'SSJ410108_18',
-					duration: 5000,
+					voice: 'SSJ310208_18',
+					duration: 3500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(
-							win[namespace].speak[4][1],
+							win[namespace].speak[4][2],
 							{
 								type: 'word',
 								answer: [
-									['ㄷㄱㅅ'],
-									['등고선', '단계선', '등급선'],
-									['등고선']
+									['ㅁㅎㅇㅅ'],
+									['문화유산', '만화예술', '모형음식'],
+									['문화유산']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][3])}
 								}
 							}
 						);
@@ -914,35 +915,35 @@
 				},
 				{
 					text: '우리 조상 대대로 전해 내려온 문화 중에서 다음 세대에 <br>물려줄 만한 가치가 있는 것을 뭐라고 하는지 아니?',
-					voice: 'SSJ410108_17',
-					duration: 5000,
+					voice: 'SSJ310208_19',
+					duration: 7500,
 					animation: {
 						type: 'd',
-						duration:4800
+						duration:7500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
+						win[namespace].askQuestion(win[namespace].speak[4][3]);
 					}
 				},
 				{
 					text: '우리 조상 대대로 전해 내려온 문화 중에서 다음 세대에 <br>물려줄 만한 가치가 있는 것을 문화유산이라고 해.',
-					voice: 'SSJ410108_19',
-					duration: 7000,
+					voice: 'SSJ310208_20',
+					duration: 7500,
 					animation: {
 						type: 'f',
-						duration:7000
+						duration:7500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][2]);
+						win[namespace].askQuestion(win[namespace].speak[4][4]);
 					}
 				},
 				{
 					text: '이곳 경주에서는 우리 조상들의 생활 모습, 슬기와 멋을 <br>알게 해 주는 문화유산을 많이 찾아볼 수가 있어.',
-					voice: 'SSJ410108_20',
-					duration: 7300,
+					voice: 'SSJ310208_21',
+					duration: 8500,
 					animation: {
 						type: 'f',
-						duration:7000
+						duration:8500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -952,25 +953,25 @@
 			[
 				{
 					text: '저 뒤에, 우리나라를 대표하는 문화유산 중 <br>하나가 보인다!',
-					voice: 'SSJ410108_23',
-					duration: 5000,
+					voice: 'SSJ310208_22',
+					duration: 4500,
 					animation: {
 						type: 'c',
 						duration:4500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
-						win[namespace].askQuestion(win[namespace].speak[5][2],
+						win[namespace].askQuestion(win[namespace].speak[5][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅈㅅㅈ'],
-									['전시장', '중심지', '자서전'],
-									['중심지']
+									['ㅊㅅㄷ'],
+									['첨성대', '초승달', '칠성도'],
+									['첨성대']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[5][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[5][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][2])}
 								}
 							}
 						);
@@ -978,32 +979,32 @@
 				},
 				{ 
 					text: '하늘의 별을 관찰하고 연구하던 시설인 <br>이 문화유산의 이름이 뭘까?',
-					voice: 'SSJ410108_25',
-					duration: 6000,
+					voice: 'SSJ310208_23',
+					duration: 4500,
 					animation: {
 						type: 'd',
-						duration:6000
+						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[5][2]);
+					}
+				},
+				{
+					text: '하늘의 별을 관찰하고 연구하던 시설인 <br>이 문화유산의 이름은 첨성대야.',
+					voice: 'SSJ310208_24',
+					duration: 5500,
+					animation: {
+						type: 'f',
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
 				},
 				{
-					text: '하늘의 별을 관찰하고 연구하던 시설인 <br>이 문화유산의 이름은 첨성대야.',
-					voice: 'SSJ410108_26',
-					duration: 7000,
-					animation: {
-						type: 'f',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][4]);
-					}
-				},
-				{
 					text: '첨성대는 신라 시대의 천문 관측대인데, <br>옛날에도 별을 관찰하고 기록했음을 알 수 있게 해줘.',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					voice: 'SSJ310208_25',
+					duration: 7500,
 					animation: {
 						type: 'f',
 						duration:7500
@@ -1016,8 +1017,8 @@
 			[ // 6 - 0
 				{
 					text: '그런데, 선생님께서 문화유산에는 <br>유형 문화유산과 무형 문화유산이 있다고 그러셨는데…',
-					voice: 'SSJ410108_27',
-					duration: 8000,
+					voice: 'SSJ310208_26',
+					duration: 7500,
 					animation: {
 						type: 'c',
 						duration:7500
@@ -1025,15 +1026,19 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
 						win[namespace].askQuestion(
-							win[namespace].speak[1][2],
+							win[namespace].speak[6][1],
 							{
 								type: 'ox',
-								answer: '모든 사람',
+								answer: '유형',
 								guideDuration: 4500,
-								guideVoice: 'SSJ610216_06',
+								guideVoice: 'SSJ310208_28',
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][3])}
+									right: function(){
+										win[namespace].askQuestion(win[namespace].speak[6][3])
+									},
+									wrong: function(){
+										win[namespace].askQuestion(win[namespace].speak[6][2])
+									}
 								}
 							}
 						);
@@ -1041,11 +1046,11 @@
 				},
 				{
 					text: '첨성대는 유형 문화유산일까, 무형 문화유산일까?',
-					voice: 'SSJ410108_28',
-					duration: 7000,
+					voice: 'SSJ310208_27',
+					duration: 4500,
 					animation: {
 						type: 'd',
-						duration:7000
+						duration:9500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][2]);
@@ -1053,35 +1058,35 @@
 				},
 				{
 					text: '첨성대는 유형 문화유산이야.',
-					voice: 'SSJ410108_29',
-					duration: 6000,
+					voice: 'SSJ310208_29',
+					duration: 2500,
 					animation: {
 						type: 'f',
-						duration:6000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][2]);
-					}
-				},
-				{
-					text: '유형 문화유산은 형태가 있는 <br>건축물, 공예품, 과학 발명품 등이고,',
-					voice: 'SSJ410108_30',
-					duration: 6000,
-					animation: {
-						type: 'f',
-						duration:5500
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 				{
-					text: '무형 문화유산은 형태가 없는 <br>예술 활동, 기술 등을 의미해.',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					text: '유형 문화유산은 형태가 있는 <br>건축물, 공예품, 과학 발명품 등이고,',
+					voice: 'SSJ310208_30',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][4]);
+					}
+				},
+				{
+					text: '무형 문화유산은 형태가 없는 <br>예술 활동, 기술 등을 의미해.',
+					voice: 'SSJ310208_31',
+					duration: 5500,
+					animation: {
+						type: 'f',
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
@@ -1091,35 +1096,35 @@
 			[
 				{
 					text: '앗, 벌써 집에 돌아가야 할 시간이네. <br>시간 가는 줄 몰랐어!',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					voice: 'SSJ310208_32',
+					duration: 4500,
 					animation: {
-						type: 'f',
-						duration:8500
+						type: 'c',
+						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][0]);
+						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
 				},
 				{
 					text: '사회 공부가 이렇게 재밌는지 몰랐는걸?',
-					voice: 'SSJ410108_31',
-					duration: 9000,
+					voice: 'SSJ310208_33',
+					duration: 3500,
 					animation: {
-						type: 'f',
-						duration:8500
+						type: 'c',
+						duration:3500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][0]);
+						win[namespace].askQuestion(win[namespace].speak[7][2]);
 					}
 				},
 				{
 					text: '오늘 이야기 나눈 내용 잊어버리지 않길 바라~! <br>그럼 다음에 또 만나.',
-					voice: 'SSJ410108_33',
-					duration: 6000,
+					voice: 'SSJ310208_34',
+					duration: 7000,
 					animation: {
 						type: 'b',
-						duration:5000
+						duration:6000
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;
