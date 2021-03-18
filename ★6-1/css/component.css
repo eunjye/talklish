@@ -129,7 +129,7 @@ ul.bul-dot > li { color:#454545; margin-top:8px; padding-left:16px; font-size:18
 .txt-script span { position:absolute; top:50%; left:50%; width:100%; display:block; transform:translate(-50%, -50%); padding:1vw 4vw; color:#fff; font-size:2.5vw; text-align:center; letter-spacing:-0.08vw; word-break:keep-all; }
 
 .img-character { display:none; position:absolute; left:0; bottom:0; width:1200px; height:700px; text-align:center; overflow:hidden; }
-.img-character canvas { position:absolute; left:0; bottom:-100px; }
+.img-character canvas { position:absolute; left:0; bottom:-70px; }
 .img-character canvas.type-e2 { bottom:-70px; }
 /* .img-character.type-b { left:46.5%; background:url('../img/ani/b.png') 0 0/5500px 4500px; }
 .img-character.type-c { background:url('../img/ani/c.png') 0 0/5500px 5000px; }

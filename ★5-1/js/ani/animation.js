@@ -22,7 +22,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 	var _minHeight = 730;
 
 	var _dx = 370;
-	var _dy = 0;
+	var _dy = 30;
 
 	switch (type)	{
 		case 'b':
@@ -30,31 +30,37 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		 break;
 
 		case 'd':
-		 _dx = 270;
+		 _dx = 260;
 		 break;
 
 		case 'f':
 		 _dx = 380;
 		 break;
+
+		case 'e1':
+		 _dx = 390;
+		 break;
 	}
 	
 	switch (type)	{
 		case 'b':
-		 _dy = 10;
+		 _dy = 40;
 		 break;
 
-		 case 'c':
-		 _dy = 0;
-		 break;
+		//  case 'c':
+		//  _dy = 10;
+		//  break;
 
 		 case 'd':
-			_dy = 10;
+			_dy = 40;
 			break;
 
 		 case 'e2':
-			_dy = 5;
+			_dy = 0;
 			break;
 	}
+
+	_dx += 40;
 
 	var _img = new Image();
 	_img.src = 'img/ani/'+type+'.png';

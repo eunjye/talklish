@@ -378,6 +378,8 @@
 						setInitialAnswer(voiceText.reduceText.slice(0, reduceAnswerText.length));
 						setTimeout(function(){
 							if (question.type === 'ox') {
+								win[namespace].progressStatus('wrong');
+								$btnVoice.removeEventListener('click', evtStartVoiceCheck);
 								lastWrongAnswer();
 								return;
 							} else {
@@ -482,6 +484,9 @@
 				win[namespace].wrongAnswer(
 					win[namespace].wrongScript[1][wrongIndex], 
 					function(){ 
+						win[namespace].checkAnswerTry = 1;
+						$questionArea.style.display='none';
+						$btnVoice.style.display='none';
 						!!resultBack && resultBack.wrong();
 						fnEndBack();
 					},
