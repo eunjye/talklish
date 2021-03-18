@@ -26,7 +26,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 	switch (type)	{
 		case 'b':
-		 _dx = 220;
+		 _dx = 240;
 		 break;
 
 		case 'd':
@@ -64,6 +64,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		 break;
 	}
 
+	_dx += 20;
 	var _img = new Image();
 	_img.src = 'img/ani/'+type+'.png';
 	_img.onload = function(e) {
