@@ -21,25 +21,44 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 	var _maxFrame = 30;
 	var _minHeight = 604;
 
-	var _dx = 0;
+	var _dx = 360;
+	var _dy = 10;
 
 	switch (type)	{
 		case 'b':
-		 _dx = -45;
-		 break;
+		_dx = 315;
+		break;
+
+	case 'd':
+		_dx = 340;
+		break;
+
+	case 'e2':
+		_dx = 340;
+		break;
 
 		case 'f':
-		 _dx = 80;
-		 break;
+		_dx = 420;
+		break;
+	}
+
+	switch (type)	{
+		case 'f':
+		_dy = 0;
+		break;
+
+		case 'b':
+		_dy = 20;
+		break;
 	}
 
 	var _img = new Image();
 	_img.src = 'img/ani/'+type+'.png';
 	_img.onload = function(e) {
-		_cvs.width = 800;
+		_cvs.width = 1200;
 		_cvs.height = _minHeight;
 
-		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, 0, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, _dy, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
 		!!callback && callback();
 	}
@@ -78,7 +97,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			function setBgAndTimer() {
 				var frameInfo = jsonSource.frames['character'+frame].frame;
 				_cvs.width = _cvs.width;
-				_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, 0, frameInfo.w, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+				_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, _dy, frameInfo.w, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 				window.speakUp.animationTimer = requestAnimationFrame(doAnimation)
 			}
 		}
@@ -88,7 +107,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 			var frameInfo = jsonSource.frames['character'+frame].frame;
 
 			_cvs.width = _cvs.width;
-			_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, 0, frameInfo.w, _minHeight);
+			_ctx.drawImage(_img, frameInfo.x, frameInfo.y, frameInfo.w, _minHeight, _dx, _dy, frameInfo.w, _minHeight);
 		}
 
 		if (!!duration && duration !== 'infinite') {
