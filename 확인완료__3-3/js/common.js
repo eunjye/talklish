@@ -635,10 +635,10 @@
 				{
 					text: '안녕, 오랜만이다. 그동안 잘 지냈니?',
 					voice: 'SSJ310309_01',
-					duration:3800,
+					duration:4200,
 					animation: {
 						type: 'b',
-						duration: 3800
+						duration: 4200
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[0][1]);
@@ -876,7 +876,7 @@
 					duration: 4500,
 					animation: {
 						type: 'd',
-						duration:11000
+						duration:10000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
@@ -909,10 +909,10 @@
 				{
 					text: '지금 우리가 보고 있는 이 고속 열차처럼 말이야!',
 					voice: 'SSJ310309_21',
-					duration: 3500,
+					duration: 4000,
 					animation: {
 						type: 'f',
-						duration:3500
+						duration:4000
 					},
 					endBack: function(){
 						window.speakUp.goStep(2);
