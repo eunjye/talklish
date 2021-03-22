@@ -614,12 +614,12 @@
 			],
 			[
 				{
-					text: '아쉬워~ 내가 알려줄게!',
+					text: '아쉬워~ 내가 설명해 줄게!',
 					voice: 'SSJ3b_B_01',
 					duration: 3000
 				},
 				{
-					text: '잘 모르겠다면 내가 설명해 줄게!',
+					text: '잘 모르겠다면 내가 알려줄게!',
 					voice: 'SSJ3b_B_02',
 					duration: 4000
 				},
@@ -1155,7 +1155,7 @@
 					voice: 'SSJ310309_37',
 					duration: 2500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:2500
 					},
 					endBack: function(){
@@ -1167,7 +1167,7 @@
 					voice: 'SSJ310309_38',
 					duration: 6500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:6500
 					},
 					endBack: function(){

@@ -1220,7 +1220,7 @@
 					voice: 'SSJ510215_39',
 					duration: 3500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:3500
 					},
 					endBack: function(){

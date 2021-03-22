@@ -126,6 +126,10 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 				frame = frameLength - 6 + 10000;
 				break;
 
+				case 'f':
+				frame = frameLength - 4 + 10000;
+				break;
+
 			}
 			var frameInfo = jsonSource.frames['character'+frame].frame;
 

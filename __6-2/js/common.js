@@ -634,7 +634,7 @@
 		speak: [
 			[
 				{
-					text: '안녕? 난 천재초등학교에 6학년 우주라고 해.',
+					text: '안녕? 난 천재초등학교에 다니는 6학년 우주라고 해.',
 					voice: 'SSJ610316_01',
 					duration:4500,
 					animation: {
@@ -899,7 +899,7 @@
 						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][6]);
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
 					}
 				},
 				{
@@ -911,7 +911,7 @@
 						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][7]);
+						win[namespace].askQuestion(win[namespace].speak[3][5]);
 					}
 				},
 				{
