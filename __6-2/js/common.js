@@ -83,6 +83,7 @@
 			win[namespace].setBgImg('bg_main'+targetStep);
 			if (bgmStatus !== 'play'){
 				win[namespace].soundStatus('stop', 'bgm');
+				document.querySelector('.btn-audio').classList.add('off');
 			}
 			win[namespace].currentStep = targetStep;
 		},
@@ -120,6 +121,7 @@
 			name: ''
 		},
 		soundStatus: function(status, type, name, callback){
+			if (win[namespace].currentBgmStatus.status === status && win[namespace].currentBgmStatus.name === name && name !== 'bgm_intro') { return false; }
 			var soundType = type;
 			var $audio;
 			if (type === 'wrong' || type === 'script') {
@@ -134,15 +136,15 @@
 					$audio.setAttribute('src', url);
 					
 					$audio.setAttribute('name', 'audio/mpeg');
-					if (type === 'bgm') {
-						$audio.setAttribute('loop' ,'');
-						$audio.volume = 0.4;
-						win[namespace].currentBgmStatus.status = 'play';
-						win[namespace].currentBgmStatus.name = name;
-					}
 					document.querySelector('body').appendChild($audio);
 				} else {
 					$audio = document.querySelector('audio.' + name);
+				}
+				if (type === 'bgm') {
+					$audio.setAttribute('loop' ,'');
+					$audio.volume = 0.4;
+					win[namespace].currentBgmStatus.status = 'play';
+					win[namespace].currentBgmStatus.name = name;
 				}
 				if (type !== 'effect') {
 					muteByType(type);
