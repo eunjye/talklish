@@ -83,6 +83,7 @@
 			win[namespace].setBgImg('bg_main'+targetStep);
 			if (bgmStatus !== 'play'){
 				win[namespace].soundStatus('stop', 'bgm');
+				document.querySelector('.btn-audio').classList.add('off');
 			}
 			win[namespace].currentStep = targetStep;
 		},
@@ -120,6 +121,7 @@
 			name: ''
 		},
 		soundStatus: function(status, type, name, callback){
+			if (win[namespace].currentBgmStatus.status === status && win[namespace].currentBgmStatus.name === name && name !== 'bgm_intro') { return false; }
 			var soundType = type;
 			var $audio;
 			if (type === 'wrong' || type === 'script') {
@@ -134,15 +136,15 @@
 					$audio.setAttribute('src', url);
 					
 					$audio.setAttribute('name', 'audio/mpeg');
-					if (type === 'bgm') {
-						$audio.setAttribute('loop' ,'');
-						$audio.volume = 0.4;
-						win[namespace].currentBgmStatus.status = 'play';
-						win[namespace].currentBgmStatus.name = name;
-					}
 					document.querySelector('body').appendChild($audio);
 				} else {
 					$audio = document.querySelector('audio.' + name);
+				}
+				if (type === 'bgm') {
+					$audio.setAttribute('loop' ,'');
+					$audio.volume = 0.4;
+					win[namespace].currentBgmStatus.status = 'play';
+					win[namespace].currentBgmStatus.name = name;
 				}
 				if (type !== 'effect') {
 					muteByType(type);
@@ -589,27 +591,27 @@
 				{
 					text: '다시 한번 생각해볼까?',
 					voice: 'SSJ3g_A_01',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '조금 더 생각해볼까?',
 					voice: 'SSJ3g_A_02',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '한 번 더 생각해보자!',
 					voice: 'SSJ3g_A_03',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '글쎄, 한 번 더 생각해볼까?',
 					voice: 'SSJ3g_A_04',
-					duration: 4000
+					duration: 3000
 				},
 				{
 					text: '아쉬워~ 한 번 더 생각해봐!',
 					voice: 'SSJ3g_A_05',
-					duration: 4000
+					duration: 3000
 				},
 			],
 			[
@@ -621,12 +623,12 @@
 				{
 					text: '잘 모르겠다면 내가 설명해 줄게!',
 					voice: 'SSJ3g_B_02',
-					duration: 4000
+					duration: 3000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
 					voice: 'SSJ3g_B_03',
-					duration: 4000
+					duration: 3000
 				},
 			]
 		],

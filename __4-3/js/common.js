@@ -592,27 +592,27 @@
 				{
 					text: '다시 한번 생각해볼까?',
 					voice: 'SSJ3g_A_01',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '조금 더 생각해볼까?',
 					voice: 'SSJ3g_A_02',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '한 번 더 생각해보자!',
 					voice: 'SSJ3g_A_03',
-					duration: 3000
+					duration: 2000
 				},
 				{
 					text: '글쎄, 한 번 더 생각해볼까?',
 					voice: 'SSJ3g_A_04',
-					duration: 4000
+					duration: 3000
 				},
 				{
 					text: '아쉬워~ 한 번 더 생각해봐!',
 					voice: 'SSJ3g_A_05',
-					duration: 4000
+					duration: 3000
 				},
 			],
 			[
@@ -624,12 +624,12 @@
 				{
 					text: '잘 모르겠다면 내가 설명해 줄게!',
 					voice: 'SSJ3g_B_02',
-					duration: 4000
+					duration: 3000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
 					voice: 'SSJ3g_B_03',
-					duration: 4000
+					duration: 3000
 				},
 			]
 		],
