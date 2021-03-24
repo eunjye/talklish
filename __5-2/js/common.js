@@ -633,7 +633,7 @@
 				{
 					text: '조금 더 생각해보자!',
 					voice: 'SSJ5b_A_02',
-					duration: 1500
+					duration: 1300
 				},
 				{
 					text: '한 번 더 생각해볼까?',
@@ -648,7 +648,7 @@
 				{
 					text: '아쉬워~ 한 번 더 생각해볼까?',
 					voice: 'SSJ5b_A_05',
-					duration: 3500
+					duration: 3000
 				},
 			],
 			[
@@ -665,7 +665,7 @@
 				{
 					text: '어려웠구나! 내가 알려줄게.',
 					voice: 'SSJ5b_B_03',
-					duration: 3500
+					duration: 3000
 				},
 			]
 		],
