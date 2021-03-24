@@ -846,7 +846,7 @@
 					voice: 'SSJ610316_15',
 					duration:5500,
 					animation: {
-						type: 'f', 
+						type: 'c', 
 						duration:5500
 					},
 					endBack: function(){
@@ -858,7 +858,7 @@
 					voice: 'SSJ610316_16',
 					duration:5500,
 					animation: {
-						type: 'f', 
+						type: 'c', 
 						duration:5500
 					},
 					endBack: function(){
@@ -935,7 +935,7 @@
 					voice: 'SSJ610316_21',
 					duration: 5500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:5500
 					},
 					endBack: function(){
@@ -1131,7 +1131,7 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
 						win[namespace].askQuestion(
-							win[namespace].speak[6][1],
+							win[namespace].speak[6][2],
 							{
 								type: 'word',
 								answer: [
@@ -1140,8 +1140,8 @@
 									['관세']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[6][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][3])}
 								}
 							}
 						);
@@ -1156,7 +1156,7 @@
 						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][2]);
+						win[namespace].askQuestion(win[namespace].speak[6][3]);
 					}
 				},
 				{
@@ -1168,7 +1168,7 @@
 						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][3]);
+						win[namespace].askQuestion(win[namespace].speak[6][4]);
 					}
 				},
 				{
@@ -1180,7 +1180,7 @@
 						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][4]);
+						win[namespace].askQuestion(win[namespace].speak[6][5]);
 					}
 				},
 				{
@@ -1202,7 +1202,7 @@
 					voice: 'SSJ610316_39',
 					duration: 2500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:2500
 					},
 					endBack: function(){
@@ -1214,7 +1214,7 @@
 					voice: 'SSJ610316_40',
 					duration: 3500,
 					animation: {
-						type: 'f',
+						type: 'c',
 						duration:3500
 					},
 					endBack: function(){
