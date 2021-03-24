@@ -40,9 +40,9 @@
 		goPage: function(targetIndex, $evtEl, callback){
 			var $targetPage = document.querySelector('[data-index="' + targetIndex + '"]');
 
-			// bgm은 먼저 틀고
-			if (!!$targetPage.getAttribute('data-bgm')) {
+			if (targetIndex !== 1 && !!$targetPage.getAttribute('data-bgm')) {
 				win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
+				console.log('노래나옴')
 			}
 
 			// 캔버스에 다 그리고 난 뒤 이벤트 실행
@@ -58,6 +58,10 @@
 					$targetPage.style.opacity = '1';
 					$targetPage.style.zIndex = '10';
 					$targetPage.style.position = 'relative';
+
+					if (!!$targetPage.getAttribute('data-bgm')) {
+						win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
+					}
 					!!callback && callback();
 				}
 			});
