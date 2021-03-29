@@ -40,9 +40,9 @@
 		goPage: function(targetIndex, $evtEl, callback){
 			var $targetPage = document.querySelector('[data-index="' + targetIndex + '"]');
 
-			// bgm은 먼저 틀고
-			if (!!$targetPage.getAttribute('data-bgm')) {
+			if (targetIndex !== 1 && !!$targetPage.getAttribute('data-bgm')) {
 				win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
+				console.log('노래나옴')
 			}
 
 			// 캔버스에 다 그리고 난 뒤 이벤트 실행
@@ -58,6 +58,10 @@
 					$targetPage.style.opacity = '1';
 					$targetPage.style.zIndex = '10';
 					$targetPage.style.position = 'relative';
+
+					if (!!$targetPage.getAttribute('data-bgm')) {
+						win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
+					}
 					!!callback && callback();
 				}
 			});
@@ -71,7 +75,9 @@
 			var bgmStatus = win[namespace].currentBgmStatus.status;
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
-				win[namespace].askQuestion(win[namespace].speak[0][0]);
+				setTimeout(function(){
+					win[namespace].askQuestion(win[namespace].speak[0][0]);
+				}, 700);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
 				win[namespace].askQuestion(win[namespace].speak[3][0]);
@@ -120,12 +126,16 @@
 			status: 'stop',
 			name: ''
 		},
+		currentVoiceStatus: false,
 		soundStatus: function(status, type, name, callback){
 			if (win[namespace].currentBgmStatus.status === status && win[namespace].currentBgmStatus.name === name && name !== 'bgm_intro') { return false; }
 			var soundType = type;
 			var $audio;
+			var audio;
+
 			if (type === 'wrong' || type === 'script') {
 				soundType = 'script';
+				win[namespace].currentVoiceStatus = false;
 			}
 			if (status === 'play') { // play status
 				if (!document.querySelector('audio.' + name)) { // no have bgm tag
@@ -152,13 +162,17 @@
 				if (!$audio.ended) {
 					$audio.currentTime = 0;
 				}
-				// $audio.oncanplaythrough = function(){
-				// 	$audio.play();
-				// }
 				
-				$audio.play();
+				audio = new Audio($audio.attributes.src.nodeValue);
+				audio.addEventListener('canplaythrough', function(){
+					win[namespace].currentVoiceStatus = true;
+					$audio.play();
+					if (win[namespace].currentBgmStatus.status === 'stop' && type === 'bgm'){
+						$audio.pause();
+						audio.pause();
+					}
+				})
 
-				// tobe : mp3 재생 끝날때 callback 실행시키도록
 				!!callback && callback();
 			} else { // stop status
 				muteByType(type);
@@ -206,7 +220,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1000;
+			script.duration += 800;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
@@ -216,36 +230,28 @@
 			var animationSpec = script.animation;
 			win[namespace].animationStatus('', animationSpec.type);
 
-			win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration);
+			
 
 			// 질문이 있을때는 checkAnswer로 넘어감
 			clearTimeout(win[namespace].willTimer);
 			if (question === undefined){
-				win[namespace].soundStatus('play', 'script', voice, fnEndBack);
+				win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration, 
+					function(){
+						win[namespace].soundStatus('play', 'script', voice, fnEndBack);
+					}, true);
 			} else {
-					
-				var addedDuration = 0;
-				if (question.addedScript !== undefined) {
-					var addedSpec = question.addedScript;
-					/* addedSpec : {
-						text: '',
-						voice: '',
-						duration: Number,
-						animation: {type:'', duration:Numb,er},
-						endBack: function(){}
-					} */
-					// setTimeout(function(){
-					// 	win[namespace].setText(addedSpec.text);
-					// 	console.log(addedSpec);
-					// 	win[namespace].soundStatus('play', 'script', addedSpec.voice);
-					// }, script.duration+1000);
-					addedDuration = addedSpec.duration;
-				}
-				win[namespace].soundStatus('play', 'script', voice);
-				setTimeout(function(){
-					console.log(addedDuration);
-					win[namespace].checkAnswer(script, question, question.resultBack, addedSpec);
-				}, 0);
+				win[namespace].animationStatus('play', animationSpec.type, animationSpec.duration, 
+				function(){
+					var addedDuration = 0;
+					if (question.addedScript !== undefined) {
+						var addedSpec = question.addedScript;
+						addedDuration = addedSpec.duration;
+					}
+					win[namespace].soundStatus('play', 'script', voice);
+					setTimeout(function(){
+						win[namespace].checkAnswer(script, question, question.resultBack, addedSpec);
+					}, 0);
+				}, true);
 			}
 		},
 		
@@ -261,15 +267,18 @@
 			var duration = wrongScript.duration;
 
 			win[namespace].setText(text);
-			win[namespace].soundStatus('play', 'wrong', voice);
 			if (win[namespace].checkAnswerTry < 3) {
 				win[namespace].checkAnswerTry++;
 			} else {
 				win[namespace].checkAnswerTry = 1;
 			}
+
 			
 			var motionIndex = win[namespace].getRandomInt(1, 2);
-			win[namespace].animationStatus('play', 'e'+motionIndex, duration);
+			win[namespace].animationStatus('play', 'e'+motionIndex, duration, function(){
+				console.log(voice);
+				win[namespace].soundStatus('play', 'wrong', voice);
+			}, true);
 
 			clearTimeout(win[namespace].willTimer);
 			win[namespace].willTimer = setTimeout(function(){
@@ -404,7 +413,6 @@
 				clearTimeout(win[namespace].blinkTimer);
 				$btnVoice.classList.remove('blink');
 				$btnVoice.disabled = true;
-				console.log(voiceText.reduceText);
 				
 				if (voiceText.reduceText.slice(0, reduceAnswerText.length) !== reduceAnswerText) {
 					// 1트에 실패일 시, 초성 나옴
@@ -427,7 +435,7 @@
 										win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
 											win[namespace].soundStatus('play', 'script', script.voice);
 											win[namespace].willTimer = setTimeout(addedSpeak, script.duration);
-										});
+										}, true);
 										win[namespace].setText(script.text);
 										blinkBtnVoice();
 									},
@@ -450,7 +458,7 @@
 									win[namespace].animationStatus('play', 'd', script.animation.duration, function(){
 										win[namespace].soundStatus('play', 'script', script.voice);
 										win[namespace].willTimer = setTimeout(addedSpeak, script.duration);
-									});
+									}, true);
 									win[namespace].setText(script.text);
 									blinkBtnVoice();
 								},
