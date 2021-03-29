@@ -247,7 +247,6 @@
 			var duration = wrongScript.duration;
 
 			win[namespace].setText(text);
-			win[namespace].soundStatus('play', 'wrong', voice);
 			if (win[namespace].checkAnswerTry < 3) {
 				win[namespace].checkAnswerTry++;
 			} else {
@@ -255,7 +254,9 @@
 			}
 			
 			var motionIndex = win[namespace].getRandomInt(1, 2);
-			win[namespace].animationStatus('play', 'e'+motionIndex, duration);
+			win[namespace].animationStatus('play', 'e'+motionIndex, duration, function(){
+				win[namespace].soundStatus('play', 'wrong', voice);
+			});
 
 			clearTimeout(win[namespace].willTimer);
 			win[namespace].willTimer = setTimeout(function(){
