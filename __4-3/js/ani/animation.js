@@ -4,10 +4,11 @@
  * @param {String} type (b:인사, c:기본, d:문제, e1 or e2 : 오답) 
  * @param {Number || String} duration (1000 || 'infinite')
  * @param {function} callback
+ * @param {boolean} isVoice 음성인가?
  */
 window.speakUp.animationTimer = {};
 window.speakUp.animationStop = {};
-window.speakUp.animationStatus = function(status, type, duration, callback) {
+window.speakUp.animationStatus = function(status, type, duration, callback, isVoice) {
 	if (status === 'stop') {
 		clearTimeout(window.speakUp.animationStop);
 		cancelAnimationFrame(window.speakUp.animationTimer);
@@ -26,30 +27,30 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 	switch (type)	{
 		case 'b':
-		_dx = 315;
-		break;
+		 _dx = 315;
+		 break;
 
-	case 'd':
-		_dx = 340;
-		break;
+		case 'd':
+		 _dx = 340;
+		 break;
 
-	case 'e2':
-		_dx = 340;
-		break;
+		case 'e2':
+		 _dx = 340;
+		 break;
 
 		case 'f':
-		_dx = 420;
-		break;
+		 _dx = 420;
+		 break;
 	}
 
 	switch (type)	{
 		case 'f':
-		_dy = 0;
-		break;
+		 _dy = 0;
+		 break;
 
 		case 'b':
-		_dy = 20;
-		break;
+		 _dy = 20;
+		 break;
 	}
 
 	var _img = new Image();
@@ -61,19 +62,27 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, _dy, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
 		if (status !== 'play'){
-				setTimeout(function(){
-				!!callback && callback();
-			}, 200)
-			}
+			!!callback && callback();
+		}
 	}
 
 	if (status === 'play'){
 		_img.onload = function(e) {
-			doAnimation();
 
-			setTimeout(function(){
+			if (isVoice){
+
 				!!callback && callback();
-			}, 200)
+				var isLoadedAudio = setInterval(function(){
+					if (!!window.speakUp.currentVoiceStatus){
+						doAnimation();
+						window.speakUp.currentVoiceStatus = true;
+						clearInterval(isLoadedAudio);
+					}
+				}, 50)
+			} else {
+				!!callback && callback();
+				doAnimation();
+			}
 		}
 
 		var count = 0;

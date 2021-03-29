@@ -167,6 +167,10 @@
 				audio.addEventListener('canplaythrough', function(){
 					win[namespace].currentVoiceStatus = true;
 					$audio.play();
+					if (win[namespace].currentBgmStatus.status === 'stop' && type === 'bgm'){
+						$audio.pause();
+						audio.pause();
+					}
 				})
 
 				!!callback && callback();

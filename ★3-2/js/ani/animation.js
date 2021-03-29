@@ -4,10 +4,11 @@
  * @param {String} type (b:인사, c:기본, d:문제, e1 or e2 : 오답) 
  * @param {Number || String} duration (1000 || 'infinite')
  * @param {function} callback
+ * @param {boolean} isVoice 음성인가?
  */
 window.speakUp.animationTimer = {};
 window.speakUp.animationStop = {};
-window.speakUp.animationStatus = function(status, type, duration, callback) {
+window.speakUp.animationStatus = function(status, type, duration, callback, isVoice) {
 	if (status === 'stop') {
 		clearTimeout(window.speakUp.animationStop);
 		cancelAnimationFrame(window.speakUp.animationTimer);
@@ -60,13 +61,28 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, _dy, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
-		!!callback && callback();
+		if (status !== 'play'){
+			!!callback && callback();
+		}
 	}
 
 	if (status === 'play'){
 		_img.onload = function(e) {
-			doAnimation();
-			!!callback && callback();
+
+			if (isVoice){
+
+				!!callback && callback();
+				var isLoadedAudio = setInterval(function(){
+					if (!!window.speakUp.currentVoiceStatus){
+						doAnimation();
+						window.speakUp.currentVoiceStatus = true;
+						clearInterval(isLoadedAudio);
+					}
+				}, 50)
+			} else {
+				!!callback && callback();
+				doAnimation();
+			}
 		}
 
 		var count = 0;
