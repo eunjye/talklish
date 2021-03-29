@@ -75,7 +75,9 @@
 			var bgmStatus = win[namespace].currentBgmStatus.status;
 			if (targetStep === 1){
 				win[namespace].progressStatus('reset');
-				win[namespace].askQuestion(win[namespace].speak[0][0]);
+				setTimeout(function(){
+					win[namespace].askQuestion(win[namespace].speak[0][0]);
+				}, 700);
 				win[namespace].soundStatus('play', 'bgm', 'bgm_01');
 			} else if (targetStep === 2){
 				win[namespace].askQuestion(win[namespace].speak[4][0]);
@@ -210,7 +212,7 @@
 		askQuestion: function(script, question){
 			var text = script.text;
 			var voice = script.voice;
-			script.duration += 1000;
+			script.duration += 800;
 			var fnEndBack = function(){
 				win[namespace].willTimer = setTimeout(script.endBack, script.duration)
 			}
