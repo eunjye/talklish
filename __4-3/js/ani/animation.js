@@ -60,13 +60,20 @@ window.speakUp.animationStatus = function(status, type, duration, callback) {
 
 		_ctx.drawImage(_img, 0, 0, 532, _minHeight, _dx, _dy, 532, _minHeight); // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
-		!!callback && callback();
+		if (status !== 'play'){
+				setTimeout(function(){
+				!!callback && callback();
+			}, 200)
+			}
 	}
 
 	if (status === 'play'){
 		_img.onload = function(e) {
 			doAnimation();
-			!!callback && callback();
+
+			setTimeout(function(){
+				!!callback && callback();
+			}, 200)
 		}
 
 		var count = 0;
