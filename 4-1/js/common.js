@@ -607,76 +607,76 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3b_ending_01',
+				voice: 'SSJ3g_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3b_ending_02',
+				voice: 'SSJ3g_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3b_ending_03',
+				voice: 'SSJ3g_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3b_ending_04',
+				voice: 'SSJ3g_ending_04',
 				duration: 4000
 			},
 		],
 		wrongScript: [
 			[
 				{
-					text: '다시 한번 생각해보자!',
-					voice: 'SSJ3b_A_01',
+					text: '다시 한번 생각해볼까?',
+					voice: 'SSJ3g_A_01',
 					duration: 2000
 				},
 				{
-					text: '조금 더 생각해보자!',
-					voice: 'SSJ3b_A_02',
+					text: '조금 더 생각해볼까?',
+					voice: 'SSJ3g_A_02',
 					duration: 2000
 				},
 				{
-					text: '한 번 더 생각해볼까?',
-					voice: 'SSJ3b_A_03',
-					duration: 2200
+					text: '한 번 더 생각해보자!',
+					voice: 'SSJ3g_A_03',
+					duration: 2000
 				},
 				{
-					text: '글쎄, 한 번 더 생각해봐!',
-					voice: 'SSJ3b_A_04',
-					duration: 2700
+					text: '글쎄, 한 번 더 생각해볼까?',
+					voice: 'SSJ3g_A_04',
+					duration: 3000
 				},
 				{
-					text: '아쉬워~ 한 번 더 생각해볼까?',
-					voice: 'SSJ3b_A_05',
-					duration: 3400
+					text: '아쉬워~ 한 번 더 생각해봐!',
+					voice: 'SSJ3g_A_05',
+					duration: 3000
 				},
 			],
 			[
 				{
-					text: '아쉬워~ 내가 설명해 줄게!',
-					voice: 'SSJ3b_B_01',
-					duration: 2900
+					text: '아쉬워~ 내가 알려줄게!',
+					voice: 'SSJ3g_B_01',
+					duration: 3000
 				},
 				{
-					text: '잘 모르겠다면 내가 알려줄게!',
-					voice: 'SSJ3b_B_02',
-					duration: 3500
+					text: '잘 모르겠다면 내가 설명해 줄게!',
+					voice: 'SSJ3g_B_02',
+					duration: 3000
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3b_B_03',
-					duration: 3200
+					voice: 'SSJ3g_B_03',
+					duration: 3000
 				},
 			]
 		],
 		speak: [
 			[
 				{
-					text: '안녕! 나는 천재초등학교 3학년 1반 하늘이야~',
-					voice: 'SSJ320110_01',
+					text: '안녕~ 나는 천재초등학교 4학년 노을이야!',
+					voice: 'SSJ420109_01',
 					duration:4500,
 					animation: {
 						type: 'b',
@@ -687,12 +687,12 @@
 					}
 				},
 				{
-					text: '우리 고장에 놀러 온 걸 환영해. ',
-					voice: 'SSJ320110_02',
-					duration:2500,
+					text: '오늘은 나와 같이 촌락과 도시의 모습을 살펴보고 오자.',
+					voice: 'SSJ420109_02',
+					duration:4500,
 					animation: {
-						type: 'b',
-						duration: 2500
+						type: 'c',
+						duration: 4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -701,23 +701,24 @@
 			],
 			[
 				{
-					text: '우리 고장에는 이렇게 넓은 논과 밭이 펼쳐져 있어.',
-					voice: 'SSJ320110_03',
-					duration:4500,
+					text: '우선 촌락부터 구경해 보자고! <br>여기저기 논과 밭이 펼쳐져 있네~',
+					voice: 'SSJ420109_03',
+					duration:6500,
 					animation: {
 						type: 'c',
-						duration: 4500
+						duration: 6500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
 						win[namespace].askQuestion(
 							win[namespace].speak[1][1],
 							{
-								type: 'ox',
-								answer: '인문 환경',
-								guideDuration: 4500,
-								// noTextLength: true,
-								guideVoice: 'SSJ320110_05',
+								type: 'word',
+								answer: [
+									['ㄴㅊ'],
+									['남촌', '농촌', '내촌'],
+									['농촌']
+								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[1][3])},
 									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][2])}
@@ -727,36 +728,36 @@
 					}
 				},
 				{
-					text: '논과 밭, 과수원, 도로와 같이 사람들이 만든 환경을 <br>무슨 환경이라고 부르는지 아니?',
-					voice: 'SSJ320110_04',
-					duration:7500,
+					text: '농사짓는 땅을 이용하여 생산 활동을 하는 <br>이곳은 어떤 종류의 촌락일까?',
+					voice: 'SSJ420109_04',
+					duration:5500,
 					animation: {
 						type: 'd',
-						duration: 14000
+						duration: 5500
 					},
 					endBack: function(){
 
 					}
 				},
 				{
-					text: '논과 밭, 과수원과 같이 사람들이 만든 환경을 <br>인문 환경이라고 불러.',
-					voice: 'SSJ320110_06',
-					duration:6500,
+					text: '농사짓는 땅을 이용하여 생산 활동을 하는 촌락을 <br>농촌이라고 해.',
+					voice: 'SSJ420109_05',
+					duration:5500,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
 				},
 				{
-					text: '우리 고장 사람들은 이 논과 밭에서 <br>농사를 지으면서 살아가고 있어.',
-					voice: 'SSJ320110_07',
-					duration:5500,
+					text: '그런데, 농촌에 사람들이 왜 이렇게 없을까?',
+					voice: 'SSJ420109_06',
+					duration:4500,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -766,48 +767,140 @@
 			],
 			[
 				{
-					text: '저길 좀 봐! 추수가 한창이야.',
-					voice: 'SSJ320110_08',
-					duration:2500,
+					text: '게다가 논과 밭에서 일하는 사람들은 <br>노인분들밖에 보이지 않네.',
+					voice: 'SSJ420109_07',
+					duration:5500,
 					animation: {
 						type: 'c',
-						duration:2500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][1]);
-					}
-				},
-				{
-					text: '사람들의 생활 모습이 계절에 따라 <br>달라진다는 것 알고 있지?',
-					voice: 'SSJ320110_09',
-					duration:4500,
-					animation: {
-						type: 'c',
-						duration:4500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
-							win[namespace].speak[2][2],
+							win[namespace].speak[2][1],
 							{
 								type: 'word',
 								answer: [
-									['ㄱㅇ'],
-									['가을', '겨울', '곡우'],
-									['가을']
+									['ㄱㄹㅎ'],
+									['공론화', '그룹화', '고령화'],
+									['고령화']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[2][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][2])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '논과 밭에서 곡식이나 열매를 수확하는 <br>지금은 어떤 계절일까?',
-					voice: 'SSJ320110_10',
+					text: '전체 인구에서 노인이 차지하는 비율이 높아지는 현상을 <br>뭐라고 하는지 아니? (OOO 현상)',
+					voice: 'SSJ420109_08',
 					duration:5500,
+					animation: {
+						type: 'd',
+						duration:5500
+					},
+					endBack: function(){
+					}
+				},
+				{
+					text: '전체 인구에서 노인이 차지하는 비율이 높아지는 것을 <br>고령화 현상이라고 해.',
+					voice: 'SSJ420109_08_1',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[2][3]);
+
+					}
+				},
+				{
+					text: '고령화 현상으로 촌락에 사는 노인의 인구는 늘어나고, <br>어린이의 수는 줄어들고 있어.',
+					voice: 'SSJ420109_09',
+					duration:7500,
+					animation: {
+						type: 'f',
+						duration:7500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[2][4]);
+					}
+				},
+				{
+					text: '일손 부족의 문제가 심각할 것 같아 걱정이 되긴 하지만,',
+					voice: 'SSJ420109_10',
+					duration:5000,
+					animation: {
+						type: 'f', 
+						duration:5000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[2][5]);
+					}
+				},
+				{
+					text: '최근 다양한 기계를 이용해서 일손 부족 문제를 <br>해결하고 있다고 하니 다행이야.',
+					voice: 'SSJ420109_11',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][0]);
+						win[namespace].setBgImg('bg_main3');
+						// win[namespace].changeBgm(2);
+					}
+				},
+			],
+			[
+				// idx 3
+				{
+					text: '저기, 새로 이사를 오는 사람들이 보이네!',
+					voice: 'SSJ420109_12',
+					duration:3500,
+					animation: {
+						type: 'c', 
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[3][1]);
+					}
+				},
+				{
+					text: '도시에서 농촌으로 이사를 온 사람들인가 봐. ',
+					voice: 'SSJ420109_13',
+					duration:2500,
+					animation: {
+						type: 'c', 
+						duration:2500
+					},
+					endBack: function(){
+						win[namespace].progressStatus('ing', 2);
+						win[namespace].askQuestion(
+							win[namespace].speak[3][2],
+							{
+								type: 'word',
+								answer: [
+									['ㄱㅊ'],
+									['강촌', '김천', '귀촌'],
+									['귀촌']
+								],
+								resultBack: {
+									right: function(){win[namespace].askQuestion(win[namespace].speak[3][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][3])}
+								}
+							}
+						);
+					}
+				},
+				{
+					text: '도시에 살던 사람들이 촌락으로 <br>삶의 터전을 옮기는 것을 뭐라고 할까?',
+					voice: 'SSJ420109_14',
+					duration: 5500,
 					animation: {
 						type: 'd',
 						duration:5500
@@ -817,128 +910,72 @@
 					}
 				},
 				{
-					text: '논과 밭에서 곡식이나 열매를 수확하는 계절은 가을이지.',
-					voice: 'SSJ320110_11',
-					duration:4500,
+					text: '도시에 살던 사람들이 촌락으로 삶의 터전을 옮기는 것을 <br>귀촌이라고 해.',
+					voice: 'SSJ420109_15',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:4500
+						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][4]);
+						win[namespace].askQuestion(win[namespace].speak[3][4]);
 					}
 				},
 				{
-					text: '가을에만 볼 수 있는 정말 멋진 풍경이야.',
-					voice: 'SSJ320110_12',
-					duration:3500,
+					text: '귀촌을 하려는 사람들이 촌락에 잘 적응하며 살 수 <br>있도록 지역 사회의 적극적인 지원이 필요할 것 같아.',
+					voice: 'SSJ420109_16',
+					duration: 8500,
 					animation: {
-						type: 'f', 
-						duration:3500
+						type: 'f',
+						duration:8500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][0]);
-						win[namespace].setBgImg('bg_main3');
+						win[namespace].askQuestion(win[namespace].speak[4][0]);
+						win[namespace].setBgImg('bg_main4');
 						win[namespace].changeBgm(2);
 					}
 				},
 			],
 			[
-				// idx 3
 				{
-					text: '여긴 우리 동네의 유명한 하천이야. <br>강변을 따라 산책을 하는 사람들이 있네.',
-					voice: 'SSJ320110_13',
-					duration:7000,
-					animation: {
-						type: 'c', 
-						duration:7000
-					},
-					endBack: function(){
-						win[namespace].progressStatus('ing', 2);
-						win[namespace].askQuestion(
-							win[namespace].speak[3][1],
-							{
-								type: 'word',
-								answer: [
-									['ㅇㄱ'],
-									['연구', '여가', '일기'],
-									['여가']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][2])}
-								}
-							}
-						);
-					}
-				},
-				{
-					text: '이렇게 스스로 즐거움을 얻고자 남는 시간에 하는 <br>자유로운 활동을 뭐라고 할까? (OO 생활)',
-					voice: 'SSJ320110_14',
-					duration: 6500,
-					animation: {
-						type: 'd',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][2]);
-					}
-				},
-				{
-					text: '스스로 즐거움을 얻고자 남는 시간에 하는 <br>자유로운 활동을 여가 생활이라고 해.',
-					voice: 'SSJ320110_15',
-					duration: 5500,
-					animation: {
-						type: 'f',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][3]);
-					}
-				},
-				{
-					text: '사람들은 주로 자신이 살고 있는 고장의 환경을 이용해 <br>여가 생활을 즐기지!',
-					voice: 'SSJ320110_16',
-					duration: 5500,
-					animation: {
-						type: 'f',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][0]);
-						win[namespace].setBgImg('bg_main4');
-						win[namespace].changeBgm(1);
-					}
-				},
-			],
-			[
-				{
-					text: '이제 저녁이 되니 조금 추워지는걸? <br>배도 좀 고픈 것 같고... 슬슬 집에 돌아가서 쉴 시간이네.',
-					voice: 'SSJ320110_17',
-					duration: 7500,
+					text: '이제 도시를 둘러볼 차례야!',
+					voice: 'SSJ420109_17',
+					duration: 2500,
 					animation: {
 						type: 'c',
-						duration:7500
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][1]);
 					}
 				},
 				{
-					text: '역시, 사람이 살아가려면 <br>몸을 보호하는 옷, 영양분을 얻기 위한 음식,',
-					voice: 'SSJ320110_18',
-					duration: 6500,
+					text: '사람도 많고, 높은 건물도 많고, 교통 시설들도 많네!',
+					voice: 'SSJ420109_18',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:6500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][2]);
 					}
 				},
 				{
-					text: '그리고 안전하고 편안하게 쉴 수 있는 집이 필요한가 봐.',
-					voice: 'SSJ320110_19',
+					text: '도시는 주로 교통이 발달하여 <br>사람과 물건 이동이 편리한 곳에 위치해.',
+					voice: 'SSJ420109_19',
+					duration: 6500,
+					animation: {
+						type: 'c',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][3]);
+					}
+				},
+				{
+					text: '그런데, 처음부터 계획하여 만들어진 도시도 있다고 하네?',
+					voice: 'SSJ420109_20',
 					duration: 4500,
 					animation: {
 						type: 'c',
@@ -947,53 +984,52 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(
-							win[namespace].speak[4][3],
+							win[namespace].speak[4][4],
 							{
 								type: 'word',
 								answer: [
-									['ㅇㅅㅈ'],
-									['음식점', '원산지', '의식주'],
-									['의식주']
+									['ㅅㅈㅌㅂㅈㅊㅅ'],
+									['순조특별자치시', '세종특별자치시', '숙종특별자치시'],
+									['세종특별자치시']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][5])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][4])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][6])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][5])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '이와 같이 옷, 음식, 집을 통틀어 이르는 말이 뭐더라?',
-					voice: 'SSJ320110_20',
-					duration: 5500,
-					animation: {
-						type: 'd',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][4]);
-					}
-				},
-				{
-					text: '옷, 음식, 집을 통틀어 이르는 말을 의식주라고 해.',
-					voice: 'SSJ320110_21',
-					duration: 5500,
-					animation: {
-						type: 'f',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][5]);
-					}
-				},
-				{
-					text: '우리가 살아가는데 꼭 필요한 것들을 이르는 말이니 <br>기억해 두자!',
-					voice: 'SSJ320110_22',
+					text: '행정의 중심지로 새롭게 계획하여 만든 <br>도시의 이름이 뭐였더라?',
+					voice: 'SSJ420109_21',
 					duration: 4500,
 					animation: {
-						type: 'f',
+						type: 'd',
 						duration:4500
+					},
+					endBack: function(){
+					}
+				},
+				{
+					text: '행정의 중심지로 새롭게 계획해서 만든 도시의 이름은 <br>세종특별자치시야.',
+					voice: 'SSJ420109_22',
+					duration: 6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][6]);
+					}
+				},
+				{
+					text: '이름만큼 특별한 도시인 것 같네!',
+					voice: 'SSJ420109_23',
+					duration: 2500,
+					animation: {
+						type: 'f',
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][0]);
@@ -1003,20 +1039,8 @@
 			],
 			[
 				{
-					text: '그런데, 고장의 환경에 따라 옷, 음식, 집의 모습도 <br>달라진다는 점 알고 있니?',
-					voice: 'SSJ320110_23',
-					duration: 7500,
-					animation: {
-						type: 'c',
-						duration:7500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][1]);
-					}
-				},
-				{ 
-					text: '지난 방학 때 가족들과 덥고 비가 많이 내려 <br>습한 고장으로 해외여행을 다녀왔는데',
-					voice: 'SSJ320110_24',
+					text: '그런데, 촌락과 도시는 서로 도움을 주고받으며 <br>발전한다는 사실 알고 있니?',
+					voice: 'SSJ420109_24',
 					duration: 6500,
 					animation: {
 						type: 'c',
@@ -1024,27 +1048,41 @@
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
-						win[namespace].askQuestion(win[namespace].speak[5][2],
+						win[namespace].askQuestion(
+							win[namespace].speak[5][1],
 							{
-								type: 'ox',
-								answer: '열대 과일',
-								// guideDuration: 2500,
-								noTextLength: true,
-								// guideVoice: 'SSJ320110_25',
+								type: 'word',
+								answer: [
+									['ㄱㄹ'],
+									['권리', '관람', '교류'],
+									['교류']
+								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[5][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[5][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][2])}
 								}
 							}
 						);
 					}
 				},
-				{
-					text: '여행을 하면서, 열대 과일, 생선, 치즈 중에서, <br>내가 제일 많이 먹은 음식이 뭐였~게?',
-					voice: 'SSJ320110_25',
-					duration: 7500,
+				{ 
+					text: '사람들이 오고 가거나 물건, 문화, 기술 등을 <br>서로 주고받는 것을 뭐라고 하더라?',
+					voice: 'SSJ420109_25',
+					duration: 6500,
 					animation: {
 						type: 'd',
+						duration:6500
+					},
+					endBack: function(){
+
+					}
+				},
+				{
+					text: '사람들이 오고 가거나 물건, 문화, 기술 등을 <br>서로 주고받는 것을 교류라고 해.',
+					voice: 'SSJ420109_26',
+					duration: 7500,
+					animation: {
+						type: 'f',
 						duration:7500
 					},
 					endBack: function(){
@@ -1052,36 +1090,12 @@
 					}
 				},
 				{
-					text: '정답은 열대 과일이야~!',
-					voice: 'SSJ320110_25_1',
-					duration: 2500,
+					text: '지역마다 생산물, 기술, 문화 등이 다르기 때문에 <br>교류가 이루어지게 돼.',
+					voice: 'SSJ420109_27',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:2500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][4]);
-					}
-				},
-				{
-					text: '날씨가 덥고 습한 고장에서는 파인애플, 바나나, <br>망고와 같은 열대 과일을 이용한 음식이 많아.',
-					voice: 'SSJ320110_26',
-					duration: 7500,
-					animation: {
-						type: 'f',
-						duration:7500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[5][5]);
-					}
-				},
-				{
-					text: '그리고, 바람이 잘 통하는 긴 옷을 입고 <br>챙이 넓은 모자를 쓰고 있는 사람들도 많이 볼 수 있었지.',
-					voice: 'SSJ320110_27',
-					duration: 7500,
-					animation: {
-						type: 'f',
-						duration:7500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
@@ -1091,20 +1105,20 @@
 			],
 			[ // 6 - 0
 				{
-					text: '자, 이제 고장의 환경에 따라 <br>집의 모양도 달라진다는 걸 보여 줄게.',
-					voice: 'SSJ320110_28',
-					duration: 5500,
+					text: '마침 저기 농산물 직거래 장터가 보이네! 한번 가 보자.',
+					voice: 'SSJ420109_28',
+					duration: 5000,
 					animation: {
 						type: 'c',
-						duration:5500
+						duration:5000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][1]);
 					}
 				},
 				{
-					text: '여긴 과거 우리 고장 사람들이 살았던 <br>집의 모양이 남아있는 곳이야.',
-					voice: 'SSJ320110_29',
+					text: '도시 사람들은 믿을 수 있는 <br>싱싱한 농산물을 싸게 구매하고',
+					voice: 'SSJ420109_29',
 					duration: 5500,
 					animation: {
 						type: 'c',
@@ -1115,8 +1129,8 @@
 					}
 				},
 				{
-					text: '우리 고장은 여름철에 홍수로 <br>집이 물에 잠길 위험이 있었거든.',
-					voice: 'SSJ320110_30',
+					text: '촌락 사람들은 농산물을 제값을 받고 팔면서, <br>서로 도움을 주고받고 있구나.',
+					voice: 'SSJ420109_30',
 					duration: 5500,
 					animation: {
 						type: 'c',
@@ -1129,9 +1143,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㅌㄷㅇㅈ'],
-									['터다운집', '터돋움집', '터듬이집'],
-									['터돋움집']
+									['ㅅㅎ ㅇㅈ'],
+									['상호 억제', '상호 의존', '상호 인정'],
+									['상호 의존']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[6][5])},
@@ -1142,32 +1156,32 @@
 					}
 				},
 				{
-					text: '그래서 이렇게 땅 위에 터를 돋우어 높은 곳에 <br>집을 지었어. 이러한 집을 뭐라고 하는지 아니?',
-					voice: 'SSJ320110_31',
+					text: '교류하는 촌락과 도시의 관계를 나타내는 말로, <br>서로 돕고 교류하며 의지하는 것을 뭐라고 하지?',
+					voice: 'SSJ420109_31',
 					duration: 8500,
 					animation: {
 						type: 'd',
 						duration:8500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][4]);
+						
 					}
 				},
 				{
-					text: '여름철 홍수로 집이 물에 잠길 위험 때문에 땅 위에 <br>터를 돋우어 높은 곳에 지은 집을 터돋움집이라고 해.',
-					voice: 'SSJ320110_32',
-					duration: 9500,
+					text: '서로 돕고 교류하며 의지하는 것을 상호 의존이라고 해.',
+					voice: 'SSJ420109_32',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:9500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][5]);
 					}
 				},
 				{
-					text: '그래. 고장의 환경에 따라 의생활, 식생활, 주생활이 <br>다양하게 나타난다는 점, 오늘 확실하게 배웠네!',
-					voice: 'SSJ320110_33',
+					text: '촌락과 도시에 사는 사람들은 서로 부족한 것들을 교류를 통해 채워 주면서 상호 의존하고 있다는 점 잊지 말자!',
+					voice: 'SSJ420109_33',
 					duration: 9500,
 					animation: {
 						type: 'f',
@@ -1180,24 +1194,24 @@
 			],
 			[
 				{
-					text: '이제 시간이 늦었으니, 집에 가서 푹 쉬도록 하자!',
-					voice: 'SSJ320110_34',
-					duration: 4000,
+					text: '벌써 집에 갈 시간이네! <br>오늘 정말 알찬 하루를 보낸 것 같아.',
+					voice: 'SSJ420109_34',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:4000
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
 				},
 				{
-					text: '그럼 다음에 또 만나! 안녕~',
-					voice: 'SSJ320110_35',
-					duration: 3500,
+					text: '그럼 다음에 또 만나서 이야기 나누자! 안녕~',
+					voice: 'SSJ420109_35',
+					duration: 4500,
 					animation: {
 						type: 'b',
-						duration:3500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].currentStep = 2;
