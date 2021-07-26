@@ -42,7 +42,6 @@
 
 			if (targetIndex !== 1 && !!$targetPage.getAttribute('data-bgm')) {
 				win[namespace].soundStatus('play', 'bgm', $targetPage.getAttribute('data-bgm'));
-				console.log('노래나옴')
 			}
 
 			// 캔버스에 다 그리고 난 뒤 이벤트 실행
@@ -92,6 +91,17 @@
 				document.querySelector('.btn-audio').classList.add('off');
 			}
 			win[namespace].currentStep = targetStep;
+		},
+		changeBgm: function(type){
+			clearTimeout(win[namespace].willTimer);
+			document.querySelector('.question-area').style.display = 'none';
+			document.querySelector('.btn-voice').style.display = 'none';
+			var bgmStatus = win[namespace].currentBgmStatus.status;
+			win[namespace].soundStatus('play', 'bgm', 'bgm_0'+type);
+			if (bgmStatus !== 'play'){
+				win[namespace].soundStatus('stop', 'bgm');
+				document.querySelector('.btn-audio').classList.add('off');
+			}
 		},
 		/**
 		 * 
@@ -269,7 +279,6 @@
 			
 			var motionIndex = win[namespace].getRandomInt(1, 2);
 			win[namespace].animationStatus('play', 'e'+motionIndex, duration, function(){
-				console.log(voice);
 				win[namespace].soundStatus('play', 'wrong', voice);
 			}, true);
 
@@ -329,7 +338,7 @@
 				// question.type === 'word' ? $btnVoice.disabled = false : '';
 			}
 			win[namespace].blinkTimer = setTimeout(function(){
-				if (question.type === 'ox') {
+				if (question.type === 'ox' && question.guideVoice !== undefined) {
 					win[namespace].soundStatus('play', 'script', question.guideVoice);
 					setTimeout(blinkBtnVoice, question.guideDuration);
 				} else {
@@ -357,7 +366,11 @@
 			}
 
 			// 첫번째 (글자수만 나오는거)
-			setInitialAnswer(answerText, true);
+			if (question.noTextLength === undefined) {
+				setInitialAnswer(answerText, true);
+			} else {
+				setInitialAnswer(false, true);
+			}
 
 			showQuestionArea();
 
@@ -520,16 +533,21 @@
 			function setInitialAnswer(initial, isTransparent) {
 				$questionArea.classList.remove('wide');
 				var resultHTML = '';
-				for(var i = 0; i < initial.length; i++) {
-					if (initial[i] === ' ') {
-						resultHTML += '&nbsp;';
-					} else {
-						if (isTransparent) {
-							resultHTML += '<span></span>';
+
+				if (!!initial) {
+					for(var i = 0; i < initial.length; i++) {
+						if (initial[i] === ' ') {
+							resultHTML += '&nbsp;';
 						} else {
-							resultHTML += '<span>' + initial[i] + '</span>';
+							if (isTransparent) {
+								resultHTML += '<span></span>';
+							} else {
+								resultHTML += '<span>' + initial[i] + '</span>';
+							}
 						}
 					}
+				} else {
+					resultHTML = '';
 				}
 				$questionInner.innerHTML = resultHTML;
 			}
@@ -589,76 +607,76 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3g_ending_01',
+				voice: 'SSJ3b_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3g_ending_02',
+				voice: 'SSJ3b_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3g_ending_03',
+				voice: 'SSJ3b_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3g_ending_04',
+				voice: 'SSJ3b_ending_04',
 				duration: 4000
 			},
 		],
 		wrongScript: [
 			[
 				{
-					text: '다시 한번 생각해볼까?',
-					voice: 'SSJ3g_A_01',
+					text: '다시 한번 생각해보자!',
+					voice: 'SSJ3b_A_01',
 					duration: 2000
 				},
 				{
-					text: '조금 더 생각해볼까?',
-					voice: 'SSJ3g_A_02',
+					text: '조금 더 생각해보자!',
+					voice: 'SSJ3b_A_02',
 					duration: 2000
 				},
 				{
-					text: '한 번 더 생각해보자!',
-					voice: 'SSJ3g_A_03',
-					duration: 2000
+					text: '한 번 더 생각해볼까?',
+					voice: 'SSJ3b_A_03',
+					duration: 2200
 				},
 				{
-					text: '글쎄, 한 번 더 생각해볼까?',
-					voice: 'SSJ3g_A_04',
-					duration: 3000
+					text: '글쎄, 한 번 더 생각해봐!',
+					voice: 'SSJ3b_A_04',
+					duration: 2700
 				},
 				{
-					text: '아쉬워~ 한 번 더 생각해봐!',
-					voice: 'SSJ3g_A_05',
-					duration: 3000
+					text: '아쉬워~ 한 번 더 생각해볼까?',
+					voice: 'SSJ3b_A_05',
+					duration: 3400
 				},
 			],
 			[
 				{
-					text: '아쉬워~ 내가 알려줄게!',
-					voice: 'SSJ3g_B_01',
-					duration: 3000
+					text: '아쉬워~ 내가 설명해 줄게!',
+					voice: 'SSJ3b_B_01',
+					duration: 2900
 				},
 				{
-					text: '잘 모르겠다면 내가 설명해 줄게!',
-					voice: 'SSJ3g_B_02',
-					duration: 3000
+					text: '잘 모르겠다면 내가 알려줄게!',
+					voice: 'SSJ3b_B_02',
+					duration: 3500
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3g_B_03',
-					duration: 3000
+					voice: 'SSJ3b_B_03',
+					duration: 3200
 				},
 			]
 		],
 		speak: [
 			[
 				{
-					text: '안녕~ 또 만났네! 그동안 잘 지냈니?',
-					voice: 'SSJ410308_01',
+					text: '안녕! 나는 천재초등학교 3학년 1반 하늘이야~',
+					voice: 'SSJ320110_01',
 					duration:4500,
 					animation: {
 						type: 'b',
@@ -669,12 +687,12 @@
 					}
 				},
 				{
-					text: '오늘도 나랑 같이 이곳저곳을 돌아다니며 <br>이야기 나눠보자.',
-					voice: 'SSJ410308_02',
-					duration:4500,
+					text: '우리 고장에 놀러 온 걸 환영해. ',
+					voice: 'SSJ320110_02',
+					duration:2500,
 					animation: {
-						type: 'c',
-						duration: 4500
+						type: 'b',
+						duration: 2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][0]);
@@ -683,12 +701,12 @@
 			],
 			[
 				{
-					text: '여기 다양한 공공 기관들이 모여 있네!',
-					voice: 'SSJ410308_03',
-					duration:3500,
+					text: '우리 고장에는 이렇게 넓은 논과 밭이 펼쳐져 있어.',
+					voice: 'SSJ320110_03',
+					duration:4500,
 					animation: {
 						type: 'c',
-						duration: 3500
+						duration: 4500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 0);
@@ -696,9 +714,10 @@
 							win[namespace].speak[1][1],
 							{
 								type: 'ox',
-								answer: '국가',
-								guideDuration: 3500,
-								guideVoice: 'SSJ410308_05',
+								answer: '인문 환경',
+								guideDuration: 4500,
+								// noTextLength: true,
+								guideVoice: 'SSJ320110_05',
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[1][3])},
 									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][2])}
@@ -708,74 +727,74 @@
 					}
 				},
 				{
-					text: '그런데, 공공 기관은 누가 세운 걸까?',
-					voice: 'SSJ410308_04',
-					duration:3200,
+					text: '논과 밭, 과수원, 도로와 같이 사람들이 만든 환경을 <br>무슨 환경이라고 부르는지 아니?',
+					voice: 'SSJ320110_04',
+					duration:7500,
 					animation: {
 						type: 'd',
-						duration: 8000
+						duration: 14000
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[1][2]);
+
 					}
 				},
 				{
-					text: '공공 기관은 국가가 세웠어.',
-					voice: 'SSJ410308_06',
-					duration:2500,
+					text: '논과 밭, 과수원과 같이 사람들이 만든 환경을 <br>인문 환경이라고 불러.',
+					voice: 'SSJ320110_06',
+					duration:6500,
 					animation: {
 						type: 'f',
-						duration:2500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
 				},
 				{
-					text: '공공 기관은 개인의 이익이 아닌 주민 전체의 <br>이익을 위해 국가가 세우고 관리하는 곳이구나.',
-					voice: 'SSJ410308_07',
-					duration:7500,
+					text: '우리 고장 사람들은 이 논과 밭에서 <br>농사를 지으면서 살아가고 있어.',
+					voice: 'SSJ320110_07',
+					duration:5500,
 					animation: {
 						type: 'f',
-						duration:7200
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
+						win[namespace].setBgImg('bg_main2');
 					}
 				},
 			],
 			[
 				{
-					text: '공공 기관의 종류에는 어떤 것들이 있더라?',
-					voice: 'SSJ410308_08',
-					duration:3500,
+					text: '저길 좀 봐! 추수가 한창이야.',
+					voice: 'SSJ320110_08',
+					duration:2500,
 					animation: {
 						type: 'c',
-						duration:3000
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][1]);
 					}
 				},
 				{
-					text: '도청, 소방서, 우체국, 주민 센터 등등…',
-					voice: 'SSJ410308_09',
+					text: '사람들의 생활 모습이 계절에 따라 <br>달라진다는 것 알고 있지?',
+					voice: 'SSJ320110_09',
 					duration:4500,
 					animation: {
 						type: 'c',
-						duration:4000
+						duration:4500
 					},
 					endBack: function(){
-						// 여기서 박스 나타남
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
 							win[namespace].speak[2][2],
 							{
 								type: 'word',
 								answer: [
-									['ㅂㄱㅅ'],
-									['보건소', '부가세', '불국사'],
-									['보건소']
+									['ㄱㅇ'],
+									['가을', '겨울', '곡우'],
+									['가을']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
@@ -786,51 +805,53 @@
 					}
 				},
 				{
-					text: '그 밖에, 감염병과 질병 예방 및 치료를 위해 노력하는 <br>공공 기관도 있대. 어디일까?',
-					voice: 'SSJ410308_10',
-					duration:7500,
+					text: '논과 밭에서 곡식이나 열매를 수확하는 <br>지금은 어떤 계절일까?',
+					voice: 'SSJ320110_10',
+					duration:5500,
 					animation: {
 						type: 'd',
-						duration:7000
+						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][3]);
+
 					}
 				},
 				{
-					text: '감염병과 질병 예방 및 치료를 위해 노력하는 <br>공공 기관은 보건소야.',
-					voice: 'SSJ410308_11',
-					duration:5500,
+					text: '논과 밭에서 곡식이나 열매를 수확하는 계절은 가을이지.',
+					voice: 'SSJ320110_11',
+					duration:4500,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][4]);
 					}
 				},
 				{
-					text: '게다가 보건소는 학생들에게 건강과 관련된 <br>다양한 교육을 해주기도 한다고!',
-					voice: 'SSJ410308_12',
-					duration:5500,
+					text: '가을에만 볼 수 있는 정말 멋진 풍경이야.',
+					voice: 'SSJ320110_12',
+					duration:3500,
 					animation: {
-						type: 'f',
-						duration:5500
+						type: 'f', 
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][0]);
+						win[namespace].setBgImg('bg_main3');
+						win[namespace].changeBgm(2);
 					}
 				},
 			],
 			[
 				// idx 3
 				{
-					text: '공공 기관에서는 지역 주민이 요청하는 일을 <br>처리하기도 해.',
-					voice: 'SSJ410308_13',
-					duration:4500,
+					text: '여긴 우리 동네의 유명한 하천이야. <br>강변을 따라 산책을 하는 사람들이 있네.',
+					voice: 'SSJ320110_13',
+					duration:7000,
 					animation: {
 						type: 'c', 
-						duration:4500
+						duration:7000
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
@@ -839,9 +860,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄱㅊㅅ'],
-									['감찰사', '관측소', '경찰서'],
-									['경찰서']
+									['ㅇㄱ'],
+									['연구', '여가', '일기'],
+									['여가']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
@@ -852,162 +873,164 @@
 					}
 				},
 				{
-					text: '어린이 보호 구역에서 신호를 지키지 않는 차에 대한 <br>단속 강화 요청은 어떤 공공 기관에 하면 좋을까?',
-					voice: 'SSJ410308_14',
-					duration:7500,
+					text: '이렇게 스스로 즐거움을 얻고자 남는 시간에 하는 <br>자유로운 활동을 뭐라고 할까? (OO 생활)',
+					voice: 'SSJ320110_14',
+					duration: 6500,
 					animation: {
-						type: 'd', 
-						duration:7500
+						type: 'd',
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][2]);
 					}
 				},
 				{
-					text: '어린이 보호 구역에서 신호를 지키지 않는 차에 대한 <br>단속 강화 요청은 경찰서에 하면 돼.',
-					voice: 'SSJ410308_15',
-					duration: 6500,
+					text: '스스로 즐거움을 얻고자 남는 시간에 하는 <br>자유로운 활동을 여가 생활이라고 해.',
+					voice: 'SSJ320110_15',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][3]);
 					}
 				},
 				{
-					text: '요즘 어린이 보호 구역에서 신호를 지키지 않는 차들이 <br>많이 보였는데, ',
-					voice: 'SSJ410308_16',
+					text: '사람들은 주로 자신이 살고 있는 고장의 환경을 이용해 <br>여가 생활을 즐기지!',
+					voice: 'SSJ320110_16',
 					duration: 5500,
 					animation: {
 						type: 'f',
 						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][4]);
-					}
-				},
-				{
-					text: '경찰서에 이들에 대한 단속 강화를 요청해야겠어.',
-					voice: 'SSJ410308_17',
-					duration: 3500,
-					animation: {
-						type: 'f',
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][5]);
-					}
-				},
-				{
-					text: '우와! 공공 기관들은 정말 다양한 방법으로 <br>우리 지역 주민들의 생활을 도와주는 것 같아.',
-					voice: 'SSJ410308_18',
-					duration: 7500,
-					animation: {
-						type: 'f',
-						duration:7500
-					},
-					endBack: function(){
-						window.speakUp.goStep(2);
+						win[namespace].askQuestion(win[namespace].speak[4][0]);
+						win[namespace].setBgImg('bg_main4');
+						win[namespace].changeBgm(1);
 					}
 				},
 			],
 			[
 				{
-					text: '오늘은 최근 우리 지역에서 발생한 문제를 해결하기 위한 <br>주민 회의가 열리는 날이야.',
-					voice: 'SSJ410308_19',
-					duration: 5500,
+					text: '이제 저녁이 되니 조금 추워지는걸? <br>배도 좀 고픈 것 같고... 슬슬 집에 돌아가서 쉴 시간이네.',
+					voice: 'SSJ320110_17',
+					duration: 7500,
 					animation: {
 						type: 'c',
-						duration:5500
+						duration:7500
 					},
 					endBack: function(){
-						win[namespace].progressStatus('ing', 3);
-						win[namespace].askQuestion(
-							win[namespace].speak[4][1],
-							{
-								type: 'word',
-								answer: [
-									['ㅈㅇ ㅁㅈ'],
-									['자연 문제', '지역 문제', '자유 문제'],
-									['지역 문제']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][2])}
-								}
-							}
-						);
+						win[namespace].askQuestion(win[namespace].speak[4][1]);
 					}
 				},
 				{
-					text: '지역 주민의 삶을 불편하게 하거나 지역 주민들 사이에 <br>갈등을 일으키는 문제를 무엇이라고 하지?',
-					voice: 'SSJ410308_20',
-					duration: 7500,
+					text: '역시, 사람이 살아가려면 <br>몸을 보호하는 옷, 영양분을 얻기 위한 음식,',
+					voice: 'SSJ320110_18',
+					duration: 6500,
 					animation: {
-						type: 'd',
-						duration:7500
+						type: 'c',
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][2]);
 					}
 				},
 				{
-					text: '지역 주민의 삶을 불편하게 하거나 지역 주민들 사이에 <br>갈등을 일으키는 문제를 지역 문제라고 해.',
-					voice: 'SSJ410308_21',
-					duration: 7200,
+					text: '그리고 안전하고 편안하게 쉴 수 있는 집이 필요한가 봐.',
+					voice: 'SSJ320110_19',
+					duration: 4500,
 					animation: {
-						type: 'f',
-						duration:7200
+						type: 'c',
+						duration:4500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][3]);
+						win[namespace].progressStatus('ing', 3);
+						win[namespace].askQuestion(
+							win[namespace].speak[4][3],
+							{
+								type: 'word',
+								answer: [
+									['ㅇㅅㅈ'],
+									['음식점', '원산지', '의식주'],
+									['의식주']
+								],
+								resultBack: {
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][5])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][4])}
+								}
+							}
+						);
 					}
 				},
 				{
-					text: '그래. 현재 우리 동네는 지역 문제로 인해 <br>많은 사람들 사이에 갈등이 일어나고 있는 상태야.',
-					voice: 'SSJ410308_22',
-					duration: 6500,
+					text: '이와 같이 옷, 음식, 집을 통틀어 이르는 말이 뭐더라?',
+					voice: 'SSJ320110_20',
+					duration: 5500,
+					animation: {
+						type: 'd',
+						duration:5500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][4]);
+					}
+				},
+				{
+					text: '옷, 음식, 집을 통틀어 이르는 말을 의식주라고 해.',
+					voice: 'SSJ320110_21',
+					duration: 5500,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:5500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][5]);
+					}
+				},
+				{
+					text: '우리가 살아가는데 꼭 필요한 것들을 이르는 말이니 <br>기억해 두자!',
+					voice: 'SSJ320110_22',
+					duration: 4500,
+					animation: {
+						type: 'f',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][0]);
+						win[namespace].setBgImg('bg_main5');
 					}
 				},
 			],
 			[
 				{
-					text: '부모님께서 그러는데, 우리 동네에 <br>주차 문제가 심각하다고 해.',
-					voice: 'SSJ410308_23',
-					duration: 4500,
+					text: '그런데, 고장의 환경에 따라 옷, 음식, 집의 모습도 <br>달라진다는 점 알고 있니?',
+					voice: 'SSJ320110_23',
+					duration: 7500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][1]);
 					}
 				},
-				{
-					text: '그래서 이렇게 많은 사람들이 <br>주민 회의에 참석한 것인가 봐.',
-					voice: 'SSJ410308_24',
-					duration: 4500,
+				{ 
+					text: '지난 방학 때 가족들과 덥고 비가 많이 내려 <br>습한 고장으로 해외여행을 다녀왔는데',
+					voice: 'SSJ320110_24',
+					duration: 6500,
 					animation: {
 						type: 'c',
-						duration:4500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
 						win[namespace].askQuestion(win[namespace].speak[5][2],
 							{
-								type: 'word',
-								answer: [
-									['ㅈㅁ ㅊㅇ'],
-									['주민 치유', '주민 참여', '주민 청원'],
-									['주민 참여']
-								],
+								type: 'ox',
+								answer: '열대 과일',
+								// guideDuration: 2500,
+								noTextLength: true,
+								// guideVoice: 'SSJ320110_25',
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[5][4])},
 									wrong: function(){win[namespace].askQuestion(win[namespace].speak[5][3])}
@@ -1016,45 +1039,45 @@
 						);
 					}
 				},
-				{ 
-					text: '지역 문제를 해결하는 과정에서 지역 주민이 중심이 되어 <br>참여하는 것을 무엇이라고 할까?',
-					voice: 'SSJ410308_25',
-					duration: 6300,
+				{
+					text: '여행을 하면서, 열대 과일, 생선, 치즈 중에서, <br>내가 제일 많이 먹은 음식이 뭐였~게?',
+					voice: 'SSJ320110_25',
+					duration: 7500,
 					animation: {
 						type: 'd',
-						duration:6300
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
 				},
 				{
-					text: '지역 문제를 해결하는 과정에서 지역 주민이 중심이 되어 참여하는 것을 주민 참여라고 해. ',
-					voice: 'SSJ410308_26',
-					duration: 7000,
+					text: '정답은 열대 과일이야~!',
+					voice: 'SSJ320110_25_1',
+					duration: 2500,
 					animation: {
 						type: 'f',
-						duration:7000
+						duration:2500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][4]);
 					}
 				},
 				{
-					text: '지역 문제는 지역의 모든 주민에게 영향을 미치기 때문에 <br>이를 해결하는 과정에 주민들이 참여하는 게 좋겠지?',
-					voice: 'SSJ410308_27',
-					duration: 8000,
+					text: '날씨가 덥고 습한 고장에서는 파인애플, 바나나, <br>망고와 같은 열대 과일을 이용한 음식이 많아.',
+					voice: 'SSJ320110_26',
+					duration: 7500,
 					animation: {
 						type: 'f',
-						duration:8000
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][5]);
 					}
 				},
 				{
-					text: '공청회 참여, 주민 회의 참여, 서명 운동 등 <br>여러 가지 방법으로 주민 참여를 실천할 수 있어.',
-					voice: 'SSJ410308_28',
+					text: '그리고, 바람이 잘 통하는 긴 옷을 입고 <br>챙이 넓은 모자를 쓰고 있는 사람들도 많이 볼 수 있었지.',
+					voice: 'SSJ320110_27',
 					duration: 7500,
 					animation: {
 						type: 'f',
@@ -1062,80 +1085,93 @@
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][0]);
+						win[namespace].setBgImg('bg_main6');
 					}
 				},
 			],
 			[ // 6 - 0
 				{
-					text: '그리고 어떤 단체를 만들어서 지역의 일에 <br>참여하는 경우도 있다고 배웠는데…',
-					voice: 'SSJ410308_29',
-					duration: 6000,
+					text: '자, 이제 고장의 환경에 따라 <br>집의 모양도 달라진다는 걸 보여 줄게.',
+					voice: 'SSJ320110_28',
+					duration: 5500,
 					animation: {
 						type: 'c',
-						duration:6000
+						duration:5500
 					},
 					endBack: function(){
-						win[namespace].progressStatus('ing', 5);
-						win[namespace].askQuestion(
-							win[namespace].speak[6][1],
-							{
-								type: 'word',
-								answer: [
-									['ㅅㅁ ㄷㅊ'],
-									['시민 단체', '신문 도착', '선물 당첨'],
-									['시민 단체']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][2])}
-								}
-							}
-						);
+						win[namespace].askQuestion(win[namespace].speak[6][1]);
 					}
 				},
 				{
-					text: '시민들이 스스로 모여 사회 전체의 이익을 위해 <br>활동하는 단체를 뭐라고 하더라?',
-					voice: 'SSJ410308_30',
-					duration: 6000,
+					text: '여긴 과거 우리 고장 사람들이 살았던 <br>집의 모양이 남아있는 곳이야.',
+					voice: 'SSJ320110_29',
+					duration: 5500,
 					animation: {
-						type: 'd',
-						duration:6000
+						type: 'c',
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][2]);
 					}
 				},
 				{
-					text: '시민들이 스스로 모여 사회 전체의 이익을 위해 <br>활동하는 단체를 시민 단체라고 해.',
-					voice: 'SSJ410308_31',
-					duration: 6000,
+					text: '우리 고장은 여름철에 홍수로 <br>집이 물에 잠길 위험이 있었거든.',
+					voice: 'SSJ320110_30',
+					duration: 5500,
 					animation: {
-						type: 'f',
-						duration:6000
+						type: 'c',
+						duration:5500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][3]);
+						win[namespace].progressStatus('ing', 5);
+						win[namespace].askQuestion(
+							win[namespace].speak[6][3],
+							{
+								type: 'word',
+								answer: [
+									['ㅌㄷㅇㅈ'],
+									['터다운집', '터돋움집', '터듬이집'],
+									['터돋움집']
+								],
+								resultBack: {
+									right: function(){win[namespace].askQuestion(win[namespace].speak[6][5])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][4])}
+								}
+							}
+						);
 					}
 				},
 				{
-					text: '그래! 시민 단체는 지역의 환경, 경제, 교육 등의 <br>여러 분야에서 활동하고,',
-					voice: 'SSJ410308_32',
-					duration: 6000,
+					text: '그래서 이렇게 땅 위에 터를 돋우어 높은 곳에 <br>집을 지었어. 이러한 집을 뭐라고 하는지 아니?',
+					voice: 'SSJ320110_31',
+					duration: 8500,
 					animation: {
-						type: 'f',
-						duration:5500
+						type: 'd',
+						duration:8500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][4]);
 					}
 				},
 				{
-					text: '지역의 어려운 사람들을 돕는 봉사 활동을 하기도 하지.',
-					voice: 'SSJ410308_33',
-					duration: 4500,
+					text: '여름철 홍수로 집이 물에 잠길 위험 때문에 땅 위에 <br>터를 돋우어 높은 곳에 지은 집을 터돋움집이라고 해.',
+					voice: 'SSJ320110_32',
+					duration: 9500,
 					animation: {
 						type: 'f',
-						duration:4500
+						duration:9500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][5]);
+					}
+				},
+				{
+					text: '그래. 고장의 환경에 따라 의생활, 식생활, 주생활이 <br>다양하게 나타난다는 점, 오늘 확실하게 배웠네!',
+					voice: 'SSJ320110_33',
+					duration: 9500,
+					animation: {
+						type: 'f',
+						duration:9500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
@@ -1144,33 +1180,21 @@
 			],
 			[
 				{
-					text: '오늘 정말 많은 곳을 둘러보고 온 것 같아!',
-					voice: 'SSJ410308_34',
-					duration: 3000,
+					text: '이제 시간이 늦었으니, 집에 가서 푹 쉬도록 하자!',
+					voice: 'SSJ320110_34',
+					duration: 4000,
 					animation: {
 						type: 'c',
-						duration:3000
+						duration:4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
 				},
 				{
-					text: '덕분에 사회 시간에 배운 내용들이 <br>한번에 정리되는 기분인걸? 고마워.',
-					voice: 'SSJ410308_35',
-					duration: 6500,
-					animation: {
-						type: 'c',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[7][2]);
-					}
-				},
-				{
-					text: '그럼 다음에 또 만나자. 안녕~!',
-					voice: 'SSJ410308_36',
-					duration: 4500,
+					text: '그럼 다음에 또 만나! 안녕~',
+					voice: 'SSJ320110_35',
+					duration: 3500,
 					animation: {
 						type: 'b',
 						duration:3500
