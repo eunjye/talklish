@@ -43,7 +43,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback, isVo
 		 break;
 
 		case 'e2':
-		 _dx = 400;
+		 _dx = 420;
 		 break;
 	}
 
@@ -58,7 +58,7 @@ window.speakUp.animationStatus = function(status, type, duration, callback, isVo
 		 break;
 
 		case 'e2':
-		 _dy = 120;
+		 _dy = 90;
 		 break;
 	}
 
