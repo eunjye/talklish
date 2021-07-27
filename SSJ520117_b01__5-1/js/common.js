@@ -691,10 +691,10 @@
 				{
 					text: '나는 요즘 우리나라의 역사에 푹 빠져있어.',
 					voice: 'SSJ520117_03',
-					duration:3500,
+					duration:4000,
 					animation: {
 						type: 'c',
-						duration: 3500
+						duration: 4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][1]);
@@ -716,10 +716,10 @@
 				{
 					text: '내가 널 위해 해설사가 되어 줄게. 날 따라와 봐~',
 					voice: 'SSJ520117_05',
-					duration:4000,
+					duration:4500,
 					animation: {
 						type: 'c',
-						duration:4000
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
