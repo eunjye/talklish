@@ -607,67 +607,67 @@
 		resultScript: [
 			{
 				text: '우리 친구 최고! 정말 잘했어~',
-				voice: 'SSJ3g_ending_01',
+				voice: 'SSJ5b_ending_01',
 				duration: 4000
 			},
 			{
 				text: '잘했어! 열심히 공부하고 있구나.',
-				voice: 'SSJ3g_ending_02',
+				voice: 'SSJ5b_ending_02',
 				duration: 4000
 			},
 			{
 				text: '다음번엔 더 잘할 수 있을 거야.',
-				voice: 'SSJ3g_ending_03',
+				voice: 'SSJ5b_ending_03',
 				duration: 3000
 			},
 			{
 				text: '아쉽다~ 다음엔 더 잘해보자! ',
-				voice: 'SSJ3g_ending_04',
+				voice: 'SSJ5b_ending_04',
 				duration: 4000
 			},
 		],
 		wrongScript: [
 			[
 				{
-					text: '다시 한번 생각해볼까?',
-					voice: 'SSJ3g_A_01',
-					duration: 2000
+					text: '다시 한번 생각해보자!',
+					voice: 'SSJ5b_A_01',
+					duration: 1500
 				},
 				{
-					text: '조금 더 생각해볼까?',
-					voice: 'SSJ3g_A_02',
-					duration: 2000
+					text: '조금 더 생각해보자!',
+					voice: 'SSJ5b_A_02',
+					duration: 1300
 				},
 				{
-					text: '한 번 더 생각해보자!',
-					voice: 'SSJ3g_A_03',
-					duration: 2000
+					text: '한 번 더 생각해볼까?',
+					voice: 'SSJ5b_A_03',
+					duration: 1500
 				},
 				{
-					text: '글쎄, 한 번 더 생각해볼까?',
-					voice: 'SSJ3g_A_04',
-					duration: 3000
+					text: '글쎄, 한 번 더 생각해봐!',
+					voice: 'SSJ5b_A_04',
+					duration: 2500
 				},
 				{
-					text: '아쉬워~ 한 번 더 생각해봐!',
-					voice: 'SSJ3g_A_05',
+					text: '아쉬워~ 한 번 더 생각해볼까?',
+					voice: 'SSJ5b_A_05',
 					duration: 3000
 				},
 			],
 			[
 				{
-					text: '아쉬워~ 내가 알려줄게!',
-					voice: 'SSJ3g_B_01',
-					duration: 3000
+					text: '아쉬워~ 내가 설명해 줄게!',
+					voice: 'SSJ5b_B_01',
+					duration: 2500
 				},
 				{
-					text: '잘 모르겠다면 내가 설명해 줄게!',
-					voice: 'SSJ3g_B_02',
-					duration: 3000
+					text: '잘 모르겠다면 내가 알려줄게!',
+					voice: 'SSJ5b_B_02',
+					duration: 2500
 				},
 				{
 					text: '어려웠구나! 내가 알려줄게.',
-					voice: 'SSJ3g_B_03',
+					voice: 'SSJ5b_B_03',
 					duration: 3000
 				},
 			]
@@ -675,23 +675,11 @@
 		speak: [
 			[
 				{
-					text: '안녕~ 나는 천재초등학교 4학년 노을이야!',
-					voice: 'SSJ420109_01',
+					text: '안녕? 나는 천재초등학교 5학년 1반 우주라고 해!',
+					voice: 'SSJ520117_01',
 					duration:4500,
 					animation: {
 						type: 'b',
-						duration: 4500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[0][1]);
-					}
-				},
-				{
-					text: '오늘은 나와 같이 촌락과 도시의 모습을 살펴보고 오자.',
-					voice: 'SSJ420109_02',
-					duration:4500,
-					animation: {
-						type: 'c',
 						duration: 4500
 					},
 					endBack: function(){
@@ -701,63 +689,112 @@
 			],
 			[
 				{
-					text: '우선 촌락부터 구경해 보자고! <br>여기저기 논과 밭이 펼쳐져 있네~',
-					voice: 'SSJ420109_03',
-					duration:6500,
+					text: '나는 요즘 우리나라의 역사에 푹 빠져있어.',
+					voice: 'SSJ520117_03',
+					duration:3500,
 					animation: {
 						type: 'c',
-						duration: 6500
+						duration: 3500
 					},
 					endBack: function(){
-						win[namespace].progressStatus('ing', 0);
-						win[namespace].askQuestion(
-							win[namespace].speak[1][1],
-							{
-								type: 'word',
-								answer: [
-									['ㄴㅊ'],
-									['남촌', '농촌', '내촌'],
-									['농촌']
-								],
-								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[1][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][2])}
-								}
-							}
-						);
+						win[namespace].askQuestion(win[namespace].speak[1][1]);
 					}
 				},
 				{
-					text: '농사짓는 땅을 이용하여 생산 활동을 하는 <br>이곳은 어떤 종류의 촌락일까?',
-					voice: 'SSJ420109_04',
+					text: '그래서 옛사람들의 삶과 문화를 알아보기 위해 <br>이곳 박물관에 와 있지!',
+					voice: 'SSJ520117_04',
 					duration:5500,
 					animation: {
-						type: 'd',
+						type: 'c',
 						duration: 5500
 					},
 					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][2]);
 
 					}
 				},
 				{
-					text: '농사짓는 땅을 이용하여 생산 활동을 하는 촌락을 <br>농촌이라고 해.',
-					voice: 'SSJ420109_05',
-					duration:5500,
+					text: '내가 널 위해 해설사가 되어 줄게. 날 따라와 봐~',
+					voice: 'SSJ520117_05',
+					duration:4000,
 					animation: {
-						type: 'f',
-						duration:5500
+						type: 'c',
+						duration:4000
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[1][3]);
 					}
 				},
 				{
-					text: '그런데, 농촌에 사람들이 왜 이렇게 없을까?',
-					voice: 'SSJ420109_06',
+					text: '음… 먼저 청동기 시대 전시실을 살펴볼까?',
+					voice: 'SSJ520117_06',
+					duration:4000,
+					animation: {
+						type: 'c',
+						duration:4000
+					},
+					endBack: function(){
+						win[namespace].progressStatus('ing', 0);
+						win[namespace].askQuestion(
+							win[namespace].speak[1][4],
+							{
+								type: 'word',
+								answer: [
+									['ㄱㅈㅅ'],
+									['국제선', '고조선', '간조선'],
+									['고조선']
+								],
+								resultBack: {
+									right: function(){win[namespace].askQuestion(win[namespace].speak[1][6])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[1][5])}
+								}
+							}
+						);
+					}
+				},
+				{
+					text: '청동기 시대에 세워진 우리나라 최초의 국가를 <br>알고 있니?',
+					voice: 'SSJ520117_07',
+					duration:3500,
+					animation: {
+						type: 'd',
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][5]);
+					}
+				},
+				{
+					text: '청동기 시대에 세워진 우리나라 최초의 국가는 <br>고조선이야.',
+					voice: 'SSJ520117_07_1',
 					duration:4500,
 					animation: {
 						type: 'f',
 						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][6]);
+					}
+				},
+				{
+					text: '단군왕검이 세운 우리나라 최초의 국가 고조선은<br>우수한 청동기 문화를 바탕으로 성장했어.',
+					voice: 'SSJ520117_08',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[1][7]);
+					}
+				},
+				{
+					text: '뒤에 보이는 미송리식 토기, 비파형 동검 등이 <br>모두 고조선의 문화유산들이지.',
+					voice: 'SSJ520117_09',
+					duration:6500,
+					animation: {
+						type: 'f',
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][0]);
@@ -767,8 +804,23 @@
 			],
 			[
 				{
-					text: '게다가 논과 밭에서 일하는 사람들은 <br>노인분들밖에 보이지 않네.',
-					voice: 'SSJ420109_07',
+					text: '여기는 세 국가로 나뉘어 전시되어 있는 걸 보니 <br>삼국 시대 전시실인가 봐.',
+					voice: 'SSJ520117_10',
+					duration:5500,
+					animation: {
+						type: 'c',
+						duration:5500
+					},
+					endBack: function(){
+
+
+						win[namespace].askQuestion(win[namespace].speak[2][1]);
+
+					}
+				},
+				{
+					text: '주몽이 세운 고구려, 온조가 세운 백제, 그리고 또…',
+					voice: 'SSJ520117_11',
 					duration:5500,
 					animation: {
 						type: 'c',
@@ -777,205 +829,155 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 1);
 						win[namespace].askQuestion(
-							win[namespace].speak[2][1],
+							win[namespace].speak[2][2],
 							{
 								type: 'word',
 								answer: [
-									['ㄱㄹㅎ'],
-									['공론화', '그룹화', '고령화'],
-									['고령화']
+									['ㅅㄹ'],
+									['사림', '승려', '신라'],
+									['신라']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[2][3])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][2])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[2][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[2][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '전체 인구에서 노인이 차지하는 비율이 높아지는 현상을 <br>뭐라고 하는지 아니? (OOO 현상)',
-					voice: 'SSJ420109_08',
+					text: '박혁거세가 세우고, 문무왕 때 고대 삼국을 통일한 <br>이 나라는 어디더라?',
+					voice: 'SSJ520117_12',
 					duration:5500,
 					animation: {
 						type: 'd',
 						duration:5500
 					},
 					endBack: function(){
-					}
-				},
-				{
-					text: '전체 인구에서 노인이 차지하는 비율이 높아지는 것을 <br>고령화 현상이라고 해.',
-					voice: 'SSJ420109_08_1',
-					duration:6500,
-					animation: {
-						type: 'f',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[2][3]);
 
 					}
 				},
 				{
-					text: '고령화 현상으로 촌락에 사는 노인의 인구는 늘어나고, <br>어린이의 수는 줄어들고 있어.',
-					voice: 'SSJ420109_09',
-					duration:7500,
+					text: '박혁거세가 세우고, 문무왕 때 고대 삼국을 통일한 <br>나라의 이름은 신라야.',
+					voice: 'SSJ520117_12_1',
+					duration:5500,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:5500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][4]);
 					}
 				},
 				{
-					text: '일손 부족의 문제가 심각할 것 같아 걱정이 되긴 하지만,',
-					voice: 'SSJ420109_10',
-					duration:5000,
+					text: '신라는 한반도에 있던 여러 나라를 처음으로 통일했어.',
+					voice: 'SSJ520117_13',
+					duration:4500,
 					animation: {
 						type: 'f', 
-						duration:5000
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[2][5]);
 					}
 				},
 				{
-					text: '최근 다양한 기계를 이용해서 일손 부족 문제를 <br>해결하고 있다고 하니 다행이야.',
-					voice: 'SSJ420109_11',
-					duration:6500,
+					text: '이번엔 후삼국을 통일한 고려의 전시실로 가 보자!',
+					voice: 'SSJ520117_14',
+					duration:3500,
 					animation: {
 						type: 'f',
-						duration:6500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[3][0]);
 						win[namespace].setBgImg('bg_main3');
-						// win[namespace].changeBgm(2);
+						win[namespace].changeBgm(2);
 					}
 				},
 			],
 			[
 				// idx 3
 				{
-					text: '저기, 새로 이사를 오는 사람들이 보이네!',
-					voice: 'SSJ420109_12',
-					duration:3500,
+					text: '고려는 송악의 호족 출신인 <br>왕건이 세운 나라인 건 알고 있지?',
+					voice: 'SSJ520117_15',
+					duration:4500,
 					animation: {
 						type: 'c', 
-						duration:3500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][1]);
-					}
-				},
-				{
-					text: '도시에서 농촌으로 이사를 온 사람들인가 봐. ',
-					voice: 'SSJ420109_13',
-					duration:2500,
-					animation: {
-						type: 'c', 
-						duration:2500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 2);
 						win[namespace].askQuestion(
-							win[namespace].speak[3][2],
+							win[namespace].speak[3][1],
 							{
-								type: 'word',
-								answer: [
-									['ㄱㅊ'],
-									['강촌', '김천', '귀촌'],
-									['귀촌']
-								],
+								type: 'ox',
+								answer: '북쪽',
+								guideDuration: 3500,
+								// noTextLength: true,
+								guideVoice: 'SSJ520117_17',
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[3][4])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][3])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[3][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[3][2])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '도시에 살던 사람들이 촌락으로 <br>삶의 터전을 옮기는 것을 뭐라고 할까?',
-					voice: 'SSJ420109_14',
-					duration: 5500,
+					text: '왕건은 남쪽과 북쪽 중 어느 방향으로 <br>영토를 넓히고자 했는지, 혹시 알아?',
+					voice: 'SSJ520117_16',
+					duration:6500,
 					animation: {
-						type: 'd',
-						duration:5500
+						type: 'd', 
+						duration:11000
 					},
 					endBack: function(){
-
+						win[namespace].askQuestion(win[namespace].speak[3][2]);
 					}
 				},
 				{
-					text: '도시에 살던 사람들이 촌락으로 삶의 터전을 옮기는 것을 <br>귀촌이라고 해.',
-					voice: 'SSJ420109_15',
-					duration: 5500,
+					text: '왕건은 북쪽으로 영토를 넓혀 나갔어.',
+					voice: 'SSJ520117_17_1',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:5500
+						duration:3500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[3][4]);
+						win[namespace].askQuestion(win[namespace].speak[3][3]);
 					}
 				},
 				{
-					text: '귀촌을 하려는 사람들이 촌락에 잘 적응하며 살 수 <br>있도록 지역 사회의 적극적인 지원이 필요할 것 같아.',
-					voice: 'SSJ420109_16',
-					duration: 8500,
+					text: '고구려를 계승하고자 했던 왕건은 <br>북진 정책을 펼쳐서 북쪽으로 영토를 넓혀 나갔어.',
+					voice: 'SSJ520117_18',
+					duration: 6500,
 					animation: {
 						type: 'f',
-						duration:8500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][0]);
 						win[namespace].setBgImg('bg_main4');
-						win[namespace].changeBgm(2);
 					}
 				},
 			],
 			[
 				{
-					text: '이제 도시를 둘러볼 차례야!',
-					voice: 'SSJ420109_17',
-					duration: 2500,
+					text: '그럼 우리 이제 고려를 대표하는 문화유산들을 <br>구경해 볼까?',
+					voice: 'SSJ520117_19',
+					duration: 4500,
 					animation: {
 						type: 'c',
-						duration:2500
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[4][1]);
 					}
 				},
 				{
-					text: '사람도 많고, 높은 건물도 많고, 교통 시설들도 많네!',
-					voice: 'SSJ420109_18',
-					duration: 5500,
-					animation: {
-						type: 'c',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][2]);
-					}
-				},
-				{
-					text: '도시는 주로 교통이 발달하여 <br>사람과 물건 이동이 편리한 곳에 위치해.',
-					voice: 'SSJ420109_19',
-					duration: 6500,
-					animation: {
-						type: 'c',
-						duration:6500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][3]);
-					}
-				},
-				{
-					text: '그런데, 처음부터 계획하여 만들어진 도시도 있다고 하네?',
-					voice: 'SSJ420109_20',
+					text: '우와~ 여기 푸른 도자기들 좀 봐. 정말 아름답다~!',
+					voice: 'SSJ520117_20',
 					duration: 4500,
 					animation: {
 						type: 'c',
@@ -984,67 +986,80 @@
 					endBack: function(){
 						win[namespace].progressStatus('ing', 3);
 						win[namespace].askQuestion(
-							win[namespace].speak[4][4],
+							win[namespace].speak[4][2],
 							{
 								type: 'word',
 								answer: [
-									['ㅅㅈㅌㅂㅈㅊㅅ'],
-									['순조특별자치시', '세종특별자치시', '숙종특별자치시'],
-									['세종특별자치시']
+									['ㅅㄱ'],
+									['상감', '실감', '소금'],
+									['상감']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[4][6])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][5])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[4][4])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[4][3])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '행정의 중심지로 새롭게 계획하여 만든 <br>도시의 이름이 뭐였더라?',
-					voice: 'SSJ420109_21',
-					duration: 4500,
+					text: '이 청자들은 고려만의 독창적인 기법을 사용해 만들어진 <br>예술품이래. 어떤 기법일까? (OO 기법)',
+					voice: 'SSJ520117_21',
+					duration: 6500,
 					animation: {
 						type: 'd',
-						duration:4500
+						duration:6500
 					},
 					endBack: function(){
 					}
 				},
 				{
-					text: '행정의 중심지로 새롭게 계획해서 만든 도시의 이름은 <br>세종특별자치시야.',
-					voice: 'SSJ420109_22',
+					text: '이 청자들은 상감 기법으로 만들어졌어.',
+					voice: 'SSJ520117_21_1',
+					duration: 3500,
+					animation: {
+						type: 'f',
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[4][4]);
+					}
+				},
+				{
+					text: '상감 기법을 사용해 만들어진 고려청자를 통해 <br>당시 귀족들의 화려한 문화를 엿볼 수 있어.',
+					voice: 'SSJ520117_22',
 					duration: 6500,
 					animation: {
 						type: 'f',
 						duration:6500
 					},
 					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[4][6]);
+						win[namespace].askQuestion(win[namespace].speak[4][5]);
 					}
 				},
 				{
-					text: '이름만큼 특별한 도시인 것 같네!',
-					voice: 'SSJ420109_23',
-					duration: 2500,
+					text: '자, 우리 이번엔 밖으로 한번 나가 보는 게 어때~?',
+					voice: 'SSJ520117_23',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:2500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][0]);
 						win[namespace].setBgImg('bg_main5');
+						win[namespace].changeBgm(1);
 					}
 				},
 			],
 			[
 				{
-					text: '그런데, 촌락과 도시는 서로 도움을 주고받으며 <br>발전한다는 사실 알고 있니?',
-					voice: 'SSJ420109_24',
-					duration: 6500,
+					text: '짜잔~ 이 발명품들은 모두 조선 시대의 한 왕이 <br>학자들과 함께 만든 과학 기구들이야.',
+					voice: 'SSJ520117_24',
+					duration: 7500,
 					animation: {
 						type: 'c',
-						duration:6500
+						duration:7500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 4);
@@ -1053,9 +1068,9 @@
 							{
 								type: 'word',
 								answer: [
-									['ㄱㄹ'],
-									['권리', '관람', '교류'],
-									['교류']
+									['ㅅㅈ'],
+									['사장', '세종', '수지'],
+									['세종']
 								],
 								resultBack: {
 									right: function(){win[namespace].askQuestion(win[namespace].speak[5][3])},
@@ -1066,32 +1081,44 @@
 					}
 				},
 				{ 
-					text: '사람들이 오고 가거나 물건, 문화, 기술 등을 <br>서로 주고받는 것을 뭐라고 하더라?',
-					voice: 'SSJ420109_25',
-					duration: 6500,
+					text: '우리에게는 훈민정음을 창제한 왕으로 잘 알려진 <br>이 사람은 누구일까?',
+					voice: 'SSJ520117_25',
+					duration: 5500,
 					animation: {
 						type: 'd',
-						duration:6500
+						duration:5500
 					},
 					endBack: function(){
 
 					}
 				},
 				{
-					text: '사람들이 오고 가거나 물건, 문화, 기술 등을 <br>서로 주고받는 것을 교류라고 해.',
-					voice: 'SSJ420109_26',
-					duration: 7500,
+					text: '훈민정음을 창제한 왕의 이름은 세종이야.',
+					voice: 'SSJ520117_25_1',
+					duration: 3500,
 					animation: {
 						type: 'f',
-						duration:7500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[5][3]);
 					}
 				},
 				{
-					text: '지역마다 생산물, 기술, 문화 등이 다르기 때문에 <br>교류가 이루어지게 돼.',
-					voice: 'SSJ420109_27',
+					text: '세종은 백성의 생활에 도움이 되는 글자와 책, <br>과학 기구를 만드는 데 힘썼어.',
+					voice: 'SSJ520117_26',
+					duration: 6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[5][4]);
+					}
+				},
+				{
+					text: '백성이 나라의 근본이며, 백성이 잘 사는 것이 <br>나라가 좋아지는 길이라고 생각했기 때문이야.',
+					voice: 'SSJ520117_27',
 					duration: 6500,
 					animation: {
 						type: 'f',
@@ -1105,87 +1132,99 @@
 			],
 			[ // 6 - 0
 				{
-					text: '마침 저기 농산물 직거래 장터가 보이네! 한번 가 보자.',
-					voice: 'SSJ420109_28',
-					duration: 5000,
+					text: '이번에는 조선이 건국 200년 만에 맞은 위기 상황과 <br>극복 과정을 알아보려고 해.',
+					voice: 'SSJ520117_28',
+					duration: 6500,
 					animation: {
 						type: 'c',
-						duration:5000
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][1]);
-					}
-				},
-				{
-					text: '도시 사람들은 믿을 수 있는 <br>싱싱한 농산물을 싸게 구매하고',
-					voice: 'SSJ420109_29',
-					duration: 5500,
-					animation: {
-						type: 'c',
-						duration:5500
-					},
-					endBack: function(){
-						win[namespace].askQuestion(win[namespace].speak[6][2]);
-					}
-				},
-				{
-					text: '촌락 사람들은 농산물을 제값을 받고 팔면서, <br>서로 도움을 주고받고 있구나.',
-					voice: 'SSJ420109_30',
-					duration: 5500,
-					animation: {
-						type: 'c',
-						duration:5500
+						duration:6500
 					},
 					endBack: function(){
 						win[namespace].progressStatus('ing', 5);
 						win[namespace].askQuestion(
-							win[namespace].speak[6][3],
+							win[namespace].speak[6][1],
 							{
 								type: 'word',
 								answer: [
-									['ㅅㅎ ㅇㅈ'],
-									['상호 억제', '상호 의존', '상호 인정'],
-									['상호 의존']
+									['ㅇㅈㅇㄹ'],
+									['임진왜란', '인정왜란', '왕자왜란'],
+									['임진왜란']
 								],
 								resultBack: {
-									right: function(){win[namespace].askQuestion(win[namespace].speak[6][5])},
-									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][4])}
+									right: function(){win[namespace].askQuestion(win[namespace].speak[6][3])},
+									wrong: function(){win[namespace].askQuestion(win[namespace].speak[6][2])}
 								}
 							}
 						);
 					}
 				},
 				{
-					text: '교류하는 촌락과 도시의 관계를 나타내는 말로, <br>서로 돕고 교류하며 의지하는 것을 뭐라고 하지?',
-					voice: 'SSJ420109_31',
-					duration: 8500,
+					text: '뒤에 보이는 저 커다란 배와 관련 있는 사건이야. <br>뭔지 알겠니~?',
+					voice: 'SSJ520117_29',
+					duration: 5500,
 					animation: {
 						type: 'd',
-						duration:8500
+						duration:5500
 					},
 					endBack: function(){
-						
 					}
 				},
 				{
-					text: '서로 돕고 교류하며 의지하는 것을 상호 의존이라고 해.',
-					voice: 'SSJ420109_32',
+					text: '바로 일본을 통일한 도요토미 히데요시가 일으킨 <br>임진왜란이야.',
+					voice: 'SSJ520117_29_1',
 					duration: 5500,
 					animation: {
 						type: 'f',
 						duration:5500
 					},
 					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][3]);
+					}
+				},
+				{
+					text: '일본은 조선을 정복하고자 수많은 군대를 이끌고 침략해 <br>임진왜란을 일으켰어.',
+					voice: 'SSJ520117_30',
+					duration: 6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][4]);
+						
+					}
+				},
+				{
+					text: '하지만 육지에서는 관군들이, 바다에서는 수군들이 <br>나라를 지키기 위해 노력했지.',
+					voice: 'SSJ520117_31',
+					duration: 6500,
+					animation: {
+						type: 'f',
+						duration:6500
+					},
+					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[6][5]);
 					}
 				},
 				{
-					text: '촌락과 도시에 사는 사람들은 서로 부족한 것들을 교류를 통해 채워 주면서 상호 의존하고 있다는 점 잊지 말자!',
-					voice: 'SSJ420109_33',
-					duration: 9500,
+					text: '특히 이순신 장군이 이끌었던 수군은 <br>저 거북선을 이용해 일본군을 크게 무찔렀어.',
+					voice: 'SSJ520117_32',
+					duration: 7000,
 					animation: {
 						type: 'f',
-						duration:9500
+						duration:7000
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[6][6]);
+					}
+				},
+				{
+					text: '나라를 지키려는 우리 선조들의 활약이 정말 대단하지~?',
+					voice: 'SSJ520117_33',
+					duration: 4500,
+					animation: {
+						type: 'f',
+						duration:4500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][0]);
@@ -1194,20 +1233,44 @@
 			],
 			[
 				{
-					text: '벌써 집에 갈 시간이네! <br>오늘 정말 알찬 하루를 보낸 것 같아.',
-					voice: 'SSJ420109_34',
-					duration: 5500,
+					text: '자! 오늘 나의 박물관 해설은 여기까지야~',
+					voice: 'SSJ520117_34',
+					duration: 3500,
 					animation: {
 						type: 'c',
-						duration:5500
+						duration:3500
 					},
 					endBack: function(){
 						win[namespace].askQuestion(win[namespace].speak[7][1]);
 					}
 				},
 				{
-					text: '그럼 다음에 또 만나서 이야기 나누자! 안녕~',
-					voice: 'SSJ420109_35',
+					text: '우리나라의 역사와 관련된 여러 가지 문화유산들을 <br>직접 보니 어땠어~?',
+					voice: 'SSJ520117_35',
+					duration: 4500,
+					animation: {
+						type: 'c',
+						duration:4500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[7][2]);
+					}
+				},
+				{
+					text: '사회 시간에 배운 내용들을 잊어버리지 않을 수 있겠지?',
+					voice: 'SSJ520117_36',
+					duration: 3500,
+					animation: {
+						type: 'c',
+						duration:3500
+					},
+					endBack: function(){
+						win[namespace].askQuestion(win[namespace].speak[7][3]);
+					}
+				},
+				{
+					text: '그럼 우리 다음에 또 만나서 이야기 나누자. 안녕~',
+					voice: 'SSJ520117_37',
 					duration: 4500,
 					animation: {
 						type: 'b',
