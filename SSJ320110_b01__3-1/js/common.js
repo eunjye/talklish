@@ -30,7 +30,7 @@
 		getRandomInt: function(min, max) {
 			min = Math.ceil(min);
 			max = Math.floor(max);
-			return Math.floor(Math.random() * (max - min + 1)) + min; //최댓값은 제외, 최솟값은 포함
+			return Math.floor(Math.random() * (max - min + 1)) + min; 
 		},
 		/**
 		 * @name goToNPage
@@ -621,7 +621,7 @@
 				duration: 3000
 			},
 			{
-				text: '아쉽다~ 다음엔 더 잘해보자! ',
+				text: '아쉽다~ 다음엔 더 잘해 보자!  ',
 				voice: 'SSJ3b_ending_04',
 				duration: 4000
 			},
@@ -629,27 +629,27 @@
 		wrongScript: [
 			[
 				{
-					text: '다시 한번 생각해보자!',
+					text: '다시 한번 생각해 보자!',
 					voice: 'SSJ3b_A_01',
 					duration: 2000
 				},
 				{
-					text: '조금 더 생각해보자!',
+					text: '조금 더 생각해 보자!',
 					voice: 'SSJ3b_A_02',
 					duration: 2000
 				},
 				{
-					text: '한 번 더 생각해볼까?',
+					text: '한 번 더 생각해 볼까?',
 					voice: 'SSJ3b_A_03',
 					duration: 2200
 				},
 				{
-					text: '글쎄, 한 번 더 생각해봐!',
+					text: '글쎄, 한 번 더 생각해 봐!',
 					voice: 'SSJ3b_A_04',
 					duration: 2700
 				},
 				{
-					text: '아쉬워~ 한 번 더 생각해볼까?',
+					text: '아쉬워~ 한 번 더 생각해 볼까?',
 					voice: 'SSJ3b_A_05',
 					duration: 3400
 				},
@@ -661,12 +661,12 @@
 					duration: 2900
 				},
 				{
-					text: '잘 모르겠다면 내가 알려줄게!',
+					text: '잘 모르겠다면 내가 알려 줄게!',
 					voice: 'SSJ3b_B_02',
 					duration: 3500
 				},
 				{
-					text: '어려웠구나! 내가 알려줄게.',
+					text: '어려웠구나! 내가 알려 줄게.',
 					voice: 'SSJ3b_B_03',
 					duration: 3200
 				},
